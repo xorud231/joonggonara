@@ -1,11 +1,15 @@
 package com.kdn.model.biz;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.kdn.model.domain.Board;
+import com.kdn.model.domain.PageBean;
 import com.kdn.model.domain.UpdateException;
+import com.kdn.util.PageUtility;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
@@ -22,4 +26,21 @@ public class BoardServiceImpl implements BoardService {
 			throw new UpdateException("게시글 검색 중 오류 발생");
 		}
 	}
+	public List<Board> searchBuyList(PageBean bean) {
+		try {
+			int total = dao.getBuyCount( bean);
+			PageUtility bar = 
+					new PageUtility(bean.getInterval()
+							, total
+							, bean.getPageNo()
+							, "images/");
+			bean.setPagelink(bar.getPageBar());
+			
+			return dao.searchBuyList(bean);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UpdateException("게시글 검색 중 오류 발생");
+		}
+	}
+	
 }

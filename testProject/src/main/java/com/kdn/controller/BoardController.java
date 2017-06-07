@@ -44,4 +44,13 @@ public class BoardController {
 		
 		return "index";
 	}
+	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
+	public String searchBuyList(Model model, PageBean bean){
+		List<Board> list = boardService.searchBuyList(bean);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("content", "board/searchBuyList.jsp");
+		
+		return "board/searchBuyList";
+	}
 }

@@ -69,6 +69,32 @@
 		order by no desc
 	</select>
 	
+	<select id = "getBuyCount" parameterType = "pagebean" resultType = "int">
+		select count(*)
+		from BUYBOARD
+		<where>
+			<if test = "word != null">
+				<choose>
+					<when test = "key == 'title'">
+						title like '%'||#{word}||'%'
+					</when>
+					<when test = "key == 'id'">
+						id = #{word}
+					</when>
+					<when test = "key == 'contents'">
+						contents like '%'||#{word}||'%'
+					</when>
+				</choose>
+			</if>
+		</where>
+	</select>
+	
+	<select id = "searchBuyList" parameterType = "pagebean" resultType = "board">
+		select b.buyno buyno, b.title title, B.CONTENTS contents,b.price price, to_char(regdate, 'yyyy-mm-dd') regdate, bf.RFILENAME rfilename 
+		from BUYBOARD b, BUYBOARDFILE bf
+        where b.BUYNO = bf.BUYNO(+)
+        order by b.buyno DESC
+	</select>
 	
 	<select id = "searchBuyBoard" parameterType = "int" resultType = "board">
 		select bno, price, dealstate, mno, dno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
