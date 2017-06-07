@@ -36,12 +36,10 @@ public class BoardController {
 		//sellbuy가 1이면 삽니다, 2면 팝니다
 		
 		Board board = boardService.searchBoard(sellbuy, bno);
-
-		System.out.println(board);
 		
 		model.addAttribute("board", board);
-		model.addAttribute("content", "board/searchBoard.jsp");
+		//model.addAttribute("content", "board/searchBoard.jsp");
 		
-		return "index";
+		return "board/searchBoard";
 	}
 }
