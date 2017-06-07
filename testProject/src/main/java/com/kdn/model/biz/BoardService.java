@@ -7,4 +7,5 @@ import com.kdn.model.domain.PageBean;
 
 public interface BoardService {
 	public Board searchBoard(int sellbuy, int bno);
+	public List<Board> searchBuyList(PageBean bean);
 }
