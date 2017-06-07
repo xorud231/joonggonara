@@ -91,8 +91,15 @@ public class MemberController {
 		return "redirect:myPage.do";
 	}
 	
+	
+	
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String index(){
 		return "index";
+	}
+	
+	@RequestMapping(value = "gomain.do", method = RequestMethod.GET)
+	public String logout(){
+		return "main";
 	}
 }

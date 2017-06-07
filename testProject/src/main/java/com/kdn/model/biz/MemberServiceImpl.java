@@ -81,7 +81,7 @@ public class MemberServiceImpl implements MemberService {
 
 	public void update(Member member) {
 		try {
-			Member find= dao.search(member.getId());
+			Member find= dao.search(member.getMno());
 			if(find == null){
 				throw new UpdateException("아이디에 해당하는 회원이 없어 수정할 수 없습니다.");
 			}else{
@@ -94,7 +94,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	public void add(Member member) {
 		try {
-			Member find= dao.search(member.getId());
+			Member find= dao.search(member.getMno());
 			if(find != null){
 				throw new UpdateException("이미 등록된 아이디 입니다.");
 			}else{

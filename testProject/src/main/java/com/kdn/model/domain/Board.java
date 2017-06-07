@@ -1,82 +1,110 @@
 package com.kdn.model.domain;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Board implements Serializable{
-	private int no;
-	private String id;
-	private String title;
+	private int bno;
 	private String regdate;
+	private String title;
+	private int price;
 	private String contents;
-	private List<FileBean>  files;    //조인 정보
+	private String dealstate;
+	private int mno;
+	private int dno;
+	private int cno;
+	
 	public Board(){}
-	public Board(int no, String id, String title) {
-		this.no = no;
-		this.id = id;
-		this.title = title;
-	}
-	public Board(int no, String id, String title, String regdate, String contents) {
-		this.no = no;
-		this.id = id;
-		this.title = title;
+
+	public Board(int bno, String regdate, String title, int price,
+			String contents, String dealstate, int mno, int dno, int cno) {
+		this.bno = bno;
 		this.regdate = regdate;
-		this.contents = contents;
-	}
-	public Board(int no, String id, String title, String regdate, String contents, List<FileBean> files) {
-		this.no = no;
-		this.id = id;
 		this.title = title;
-		this.regdate = regdate;
+		this.price = price;
 		this.contents = contents;
-		this.files = files;
+		this.dealstate = dealstate;
+		this.mno = mno;
+		this.dno = dno;
+		this.cno = cno;
 	}
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Board [no=").append(no).append(", id=").append(id)
-				.append(", title=").append(title)
-				.append(", regdate=").append(regdate).append(", contents=")
-				.append(contents).append(", files=")
-				.append(files).append("]");
-		return builder.toString();
+	
+	public int getBno() {
+		return bno;
 	}
-	public int getNo() {
-		return no;
+
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
-	public void setNo(int no) {
-		this.no = no;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
+
 	public String getRegdate() {
 		return regdate;
 	}
+
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 	public String getContents() {
 		return contents;
 	}
+
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public List<FileBean> getFiles() {
-		return files;
+
+	public String getDealstate() {
+		return dealstate;
 	}
-	public void setFiles(List<FileBean> files) {
-		this.files = files;
+
+	public void setDealstate(String dealstate) {
+		this.dealstate = dealstate;
 	}
-	
-	
+
+	public int getMno() {
+		return mno;
+	}
+
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+
+	public int getDno() {
+		return dno;
+	}
+
+	public void setDno(int dno) {
+		this.dno = dno;
+	}
+
+	public int getCno() {
+		return cno;
+	}
+
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
+
+	@Override
+	public String toString() {
+		return "bno=" + bno + ", regdate=" + regdate + ", title="
+				+ title + ", price=" + price + ", contents=" + contents
+				+ ", dealstate=" + dealstate + ", mno=" + mno + ", dno=" + dno
+				+ ", cno=" + cno;
+	}
 }

@@ -31,51 +31,17 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@RequestMapping(value = "listBoard.do", method = RequestMethod.GET)
-	public String listBoard(Model model, PageBean bean){
-		List<Board> list = boardService.searchAll(bean);
-		
-		model.addAttribute("list", list);
-		model.addAttribute("content", "board/listBoard.jsp");
-		
-		return "index";
-	}
-	
-	@RequestMapping(value = "insertBoardForm.do", method = RequestMethod.GET)
-	public String insertBoardForm(Model model){
-		model.addAttribute("content", "board/insertBoard.jsp");
-		
-		return "index";
-	}
-	
-	@RequestMapping(value = "insertBoard.do", method = RequestMethod.POST)
-	public String insertBoard(Board board, HttpServletRequest request){
-		String dir = request.getRealPath("upload/");
-		boardService.add(board, dir);
-		
-		return "redirect:listBoard.do";
-	}
-	
 	@RequestMapping(value = "searchBoard.do", method = RequestMethod.GET)
-	public String searchBoard(int no, Model model){
-		model.addAttribute("board", boardService.search(no));
+	public String searchBoard(int sellbuy, int bno, Model model){
+		//sellbuy가 1이면 삽니다, 2면 팝니다
+		
+		Board board = boardService.searchBoard(sellbuy, bno);
+
+		System.out.println(board);
+		
+		model.addAttribute("board", board);
 		model.addAttribute("content", "board/searchBoard.jsp");
 		
 		return "index";
-	}
-	
-	@RequestMapping(value = "deleteBoard.do", method = RequestMethod.GET)
-	public String deleteBoard(int no){
-		boardService.remove(no);
-		
-		return "redirect:listBoard.do";
-	}
-	
-	@RequestMapping(value = "updateBoard.do", method = RequestMethod.GET)
-	public String updateBoard(Board board, Model model){
-		boardService.update(board);
-		model.addAttribute("no", board.getNo());
-		
-		return "redirect:searchBoard.do";
 	}
 }

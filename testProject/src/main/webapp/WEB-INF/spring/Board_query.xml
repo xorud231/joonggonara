@@ -68,4 +68,17 @@
 		</where>
 		order by no desc
 	</select>
+	
+	
+	<select id = "searchBuyBoard" parameterType = "int" resultType = "board">
+		select bno, price, dealstate, mno, dno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
+		from buyboard
+		where bno = #{bno:INTEGER}
+	</select>
+	
+	<select id = "searchSellBoard" parameterType = "int" resultType = "board">
+		select bno, price, dealstate, mno, dno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
+		from sellboard
+		where bno = #{bno:INTEGER}
+	</select>
 </mapper>

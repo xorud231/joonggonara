@@ -13,6 +13,9 @@
 		<typeAlias type="com.kdn.model.domain.BoardFile" alias="boardfile"/>
 		<typeAlias type="com.kdn.model.domain.PageBean" alias="pagebean"/>
 		<typeAlias type="com.kdn.model.domain.Member" alias="member"/>
+		
+		<typeAlias type="com.kdn.model.domain.BuyBoard" alias="buyboard"/>
+		<typeAlias type="com.kdn.model.domain.SellBoard" alias="sellboard"/>
 	</typeAliases>
 	<mappers>
 	<!-- sql 쿼리를 작성한 xml 파일 경로 설정 
