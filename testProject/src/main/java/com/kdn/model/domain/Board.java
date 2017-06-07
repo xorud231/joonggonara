@@ -1,6 +1,7 @@
 package com.kdn.model.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Board implements Serializable{
 	private int bno;
@@ -12,6 +13,7 @@ public class Board implements Serializable{
 	private int mno;
 	private int dno;
 	private int cno;
+	private List<Reply> replys;
 	
 	public Board(){}
 

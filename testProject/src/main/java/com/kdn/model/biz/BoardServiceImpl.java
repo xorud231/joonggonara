@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kdn.model.domain.Board;
 import com.kdn.model.domain.PageBean;
+import com.kdn.model.domain.Reply;
 import com.kdn.model.domain.UpdateException;
 import com.kdn.util.PageUtility;
 
@@ -26,6 +27,7 @@ public class BoardServiceImpl implements BoardService {
 			throw new UpdateException("게시글 검색 중 오류 발생");
 		}
 	}
+	
 	public List<Board> searchBuyList(PageBean bean) {
 		try {
 			int total = dao.getBuyCount( bean);
@@ -43,4 +45,20 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	
+	public List<Reply> searchReply(int sellbuy, int bno){
+		try {
+			/*int total = dao.getBuyCount( bean);
+			PageUtility bar = 
+					new PageUtility(bean.getInterval()
+							, total
+							, bean.getPageNo()
+							, "images/");
+			bean.setPagelink(bar.getPageBar());*/
+			
+			return dao.searchReply(sellbuy, bno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UpdateException("게시글 검색 중 오류 발생");
+		}
+	}
 }

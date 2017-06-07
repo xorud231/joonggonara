@@ -107,4 +107,16 @@
 		from sellboard
 		where bno = #{bno:INTEGER}
 	</select>
+	
+	<select id = "searchBuyBoard" parameterType = "int" resultType = "reply">
+		select *
+		from buyboard
+		where bno = #{bno:INTEGER}
+	</select>
+	
+	<select id = "searchSellBoard" parameterType = "int" resultType = "reply">
+		select *
+		from sellboard
+		where bno = #{bno:INTEGER}
+	</select>
 </mapper>

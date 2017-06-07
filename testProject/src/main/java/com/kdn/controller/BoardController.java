@@ -2,8 +2,6 @@ package com.kdn.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kdn.model.biz.BoardService;
 import com.kdn.model.domain.Board;
 import com.kdn.model.domain.PageBean;
+import com.kdn.model.domain.Reply;
 
 @Controller
 public class BoardController {
@@ -36,9 +35,11 @@ public class BoardController {
 		//sellbuy가 1이면 삽니다, 2면 팝니다
 		
 		Board board = boardService.searchBoard(sellbuy, bno);
+		List<Reply> replys = boardService.searchReply(sellbuy, bno);
 		
 		model.addAttribute("board", board);
-		//model.addAttribute("content", "board/searchBoard.jsp");
+		model.addAttribute("replys", replys);
+		model.addAttribute("content", "board/searchBoard.jsp");
 		
 		return "board/searchBoard";
 	}

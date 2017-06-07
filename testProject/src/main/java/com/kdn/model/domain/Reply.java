@@ -6,14 +6,33 @@ public class Reply implements Serializable{
 	private int rno;
 	private String reply;
 	private int bno;
+	private String regdate;
+	private String mno;
 	
 	public Reply(){}
 
-	public Reply(int rno, String reply, int bno) {
-		super();
+	public Reply(int rno, String reply, int bno, String regdate, String mno) {
 		this.rno = rno;
 		this.reply = reply;
 		this.bno = bno;
+		this.regdate = regdate;
+		this.mno = mno;
+	}
+	
+	public String getMno() {
+		return mno;
+	}
+
+	public void setMno(String mno) {
+		this.mno = mno;
+	}
+
+	public String getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
 	}
 
 	public int getRno() {
@@ -42,8 +61,7 @@ public class Reply implements Serializable{
 
 	@Override
 	public String toString() {
-		return "rno=" + rno + ", reply=" + reply + ", bno=" + bno;
+		return "rno=" + rno + ", reply=" + reply + ", bno=" + bno
+				+ ", regdate=" + regdate + ", mno=" + mno;
 	}
-	
-	
 }
