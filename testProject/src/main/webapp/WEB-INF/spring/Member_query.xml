@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+<mapper namespace="member">
+	<select id = "searchMember" parameterType = "String" resultType = "member">
+		select *
+		from member
+		where id = #{id}
+	</select>
+	
+	<select id = "getCount" parameterType = "pagebean" resultType = "int">
+		select count(*)
+		from member
+		<where>
+			<if test = "word != null">
+				<choose>
+					<when test = "key == 'name'">
+						name like '%'||#{word}||'%'
+					</when>
+					<when test = "key == 'id'">
+						id = #{word}
+					</when>
+					<when test = "key == 'address'">
+						address like '%'||#{word}||'%'
+					</when>
+				</choose>
+			</if>
+		</where>
+	</select>
+	
+	<select	 id = "searchAllMember" parameterType = "pagebean" resultType = "member">
+		select *
+		from member
+		<where>
+			<if test = "word != null">
+				<choose>
+					<when test = "key == 'name'">
+						name like '%'||#{word}||'%'
+					</when>
+					<when test = "key == 'id'">
+						id = #{word}
+					</when>
+					<when test = "key == 'address'">
+						address like '%'||#{word}||'%'
+					</when>
+				</choose>
+			</if>
+		</where>
+	</select>
+	
+	<delete id = "removeMember" parameterType = "String">
+		update member set withdraw = 'Y' where id = #{id:VARCHAR}
+	</delete>
+	
+	<update id = "updateMember" parameterType = "member">
+		update member set password = #{password:VARCHAR}, name = #{name:VARCHAR},
+						  email = #{email:VARCHAR}, address = #{address:VARCHAR}
+		where id = #{id:VARCHAR}
+	</update>
+	
+	<insert id = "insertMember" parameterType = "member">
+		insert into member (id, password, name, email, address)
+		values (#{id:VARCHAR}, #{password:VARCHAR}, #{name:VARCHAR}, #{email:VARCHAR}, #{address:VARCHAR})
+	</insert>
+</mapper>
