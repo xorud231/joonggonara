@@ -16,8 +16,8 @@ public class MemberDaoImpl implements MemberDao {
 	@Autowired
 	private SqlSessionTemplate session;
 	
-	public Member search(String id) {
-		return session.selectOne("member.searchMember", id);
+	public Member search(String mno) {
+		return session.selectOne("member.searchMember", mno);
 	}
 
 	public List<Member> searchAll(PageBean bean) {
@@ -31,11 +31,12 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	public void add(Member member) {
+		System.out.println("adddddd");
 		session.insert("member.insertMember", member);
 	}
 
-	public void update(String id) {
-		session.delete("member.removeMember", id);
+	public void update(String mno) {
+		session.delete("member.removeMember", mno);
 	}
 
 	public void update(Member member) {

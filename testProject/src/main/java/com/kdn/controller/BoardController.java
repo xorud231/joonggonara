@@ -54,7 +54,13 @@ public class BoardController {
 		model.addAttribute("replys", replys);
 		model.addAttribute("replycount", replycount);
 		model.addAttribute("content", "board/searchBoard.jsp");
+<<<<<<< HEAD
 		return "board/searchBoard";
+=======
+		
+		return "index";
+//		return "board/searchBoard";
+>>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
 	}
 	
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
@@ -64,7 +70,18 @@ public class BoardController {
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchBuyList.jsp");
 		
-		return "board/searchBuyList";
+		return "index";
+//		return "board/searchBuyList";
+	}
+	@RequestMapping(value = "searchSellList.do", method = RequestMethod.GET)
+	public String searchSellList(Model model, PageBean bean){
+		List<Board> list = boardService.searchSellList(bean);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("content", "board/searchSellList.jsp");
+		
+		return "index";
+//		return "board/searchSellList";
 	}
 	
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)

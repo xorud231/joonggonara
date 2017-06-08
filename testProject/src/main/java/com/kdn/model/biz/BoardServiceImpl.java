@@ -44,6 +44,22 @@ public class BoardServiceImpl implements BoardService {
 			throw new UpdateException("게시글 검색 중 오류 발생");
 		}
 	}
+	public List<Board> searchSellList(PageBean bean) {
+		try {
+			int total = dao.getSellCount( bean);
+			PageUtility bar = 
+					new PageUtility(bean.getInterval()
+							, total
+							, bean.getPageNo()
+							, "images/");
+			bean.setPagelink(bar.getPageBar());
+			
+			return dao.searchSellList(bean);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UpdateException("게시글 검색 중 오류 발생");
+		}
+	}
 	
 	public List<Reply> searchReply(int sellbuy, int bno){
 		try {

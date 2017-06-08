@@ -1,5 +1,8 @@
 package com.kdn.controller;
 
+import java.awt.Window;
+import java.awt.event.WindowEvent;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +20,7 @@ import com.kdn.model.domain.Member;
 public class MemberController {
 	@ExceptionHandler
 	public ModelAndView handler(Exception e){
-		ModelAndView model = new ModelAndView("index");
+		ModelAndView model = new ModelAndView("main");
 		
 		model.addObject("msg", e.getMessage());
 		model.addObject("content", "ErrorHandler.jsp");
@@ -28,49 +31,51 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	@RequestMapping(value = "loginform.do", method = RequestMethod.GET)
+/*	@RequestMapping(value = "loginform.do", method = RequestMethod.GET)
 	public String loginform(Model model){
-		model.addAttribute("content", "member/login.jsp");
+		model.addAttribute("content", "main.jsp");
 		
 		return "index";
-	}
+	}*/
 	
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String login(String id, String pw, HttpSession session){
-		memberService.login(id, pw);
-		session.setAttribute("id", id);
+	public String login(String mno, String password, HttpSession session){
 		
-		return "redirect:listBoard.do";
+		memberService.login(mno, password);
+		session.setAttribute("mno", mno);
+		
+		return "redirect:index.do";
 	}
 	
-	@RequestMapping(value = "insertMemberForm.do", method = RequestMethod.GET)
+/*	@RequestMapping(value = "insertMemberForm.do", method = RequestMethod.GET)
 	public String insertMemberForm(Model model){
-		model.addAttribute("content", "member/insertMember.jsp");
+		model.addAttribute("content", "insertMember.jsp");
 		
 		return "index";
 	}
-	
+	*/
 	@RequestMapping(value = "insertMember.do", method = RequestMethod.POST)
 	public String insertMember(Model model, Member member){
+		
 		memberService.add(member);
+	
+		model.addAttribute("content", "main");
 		
-		model.addAttribute("content", "member/login.jsp");
-		
-		return "index";
+		return "main";
 	}
 	
 	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
 	public String insertMemberForm(HttpSession session, Model model){
-		session.removeAttribute("id");
+		session.removeAttribute("mno");
 		
-		model.addAttribute("content", "member/login.jsp");
+		model.addAttribute("content", "main");
 		
-		return "index";
+		return "main";
 	}
 	
 	@RequestMapping(value = "myPage.do", method = RequestMethod.GET)
 	public String myPage(Model model, HttpSession session){
-		model.addAttribute("member", memberService.search((String)session.getAttribute("id")));
+		model.addAttribute("member", memberService.search((String)session.getAttribute("mno")));
 		model.addAttribute("content", "member/memberInfo.jsp");
 		
 		return "index";
@@ -78,7 +83,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "memberUpdateForm.do", method = RequestMethod.GET)
 	public String memberUpdateForm(Model model, HttpSession session){
-		model.addAttribute("member", memberService.search((String)session.getAttribute("id")));
+		model.addAttribute("member", memberService.search((String)session.getAttribute("mno")));
 		model.addAttribute("content", "member/updateMember.jsp");
 		
 		return "index";
@@ -99,7 +104,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "gomain.do", method = RequestMethod.GET)
-	public String logout(){
+	public String logout(HttpSession session){
+		session.removeAttribute("mno");
 		return "main";
 	}
 }

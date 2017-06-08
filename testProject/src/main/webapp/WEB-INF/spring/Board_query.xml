@@ -88,11 +88,40 @@
 			</if>
 		</where>
 	</select>
-	
+	<select id = "getSellCount" parameterType = "pagebean" resultType = "int">
+		select count(*)
+		from SELLBOARD
+		<where>
+			<if test = "word != null">
+				<choose>
+					<when test = "key == 'title'">
+						title like '%'||#{word}||'%'
+					</when>
+					<when test = "key == 'id'">
+						id = #{word}
+					</when>
+					<when test = "key == 'contents'">
+						contents like '%'||#{word}||'%'
+					</when>
+				</choose>
+			</if>
+		</where>
+	</select>
 	<select id = "searchBuyList" parameterType = "pagebean" resultType = "board">
 		select b.bno bno, b.title title, B.CONTENTS contents,b.price price, to_char(regdate, 'yyyy-mm-dd') regdate, bf.RFILENAME rfilename 
 		from BUYBOARD b, BUYBOARDFILE bf
+<<<<<<< HEAD
         where b.BNO = bf.BNO(+)
+=======
+        where b.bNO = bf.bNO(+)
+        order by b.bno DESC
+	</select>
+	
+	<select id = "searchSellList" parameterType = "pagebean" resultType = "board">
+		select b.bno bno, b.title title, B.CONTENTS contents,b.price price, to_char(regdate, 'yyyy-mm-dd') regdate, bf.RFILENAME rfilename 
+		from SELLBOARD b, SELLBOARDFILE bf
+        where b.bNO = bf.bNO(+)
+>>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
         order by b.bno DESC
 	</select>
 	
