@@ -31,7 +31,6 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	public void add(Member member) {
-		System.out.println("adddddd");
 		session.insert("member.insertMember", member);
 	}
 
