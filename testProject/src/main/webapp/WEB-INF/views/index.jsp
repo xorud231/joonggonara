@@ -100,7 +100,7 @@
             <div class="col-md-3" id="3_buy" style="display:none">
                 <p class="lead">팝니다</p>
                 <div class="list-group">
-                    <a href="#col-md-9" class="list-group-item">팝니다 카테고리1</a>
+                    <a href="searchBoard.do?sellbuy=1&bno=1" class="list-group-item">팝니다 카테고리1</a>
                     <a href="#col-md-9" class="list-group-item">팝니다 카테고리2</a>
                     <a href="#col-md-9" class="list-group-item">팝니다 카테고리3</a>
                 </div>

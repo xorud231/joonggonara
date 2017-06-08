@@ -1,5 +1,7 @@
 package com.kdn.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -51,5 +53,47 @@ public class BoardDaoImpl implements BoardDao {
 		
 		else
 			return session.selectOne("board.getCountSellReply", bno);
+	}
+	
+	public void insertReply(int sellbuy, int bno, String replycontent, String mno){
+		HashMap<String, Object> temp = new HashMap<String, Object>();
+		temp.put("bno", bno);
+		temp.put("replycontent", replycontent);
+		temp.put("mno", Integer.parseInt(mno));
+		
+		if(sellbuy == 1)
+			session.insert("board.insertBuyReply", temp);
+		
+		else
+			session.insert("board.insertSellReply", temp);
+	}
+	
+	public boolean searchInCart(String mno, int sellbuy, int bno){
+		HashMap<String, Object> temp = new HashMap<String, Object>();
+		temp.put("mno", Integer.parseInt(mno));
+		temp.put("sellbuy", sellbuy + "");
+		temp.put("bno", bno);
+		
+		int check = session.selectOne("board.searchInCart", temp);
+		
+		if(check == 0)
+			return false;
+		else
+			return true;
+	}
+	
+	public void updateCart(String mno, int sellbuy, int bno, boolean isInCart){
+		HashMap<String, Object> temp = new HashMap<String, Object>();
+		temp.put("mno", Integer.parseInt(mno));
+		temp.put("sellbuy", sellbuy + "");
+		temp.put("bno", bno);
+		
+		if(isInCart){
+			session.delete("board.deleteCart", temp);
+		}
+		
+		else{
+			session.insert("board.insertCart", temp);
+		}
 	}
 }

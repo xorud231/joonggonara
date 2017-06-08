@@ -13,12 +13,14 @@ public class Board implements Serializable{
 	private int mno;
 	private int dno;
 	private int cno;
+	private List<FileBean> files;
+	private boolean isInCart;
 	private List<Reply> replys;
 	
 	public Board(){}
 
 	public Board(int bno, String regdate, String title, int price,
-			String contents, String dealstate, int mno, int dno, int cno) {
+			String contents, String dealstate, int mno, int dno, int cno, boolean isInCart) {
 		this.bno = bno;
 		this.regdate = regdate;
 		this.title = title;
@@ -28,8 +30,33 @@ public class Board implements Serializable{
 		this.mno = mno;
 		this.dno = dno;
 		this.cno = cno;
+		this.isInCart = isInCart;
 	}
 	
+	public List<FileBean> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<FileBean> files) {
+		this.files = files;
+	}
+
+	public boolean getIsInCart() {
+		return isInCart;
+	}
+
+	public void setInCart(boolean isInCart) {
+		this.isInCart = isInCart;
+	}
+
+	public List<Reply> getReplys() {
+		return replys;
+	}
+
+	public void setReplys(List<Reply> replys) {
+		this.replys = replys;
+	}
+
 	public int getBno() {
 		return bno;
 	}
@@ -107,6 +134,7 @@ public class Board implements Serializable{
 		return "bno=" + bno + ", regdate=" + regdate + ", title="
 				+ title + ", price=" + price + ", contents=" + contents
 				+ ", dealstate=" + dealstate + ", mno=" + mno + ", dno=" + dno
-				+ ", cno=" + cno;
+				+ ", cno=" + cno + ", files=" + files + ", isInCart="
+				+ isInCart + ", replys=" + replys;
 	}
 }

@@ -2,6 +2,8 @@ package com.kdn.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,20 +33,30 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@RequestMapping(value = "searchBoard.do", method = RequestMethod.GET)
-	public String searchBoard(int sellbuy, int bno, Model model){
+	public String searchBoard(int sellbuy, int bno, Model model, HttpSession session){
 		//sellbuy가 1이면 삽니다, 2면 팝니다
 		
+		session.setAttribute("mno", "1234");
+		session.setAttribute("sellbuy", sellbuy);
+		
+		String mno = (String)session.getAttribute("mno");
 		Board board = boardService.searchBoard(sellbuy, bno);
 		List<Reply> replys = boardService.searchReply(sellbuy, bno);
 		int replycount = boardService.getCountReply(sellbuy, bno);
+		
+		boolean isInCart = boardService.searchInCart(mno, sellbuy, bno);
+		
+		board.setInCart(isInCart);
+		
+		//멤버서치해서 넘겨줘야함 (글쓴이랑 댓글 글쓴이)
 		
 		model.addAttribute("board", board);
 		model.addAttribute("replys", replys);
 		model.addAttribute("replycount", replycount);
 		model.addAttribute("content", "board/searchBoard.jsp");
-		
 		return "board/searchBoard";
 	}
+	
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
 	public String searchBuyList(Model model, PageBean bean){
 		List<Board> list = boardService.searchBuyList(bean);
@@ -53,5 +65,37 @@ public class BoardController {
 		model.addAttribute("content", "board/searchBuyList.jsp");
 		
 		return "board/searchBuyList";
+	}
+	
+	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
+	public String insertReply(int bno, String replycontent, HttpSession session, Model model){
+		session.setAttribute("mno", "1234");
+		
+		String mno = (String)session.getAttribute("mno");
+		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		
+		boardService.insertReply(sellbuy, bno, replycontent, mno);
+		
+		model.addAttribute("sellbuy", sellbuy);
+		model.addAttribute("bno", bno);
+		
+		return "redirect:searchBoard.do";
+	}
+	
+	@RequestMapping(value = "updateCart.do", method = RequestMethod.GET)
+	public String updateCart(int bno, HttpSession session, Model model){
+		session.setAttribute("mno", "1234");
+		
+		String mno = (String)session.getAttribute("mno");
+		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		
+		boolean isInCart = boardService.searchInCart(mno, sellbuy, bno);
+		
+		boardService.updateCart(mno, sellbuy, bno, isInCart);
+		
+		model.addAttribute("sellbuy", sellbuy);
+		model.addAttribute("bno", bno);
+		
+		return "redirect:searchBoard.do";
 	}
 }

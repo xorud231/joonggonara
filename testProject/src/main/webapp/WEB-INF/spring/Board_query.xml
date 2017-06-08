@@ -90,10 +90,10 @@
 	</select>
 	
 	<select id = "searchBuyList" parameterType = "pagebean" resultType = "board">
-		select b.buyno buyno, b.title title, B.CONTENTS contents,b.price price, to_char(regdate, 'yyyy-mm-dd') regdate, bf.RFILENAME rfilename 
+		select b.bno bno, b.title title, B.CONTENTS contents,b.price price, to_char(regdate, 'yyyy-mm-dd') regdate, bf.RFILENAME rfilename 
 		from BUYBOARD b, BUYBOARDFILE bf
-        where b.BUYNO = bf.BUYNO(+)
-        order by b.buyno DESC
+        where b.BNO = bf.BNO(+)
+        order by b.bno DESC
 	</select>
 	
 	<select id = "searchBuyBoard" parameterType = "int" resultType = "board">
@@ -131,4 +131,26 @@
 		from sellreply
 		where bno = #{bno:INTEGER}
 	</select>
+	
+	<insert id = "insertBuyReply" parameterType = "hashmap">
+		insert into BuyReply values (2, #{replycontent:VARCHAR}, #{bno:INTEGER}, sysdate, #{mno:INTEGER})
+	</insert>
+	
+	<insert id = "insertSellReply" parameterType = "hashmap">
+		insert into SellReply values (2, #{replycontent:VARCHAR}, #{bno:INTEGER}, sysdate, #{mno:INTEGER})
+	</insert>
+	
+	<select id = "searchInCart" parameterType = "hashmap" resultType = "int">
+		select count(*)
+		from cart
+		where mno = ${mno} and bno = ${bno} and bkind = ${sellbuy}
+	</select>
+	
+	<delete id = "deleteCart" parameterType = "hashmap">
+		delete from cart where mno = ${mno} and bno = ${bno} and bkind = ${sellbuy}
+	</delete>
+	
+	<insert id = "insertCart" parameterType = "hashmap">
+		insert into cart values (${mno}, ${bno}, ${sellbuy})
+	</insert>
 </mapper>

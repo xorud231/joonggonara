@@ -44,24 +44,38 @@
 		.ratings > a {
 			color : #d17581;
 		}
+		
+		#cartbutton {
+			float: right !important; 
+			background-color : #ffcbcf;
+			color : #ffecec;
+			font-weight : bold;
+		}
+		
+		#cartbutton:hover {
+			background-color : #efbbbf;
+		}
+		
     </style>
     
     <script type="text/javascript">
-    	var click = false;
+    	
+    	var reviewClick = false;
     	
     	function review(){
     		var review = document.getElementById("review");
     		
-    		if(!click){
+    		if(!reviewClick){
     			review.style.display = "";
-    			click = true;
+    			reviewClick = true;
     		}
     		
     		else{
     			review.style.display = "none";
-    			click = false;
+    			reviewClick = false;
     		}
     	}
+    	
     </script>
 </head>
 
@@ -71,7 +85,6 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="thumbnail">
-                
 					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 						<ol class="carousel-indicators">
 							<!-- 여기에 넘어가는 사진들 index 번호랑 해서 넣으면 됨 -->
@@ -82,7 +95,7 @@
 						<div class="carousel-inner">
 							<!-- 여기에 넘어가는 사진들 넣으면 됨 -->
 						    <div class="item active">
-						        <img class="slide-image" src="img/header.jpg" alt="">
+						        <img class="slide-image" src="img/header.jpg" alt="" style = "height : 400px;">
 						    </div>
 						    <div class="item">
 						        <img class="slide-image" src="http://placehold.it/800x300" alt="">
@@ -98,87 +111,47 @@
 						    <span class="glyphicon glyphicon-chevron-right"></span>
 						</a>
 					</div>
-                
+					<div class="caption-full">
+						<a id = "cartbutton" class = "btn btn-success"
+							href = "updateCart.do?bno=${board.bno}">담기${board.isInCart}</a>
+                    	<h4 style = "font-weight : bold;">작성자: ${board.mno}</h4>
+                    </div>
                     <div class="caption-full">
                         <h3 class="pull-right">￦${board.price}</h3>
                         <h3 style = "color : #43bdb1;">${board.title}</h3>
                         <p>${board.contents}</p>
                     </div>
                     <div class="ratings">
-                        <a class="pull-right" href = "#" onclick = "review()">${replycount} reviews</a>
+                        <a class="pull-right" href = "#" onclick = "review()">${replycount} replies</a>
                         <p>&nbsp;</p>
                     </div>
                 </div>
 
                 <div id = "review" class="well" style = "display : none;">
-
-                    <div class="text-right">
-                    	<textarea class = "reply">
-                    		
-                    	</textarea>
-                        <a class="btn btn-success" href = "reply.do">댓글달기</a>
-                    </div>
+					
+					<form action = "reply.do">
+	                    <div class="text-right">
+	                    	<input type = "hidden" id = "sellbuy" value = "1"  name="sellbuy">
+							<input type = "hidden" id = "bno" value = "1"  name="bno">
+	                    	<textarea class = "reply" id = "replycontent"  name="replycontent">
+	                    	</textarea>
+	                    	<input type = 'submit' class = "btn btn-success" value = "댓글달기"/>
+	                    </div>
+                    </form>
 
                     <hr>
 
 					<!-- 디비에서 댓글 가져와서 div 하나씩 생성하자 -->
 					<div id = "replyDiv">
 						<c:forEach var = "reply" items="${replys}">
-							<div class="row">
+							<div class="row" style = "border-top : 1px solid #d3d3d3; padding-top : 7px;">
 		                        <div class="col-md-12">
-		                            <span class="glyphicon glyphicon-star"></span>
-		                            <span class="glyphicon glyphicon-star"></span>
-		                            <span class="glyphicon glyphicon-star"></span>
-		                            <span class="glyphicon glyphicon-star"></span>
-		                            <span class="glyphicon glyphicon-star-empty"></span>
-		                            ${reply.mno}
-		                            <span class="pull-right">${reply.regdate}</span>
-		                            <p>${reply.reply}</p>
+		                        	<span style = "font-weight : bold;">작성자: ${reply.mno}</span>
+		                            <span class="pull-right" style = "font-weight : bold;">${reply.regdate}</span>
+		                            <p style = "margin-top : 5px;">${reply.reply}</p>
 		                        </div>
 	                    	</div>
 						</c:forEach>
-	                    <!-- <div class="row">
-	                        <div class="col-md-12">
-	                            <span class="glyphicon glyphicon-star"></span>
-	                            <span class="glyphicon glyphicon-star"></span>
-	                            <span class="glyphicon glyphicon-star"></span>
-	                            <span class="glyphicon glyphicon-star"></span>
-	                            <span class="glyphicon glyphicon-star-empty"></span>
-	                            Anonymous
-	                            <span class="pull-right">10 days ago</span>
-	                            <p>This product was great in terms of quality. I would definitely buy another!</p>
-	                        </div>
-	                    </div>
-	
-	                    <hr>
-	
-	                    <div class="row">
-	                        <div class="col-md-12">
-	                            <span class="glyphicon glyphicon-star"></span>
-	                            <span class="glyphicon glyphicon-star"></span>
-	                            <span class="glyphicon glyphicon-star"></span>
-	                            <span class="glyphicon glyphicon-star"></span>
-	                            <span class="glyphicon glyphicon-star-empty"></span>
-	                            Anonymous
-	                            <span class="pull-right">12 days ago</span>
-	                            <p>I've alredy ordered another one!</p>
-	                        </div>
-	                    </div>
-	
-	                    <hr>
-	
-	                    <div class="row">
-	                        <div class="col-md-12">
-	                            <span class="glyphicon glyphicon-star"></span>
-	                            <span class="glyphicon glyphicon-star"></span>
-	                            <span class="glyphicon glyphicon-star"></span>
-	                            <span class="glyphicon glyphicon-star"></span>
-	                            <span class="glyphicon glyphicon-star-empty"></span>
-	                            Anonymous
-	                            <span class="pull-right">15 days ago</span>
-	                            <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-	                        </div>
-	                    </div> -->
                     </div>
                 </div>
             </div>
