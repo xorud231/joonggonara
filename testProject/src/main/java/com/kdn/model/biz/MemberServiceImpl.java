@@ -20,10 +20,10 @@ public class MemberServiceImpl implements MemberService {
 	@Qualifier("memberDao")
 	private MemberDao dao;
 	
-	public Member search(String id) {
+	public Member search(String mno) {
 		Member member = null;
 		try {
-			member = dao.search( id);
+			member = dao.search( mno);
 		} catch(Exception  s){
 			throw new UpdateException("DB 서버 오류");
 		} 
@@ -45,17 +45,17 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
-	public boolean login(String id, String passwrod) {
+	public boolean login(String mno, String password) {
 		Member member = null;
 		try {
-			member = dao.search( id);
+			member = dao.search( mno);
 		} catch(Exception  s){
 			throw new UpdateException("DB 서버 오류");
 		}
 		if(member == null){
 			throw new UpdateException("해당하는 아이디는 존재하지 않습니다.");
 		}
-		if(passwrod ==null || !passwrod.equals(member.getPassword())){
+		if(password ==null || !password.equals(member.getPassword())){
 			throw new UpdateException("비밀번호가 맞지 않습니다.");
 		}
 		if(member.getWithdraw().equals("Y")){
@@ -64,14 +64,14 @@ public class MemberServiceImpl implements MemberService {
 		return true;
 	}
 
-	public void withdraw(String id) {
+	public void withdraw(String mno) {
 		Member member = null;
 		try {
-			member = dao.search(id);
+			member = dao.search(mno);
 			if(member == null){
 				throw new UpdateException("아이디에 해당하는 회원이 없어 탈퇴 처리할 수 없습니다.");
 			}else{
-				dao.update(id);
+				dao.update(mno);
 			}
 		} catch(Exception  s){
 			throw new UpdateException("DB 서버 오류");

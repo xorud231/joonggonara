@@ -20,7 +20,7 @@
  	    if(msg!=null && !msg.equals("")){ %>
  	    <p  style="color:red"><%=msg %></p>
  	 <% } %>
-	<form action="login.do" method="post"  id="frm">
+	<!--  <form action="login.do" method="post"  id="frm">
 		아 이 디: <input type="text" name="id" value='<%=idSave %>'  id="id"/><br/>
 		비밀번호 : <input type="text" name="pw"  id="pw"/><br/>
 		<input type="checkbox" name='idsave' value='t'
@@ -29,6 +29,7 @@
 		<input type="submit" value="전송"/>
 	</form>
 	<%} %>
+	-->
 </body>
 </html>
 

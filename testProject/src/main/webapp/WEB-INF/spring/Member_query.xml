@@ -7,7 +7,7 @@
 	<select id = "searchMember" parameterType = "String" resultType = "member">
 		select *
 		from member
-		where id = #{id}
+		where mno = #{mno}
 	</select>
 	
 	<select id = "getCount" parameterType = "pagebean" resultType = "int">
@@ -19,11 +19,11 @@
 					<when test = "key == 'name'">
 						name like '%'||#{word}||'%'
 					</when>
-					<when test = "key == 'id'">
-						id = #{word}
+					<when test = "key == 'mno'">
+						mno = #{word}
 					</when>
-					<when test = "key == 'address'">
-						address like '%'||#{word}||'%'
+					<when test = "key == 'nick'">
+						nick like '%'||#{word}||'%'
 					</when>
 				</choose>
 			</if>
@@ -40,10 +40,10 @@
 						name like '%'||#{word}||'%'
 					</when>
 					<when test = "key == 'id'">
-						id = #{word}
+						mno = #{word}
 					</when>
 					<when test = "key == 'address'">
-						address like '%'||#{word}||'%'
+						nick like '%'||#{word}||'%'
 					</when>
 				</choose>
 			</if>
@@ -51,17 +51,17 @@
 	</select>
 	
 	<delete id = "removeMember" parameterType = "String">
-		update member set withdraw = 'Y' where id = #{id:VARCHAR}
+		update member set withdraw = 'Y' where mno = #{mno:VARCHAR}
 	</delete>
 	
 	<update id = "updateMember" parameterType = "member">
 		update member set password = #{password:VARCHAR}, name = #{name:VARCHAR},
-						  email = #{email:VARCHAR}, address = #{address:VARCHAR}
-		where id = #{id:VARCHAR}
+						  nick = #{nick:VARCHAR}, address = #{address:VARCHAR}, phonenum=#{phonenum:VARCHAR}
+		where mno = #{mno:VARCHAR}
 	</update>
 	
 	<insert id = "insertMember" parameterType = "member">
-		insert into member (id, password, name, email, address)
-		values (#{id:VARCHAR}, #{password:VARCHAR}, #{name:VARCHAR}, #{email:VARCHAR}, #{address:VARCHAR})
+		insert into member (mno, password, name, nick, address, phonenum)
+		values (#{mno:VARCHAR}, #{password:VARCHAR}, #{name:VARCHAR}, #{nick:VARCHAR}, #{address:VARCHAR}, #{phonenum:VARCHAR})
 	</insert>
 </mapper>

@@ -11,8 +11,9 @@
 		<caption>고객 정보</caption>
 		<tr><td>이 름</td><td>${member.name}</td></tr>
 		<tr><td>비 번</td><td>${member.password}</td></tr>
-		<tr><td>아이디</td><td>${member.id}</td></tr>
-		<tr><td>이메일</td><td>${member.email}</td></tr>
+		<tr><td>사 번</td><td>${member.mno}</td></tr>
+		<tr><td>닉네임</td><td>${member.nick}</td></tr>
+		<tr><td>전화번호</td><td>${member.phonenum}</td></tr>
 		<tr><td>주소</td><td>${member.address}</td></tr>
 	</table>
 </body>

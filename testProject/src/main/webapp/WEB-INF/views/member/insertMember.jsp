@@ -8,7 +8,7 @@
 <link href="../css/basic.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<form method="post" action="insertMember.do" >
+<!-- <form method="post" action="insertMember.do" >
 <table  align='center' >
 	<tr><td class="caption" colspan='2'>회원가입</td></tr>
 	<tr><td class='tbasic'>아 이 디</td>
@@ -34,6 +34,7 @@
 	</tr>
 </table>
 </form>
+ -->
 </body>
 </html>
 
