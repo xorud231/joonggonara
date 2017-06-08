@@ -44,7 +44,8 @@ public class MemberController {
 		memberService.login(mno, password);
 		session.setAttribute("mno", mno);
 		
-		return "redirect:index.do";
+		return "index";
+		//return "redirect:index.do";
 	}
 	
 /*	@RequestMapping(value = "insertMemberForm.do", method = RequestMethod.GET)
@@ -100,6 +101,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String index(){
+		
 		return "index";
 	}
 	
