@@ -61,4 +61,13 @@ public class BoardServiceImpl implements BoardService {
 			throw new UpdateException("게시글 검색 중 오류 발생");
 		}
 	}
+	
+	public int getCountReply(int sellbuy, int bno){
+		try {
+			return dao.getCountReply(sellbuy, bno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UpdateException("게시글 검색 중 오류 발생");
+		}
+	}
 }

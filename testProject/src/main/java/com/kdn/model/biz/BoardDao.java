@@ -12,6 +12,7 @@ public interface BoardDao {
 	public List<Board> searchBuyList(PageBean bean) ;
 	public int 		getBuyCount(PageBean bean) ;
 	public List<Reply> searchReply(int sellbuy, int bno);
+	public int getCountReply(int sellbuy, int bno);
 }
 
 

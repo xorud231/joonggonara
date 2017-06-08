@@ -36,9 +36,11 @@ public class BoardController {
 		
 		Board board = boardService.searchBoard(sellbuy, bno);
 		List<Reply> replys = boardService.searchReply(sellbuy, bno);
+		int replycount = boardService.getCountReply(sellbuy, bno);
 		
 		model.addAttribute("board", board);
 		model.addAttribute("replys", replys);
+		model.addAttribute("replycount", replycount);
 		model.addAttribute("content", "board/searchBoard.jsp");
 		
 		return "board/searchBoard";

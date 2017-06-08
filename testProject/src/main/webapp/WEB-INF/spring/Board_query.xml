@@ -108,15 +108,27 @@
 		where bno = #{bno:INTEGER}
 	</select>
 	
-	<select id = "searchBuyBoard" parameterType = "int" resultType = "reply">
+	<select id = "searchBuyReply" parameterType = "int" resultType = "reply">
 		select *
-		from buyboard
+		from buyreply
 		where bno = #{bno:INTEGER}
 	</select>
 	
-	<select id = "searchSellBoard" parameterType = "int" resultType = "reply">
+	<select id = "searchSellReply" parameterType = "int" resultType = "reply">
 		select *
-		from sellboard
+		from sellreply
+		where bno = #{bno:INTEGER}
+	</select>
+	
+	<select id = "getCountBuyReply" parameterType = "int" resultType = "int">
+		select count(*)
+		from buyreply
+		where bno = #{bno:INTEGER}
+	</select>
+	
+	<select id = "getCountSellReply" parameterType = "int" resultType = "int">
+		select count(*)
+		from sellreply
 		where bno = #{bno:INTEGER}
 	</select>
 </mapper>

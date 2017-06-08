@@ -10,4 +10,5 @@ public interface BoardService {
 	public Board searchBoard(int sellbuy, int bno);
 	public List<Board> searchBuyList(PageBean bean);
 	public List<Reply> searchReply(int sellbuy, int bno);
+	public int getCountReply(int sellbuy, int bno);
 }

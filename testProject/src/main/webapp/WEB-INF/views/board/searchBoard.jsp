@@ -105,7 +105,7 @@
                         <p>${board.contents}</p>
                     </div>
                     <div class="ratings">
-                        <a class="pull-right" href = "#" onclick = "review()">3 reviews</a>
+                        <a class="pull-right" href = "#" onclick = "review()">${replycount} reviews</a>
                         <p>&nbsp;</p>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
 
 					<!-- 디비에서 댓글 가져와서 div 하나씩 생성하자 -->
 					<div id = "replyDiv">
-						<c:forEach val = "reply" items="${replys}">
+						<c:forEach var = "reply" items="${replys}">
 							<div class="row">
 		                        <div class="col-md-12">
 		                            <span class="glyphicon glyphicon-star"></span>
@@ -131,9 +131,9 @@
 		                            <span class="glyphicon glyphicon-star"></span>
 		                            <span class="glyphicon glyphicon-star"></span>
 		                            <span class="glyphicon glyphicon-star-empty"></span>
-		                            ${replys.mno}
-		                            <span class="pull-right">${replys.regdate}</span>
-		                            <p>${replys.reply}</p>
+		                            ${reply.mno}
+		                            <span class="pull-right">${reply.regdate}</span>
+		                            <p>${reply.reply}</p>
 		                        </div>
 	                    	</div>
 						</c:forEach>

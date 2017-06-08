@@ -44,4 +44,12 @@ public class BoardDaoImpl implements BoardDao {
 		else
 			return session.selectList("board.searchSellReply", bno);
 	}
+	
+	public int getCountReply(int sellbuy, int bno){
+		if(sellbuy == 1)
+			return session.selectOne("board.getCountBuyReply", bno);
+		
+		else
+			return session.selectOne("board.getCountSellReply", bno);
+	}
 }
