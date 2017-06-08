@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="">f
 
     <title>Shop Homepage - Start Bootstrap Template</title>
 
@@ -122,6 +122,7 @@
                     <a href="#col-md-9" class="list-group-item">내 게시물 관리</a>
                 </div>
             </div>
+            
 			<c:if test = '${!empty content }'>
 	            <jsp:include page="${content}"/>
 			</c:if>

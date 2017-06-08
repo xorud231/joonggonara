@@ -36,7 +36,6 @@ public class BoardController {
 	public String searchBoard(int sellbuy, int bno, Model model, HttpSession session){
 		//sellbuy가 1이면 삽니다, 2면 팝니다
 		
-		session.setAttribute("mno", "1234");
 		session.setAttribute("sellbuy", sellbuy);
 		
 		String mno = (String)session.getAttribute("mno");
@@ -80,7 +79,6 @@ public class BoardController {
 	
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
 	public String insertReply(int bno, String replycontent, HttpSession session, Model model){
-		session.setAttribute("mno", "1234");
 		
 		String mno = (String)session.getAttribute("mno");
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
@@ -95,7 +93,6 @@ public class BoardController {
 	
 	@RequestMapping(value = "updateCart.do", method = RequestMethod.GET)
 	public String updateCart(int bno, HttpSession session, Model model){
-		session.setAttribute("mno", "1234");
 		
 		String mno = (String)session.getAttribute("mno");
 		int sellbuy = (Integer)session.getAttribute("sellbuy");

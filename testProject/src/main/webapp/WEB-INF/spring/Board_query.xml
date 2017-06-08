@@ -158,11 +158,11 @@
 	</select>
 	
 	<insert id = "insertBuyReply" parameterType = "hashmap">
-		insert into BuyReply values (2, #{replycontent:VARCHAR}, #{bno:INTEGER}, sysdate, #{mno:INTEGER})
+		insert into BuyReply values (buyreply_no.nextval, #{replycontent:VARCHAR}, #{bno:INTEGER}, sysdate, #{mno:INTEGER})
 	</insert>
 	
 	<insert id = "insertSellReply" parameterType = "hashmap">
-		insert into SellReply values (2, #{replycontent:VARCHAR}, #{bno:INTEGER}, sysdate, #{mno:INTEGER})
+		insert into SellReply values (sellreply_no.nextval, #{replycontent:VARCHAR}, #{bno:INTEGER}, sysdate, #{mno:INTEGER})
 	</insert>
 	
 	<select id = "searchInCart" parameterType = "hashmap" resultType = "int">

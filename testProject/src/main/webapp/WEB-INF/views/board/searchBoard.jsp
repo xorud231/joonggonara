@@ -46,19 +46,29 @@
 		}
 		
 		#cartbutton {
-			float: right !important; 
-			background-color : #ffcbcf;
+			float: right !important;
+			background-color : #eeeeee;
 			color : #ffecec;
 			font-weight : bold;
 		}
 		
 		#cartbutton:hover {
-			background-color : #efbbbf;
+			background-color : #dedede;
 		}
 		
     </style>
     
+    <script type="text/javascript" src="js/jquery-1.10.1.js"></script>
     <script type="text/javascript">
+    	$(function(){
+    		var isInCart = ${board.isInCart}; 
+    		var cartbutton = document.getElementById("cartbutton");
+    		
+    		if(isInCart){
+    			cartbutton.style.background = "#e8f42d";
+    			$('#cartbutton:hover').css("background", "black");
+    		}
+    	})
     	
     	var reviewClick = false;
     	
@@ -73,6 +83,18 @@
     		else{
     			review.style.display = "none";
     			reviewClick = false;
+    		}
+    	}
+    	
+    	function back(){
+    		var sellbuy = sessionStorage.getItem('sellbuy');
+			
+    		if(sellbuy == 1){
+    			location.href = "searchBuyList.do?sellbuy=1"
+    		}
+    		
+    		else{
+    			location.href = "searchSellList.do?sellbuy=2"
     		}
     	}
     	
@@ -113,12 +135,16 @@
 					</div>
 					<div class="caption-full">
 						<a id = "cartbutton" class = "btn btn-success"
-							href = "updateCart.do?bno=${board.bno}">담기${board.isInCart}</a>
+							href = "updateCart.do?bno=${board.bno}" style = "color : black;">담기</a>
+						<a class = "btn btn-success" onclick = "back()" 
+							style = "margin-right : 10px; background-color : #d041ff;">목록</a>
                     	<h4 style = "font-weight : bold;">작성자: ${board.mno}</h4>
+                    	<a style = "color:black">작성일 : ${board.regdate}</a>
                     </div>
+                    
                     <div class="caption-full">
                         <h3 class="pull-right">￦${board.price}</h3>
-                        <h3 style = "color : #43bdb1;">${board.title}</h3>
+                        <h3 style = "color : #43bdb1; font-weight : bold;">${board.title}</h3>
                         <p>${board.contents}</p>
                     </div>
                     <div class="ratings">
