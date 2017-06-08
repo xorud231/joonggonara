@@ -101,28 +101,34 @@
 
 		<!-- 모달 팝업 -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="false"
+			aria-labelledby="myModalLabel" aria-hidden="true"
 			style="margin-top: 350px">
+		
 			<div class="modal-dialog modal-lg">
+				
 				<div class="modal-content">
+				
 					<div class="modal-header">
+					
 						<button type="button" class="close" data-dismiss="modal">
+						
 							<span aria-hidden="true">×</span><span class="sr-only">Close</span>
 						</button>
 						<h2 class="modal-title" id="myModalLabel">
 							<font color="black">LOGIN</font>
 						</h2>
 					</div>
-					<
+					
 					<form action="login.do" method="post" id="frm">
 						<div class="modal-body">
+						
 							<table align="center" style="color: black">
 							
 								<tr>
 									<th>사    번</th>
 									<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
 									<td><input type="text" name="mno" id="mno"
-										 placeholder="사 번" />
+										 placeholder="사 번" style="font-style: italic;" />
 								</tr>
 								<tr>
 									<td>&nbsp;</td>
@@ -131,7 +137,7 @@
 									<th>비밀번호</th>
 									<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
 									<td><input type="password" name="password" id="password"
-										placeholder="비밀번호" /></td>
+										placeholder="비밀번호" style="font-style: italic;" /></td>
 
 								</tr>
 							</table>
@@ -165,12 +171,12 @@
 						</h2>
 					</div>
 					<div class="modal-body">
-						<table align='center' style="color: black">
+						<table align='center' style="color: black" >
 							<tr>
 								<th>사&nbsp;&nbsp;&nbsp;&nbsp;번</th>
 								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
 								<td><input type='text' name='mno' id='mno' alt="mno"
-									placeholder="사 번"></td>
+									placeholder="사 번" style="font-style: italic"></td>
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
@@ -179,7 +185,7 @@
 								<th>이&nbsp;&nbsp;&nbsp;&nbsp;름</th>
 								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
 								<td><input type='text' name='name' id='name'
-									placeholder="이 름"></td>
+									placeholder="이 름" style="font-style: italic"></td>
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
@@ -188,7 +194,7 @@
 								<th>비밀번호</th>
 								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
 								<td><input type='password' name='password' id='password'
-									placeholder="비밀번호"></td>
+									placeholder="비밀번호" style="font-style: italic"></td>
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
@@ -197,7 +203,7 @@
 								<th>닉&nbsp;네&nbsp;임</th>
 								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
 								<td><input type='text' name='nick' id='nick'
-									placeholder="닉 네 임">
+									placeholder="닉 네 임" style="font-style: italic">
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
@@ -205,7 +211,7 @@
 								<th>연&nbsp;락&nbsp;처</th>
 								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
 								<td><input type='text' name='phonenum' id='phonenum'
-									placeholder="연 락 처(-빼고 입력)">
+									placeholder="연 락 처(-빼고 입력)" style="font-style: italic">
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
@@ -214,7 +220,7 @@
 								<th>주&nbsp;&nbsp;&nbsp;&nbsp;소</th>
 								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
 								<td><input type='text' name='address' id='address'
-									placeholder="주 소">
+									placeholder="주 소" style="font-style: italic">
 							</tr>
 						</table>
 					</div>
