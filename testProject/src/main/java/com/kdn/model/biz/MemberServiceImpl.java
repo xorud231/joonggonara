@@ -89,16 +89,39 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	public void add(Member member) {
+		
+		
+		
+		
 		Member find= dao.search(member.getMno());
 		if(find != null){
 			System.out.println(find);
 			throw new UpdateException("이미 등록된 사번 입니다.");
 		}
-		
-		else{
-			dao.add(member);
+		if(find == null){
+			if(member.getMno() == ""){
+				throw new UpdateException("사번 입력하세요!");
+			}
+			else if(member.getName() == ""){
+				throw new UpdateException("이름 입력하세요!");
+			}
+			else if(member.getPassword() == ""){
+				throw new UpdateException("비밀번호 입력하세요!");
+			}
+			else if(member.getNick() == ""){
+				throw new UpdateException("닉네임 입력하세요!");
+			}
+			else if(member.getPhonenum() == ""){
+				throw new UpdateException("전화번호 입력하세요!");
+			}
+			else if(member.getAddress() == ""){
+				throw new UpdateException("주소 입력하세요!");
+			}
+			else{
+				dao.add(member);
+				
+			}
 		}
-		
 	}
 	
 }
