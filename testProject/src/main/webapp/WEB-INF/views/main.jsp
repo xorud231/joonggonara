@@ -45,7 +45,10 @@
 </head>
 
 <body id="page-top">
-
+	
+ 	
+ 	 
+ 	 
 
 	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
@@ -77,32 +80,28 @@
 		</div>
 	</div>
 	<div class="container">
-		<%
-			String id = (String) session.getAttribute("id");
-			if (id == null) { //로긴을 하지 않은 경우   로그인 화면 출력
-				Cookie[] cookies = request.getCookies();
-				String idSave = "";
-				for (Cookie cookie : cookies) {
-					if (cookie.getName().equals("idsave")) {
-						idSave = cookie.getValue();
-					}
-				}
-				String msg = (String) request.getAttribute("msg");
-				if (msg != null && !msg.equals("")) {
-		%>
-		<p style="color: white"><%=msg%></p>
-		<%
-			}
-		%>
-			<%
-			}
-		%>
-
+	<% String mno = (String) session.getAttribute("mno");
+ 	if(mno ==null){    //로긴을 하지 않은 경우   로그인 화면 출력
+ 	  Cookie[] cookies = request.getCookies();
+ 		String idSave ="";
+ 	    for(Cookie cookie: cookies){
+ 	    	if(cookie.getName().equals("idsave")){
+ 	    		idSave = cookie.getValue();
+ 	    	}
+ 	    }
+ 	    String msg = (String)request.getAttribute("msg");
+ 	    if(msg!=null && !msg.equals("")){ 
+ 	    	out.println("<script type='text/javascript'>"
+ 	    	+ "alert('" + msg + "')"
+ 	    	+ "</script>");
+ 	 	}
+ 	 }
+ 	 %>
 		<!-- 버튼 -->
 
 		<!-- 모달 팝업 -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true"
+			aria-labelledby="myModalLabel" aria-hidden="false"
 			style="margin-top: 350px">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -141,7 +140,7 @@
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">닫기</button>
 							<button type="submit" class="btn btn-primary">
-								<a href="index.do" style="color: white">로그인</a>
+								<a style="color: white">로그인</a>
 							</button>
 						</div>
 					</form>
@@ -221,12 +220,13 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal" value="취소">닫기</button>
-						<button type="submit" class="btn btn-primary" value="전송" onclick="alert('안되나?')">회원가입</button>
+						<button type="submit" class="btn btn-primary" value="전송" >회원가입</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</form>
+ 	
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script> <script
 		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script><!-- ie10-viewport-bug-workaround.js -->

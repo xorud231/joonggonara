@@ -47,9 +47,9 @@ public class MemberServiceImpl implements MemberService {
 
 	public boolean login(String mno, String password) {
 		Member member = null;
-		try {
+		try{
 			member = dao.search( mno);
-		} catch(Exception  s){
+		}catch(Exception s){
 			throw new UpdateException("DB 서버 오류");
 		}
 		if(member == null){
@@ -63,46 +63,42 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return true;
 	}
+	
+	
 
 	public void withdraw(String mno) {
 		Member member = null;
-		try {
+		
 			member = dao.search(mno);
 			if(member == null){
 				throw new UpdateException("아이디에 해당하는 회원이 없어 탈퇴 처리할 수 없습니다.");
 			}else{
 				dao.update(mno);
 			}
-		} catch(Exception  s){
-			throw new UpdateException("DB 서버 오류");
-		}
+		
 	}
 
 
 	public void update(Member member) {
-		try {
 			Member find= dao.search(member.getMno());
 			if(find == null){
 				throw new UpdateException("아이디에 해당하는 회원이 없어 수정할 수 없습니다.");
 			}else{
 				dao.update(member);
 			}
-		} catch(Exception  s){
-			throw new UpdateException("DB 서버 오류");
-		}
 	}
 	
 	public void add(Member member) {
-		try {
-			Member find= dao.search(member.getMno());
-			if(find != null){
-				throw new UpdateException("이미 등록된 아이디 입니다.");
-			}else{
-				dao.add(member);
-			}
-		} catch(Exception  s){
-			throw new UpdateException("DB 서버 오류");
-		} 
+		Member find= dao.search(member.getMno());
+		if(find != null){
+			System.out.println(find);
+			throw new UpdateException("이미 등록된 사번 입니다.");
+		}
+		
+		else{
+			dao.add(member);
+		}
+		
 	}
 	
 }
