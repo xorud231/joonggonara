@@ -1387,7 +1387,7 @@ img {
 	.thumbnail a>img, .thumbnail>img {
 	display: block;
 	max-width: 100%;
-	height: 400px
+	height: auto
 }
 
 .img-rounded {
@@ -4670,7 +4670,8 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 	height: 50px;
 	padding: 15px 15px;
 	font-size: 18px;
-	line-height: 20px
+	line-height: 20px;
+	margin-top: -15px;
 }
 
 .navbar-brand:focus, .navbar-brand:hover {

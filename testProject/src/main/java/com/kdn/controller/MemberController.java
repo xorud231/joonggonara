@@ -90,7 +90,7 @@ public class MemberController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "memberUpdate.do", method = RequestMethod.POST)
+	@RequestMapping(value = "memberUpdate.do", method = RequestMethod.GET)
 	public String memberUpdate(Member member){
 		memberService.update(member);
 		
