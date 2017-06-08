@@ -30,11 +30,19 @@ public class BoardDaoImpl implements BoardDao {
 	public int getBuyCount(PageBean bean) {
 		return session.selectOne("board.getBuyCount", bean);
 	}
+	public int getSellCount(PageBean bean) {
+		return session.selectOne("board.getSellCount", bean);
+	}
 	
 	public List<Board> searchBuyList(PageBean bean) {
 		RowBounds rows = new RowBounds(bean.getStart() - 1, bean.getInterval());
 		
 		return session.selectList("board.searchBuyList", bean, rows);
+	}
+	public List<Board> searchSellList(PageBean bean) {
+		RowBounds rows = new RowBounds(bean.getStart() - 1, bean.getInterval());
+		
+		return session.selectList("board.searchSellList", bean, rows);
 	}
 	
 	public List<Reply> searchReply(int sellbuy, int bno){

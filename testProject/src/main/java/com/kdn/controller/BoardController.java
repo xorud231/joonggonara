@@ -43,7 +43,8 @@ public class BoardController {
 		model.addAttribute("replycount", replycount);
 		model.addAttribute("content", "board/searchBoard.jsp");
 		
-		return "board/searchBoard";
+		return "index";
+//		return "board/searchBoard";
 	}
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
 	public String searchBuyList(Model model, PageBean bean){
@@ -52,6 +53,17 @@ public class BoardController {
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchBuyList.jsp");
 		
-		return "board/searchBuyList";
+		return "index";
+//		return "board/searchBuyList";
+	}
+	@RequestMapping(value = "searchSellList.do", method = RequestMethod.GET)
+	public String searchSellList(Model model, PageBean bean){
+		List<Board> list = boardService.searchSellList(bean);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("content", "board/searchSellList.jsp");
+		
+		return "index";
+//		return "board/searchSellList";
 	}
 }

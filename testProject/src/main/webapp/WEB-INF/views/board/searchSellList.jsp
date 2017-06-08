@@ -27,7 +27,7 @@
 		//input 양식의 hidden으로 선언된 page에 요청된 페이지 정보 셋팅 
 		document.getElementById("pageNo").value=cpage;
 		var frm = document.getElementById("frm");
-		frm.action="searchBuyList.do";
+		frm.action="searchSellList.do";
 		frm.submit();
 	}
 	//게시글 번호나 타이틀을 클릭하면 해당 게시글 요청을 위한 메서드 
@@ -76,7 +76,7 @@
                 <div class="row">
 					 <form id="frm" >
 					<input type="hidden" id="pageNo"  name="pageNo"  value="1"/>
-					<input type="hidden" id="sellbuy"  name="sellbuy"  value="1"/>
+					<input type="hidden" id="sellbuy"  name="sellbuy"  value="2"/>
 					<input type="hidden" id="bno"  name="bno"/>
 					 <c:forEach  var="board" items="${list}">
                     <div class="col-sm-4 col-lg-4 col-md-4">
