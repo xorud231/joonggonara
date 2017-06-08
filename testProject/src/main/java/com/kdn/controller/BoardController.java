@@ -54,13 +54,7 @@ public class BoardController {
 		model.addAttribute("replys", replys);
 		model.addAttribute("replycount", replycount);
 		model.addAttribute("content", "board/searchBoard.jsp");
-<<<<<<< HEAD
 		return "board/searchBoard";
-=======
-		
-		return "index";
-//		return "board/searchBoard";
->>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
 	}
 	
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
