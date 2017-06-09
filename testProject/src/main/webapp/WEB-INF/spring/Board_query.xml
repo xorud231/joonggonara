@@ -178,4 +178,12 @@
 	<insert id = "insertCart" parameterType = "hashmap">
 		insert into cart values (${mno}, ${bno}, ${sellbuy})
 	</insert>
+	
+	<delete id = "deleteBuyReply" parameterType = "int">
+		delete from buyboard where bno = ${bno}
+	</delete>
+	
+	<delete id = "deleteSellReply" parameterType = "int">
+		delete from sellboard where bno = ${bno}
+	</delete>
 </mapper>

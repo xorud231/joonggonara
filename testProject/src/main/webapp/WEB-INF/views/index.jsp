@@ -241,7 +241,7 @@
 				<p class="lead">My Page</p>
 				<div class="list-group">
 					
-					<a href="#col-md-9" class="list-group-item" >회원정보확인</a> 
+					<a href="myPage.do" class="list-group-item" >회원정보확인</a> 
 					<a href="searchBoard.do?sellbuy=1&bno=1" class="list-group-item">장바구니</a> 
 					<a href="#col-md-9" class="list-group-item">내 게시물 관리</a>
 				</div>

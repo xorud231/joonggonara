@@ -1,5 +1,6 @@
 package com.kdn.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kdn.model.biz.BoardService;
+import com.kdn.model.biz.MemberService;
 import com.kdn.model.domain.Board;
+import com.kdn.model.domain.Member;
 import com.kdn.model.domain.PageBean;
 import com.kdn.model.domain.Reply;
 
@@ -32,11 +35,12 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
+	@Autowired
+	private MemberService memberService2;
+	
 	@RequestMapping(value = "searchBoard.do", method = RequestMethod.GET)
 	public String searchBoard(int sellbuy, int bno, Model model, HttpSession session){
 		//sellbuy가 1이면 삽니다, 2면 팝니다
-		
-		session.setAttribute("sellbuy", sellbuy);
 		
 		String mno = (String)session.getAttribute("mno");
 		Board board = boardService.searchBoard(sellbuy, bno);
@@ -47,17 +51,29 @@ public class BoardController {
 		
 		board.setInCart(isInCart);
 		
-		//멤버서치해서 넘겨줘야함 (글쓴이랑 댓글 글쓴이)
+		Member member = memberService2.search(mno);
+		
+		HashMap<String, Reply> replyList = new HashMap<String, Reply>();
+		
+		for (Reply reply : replys) {
+			String nick = memberService2.search(reply.getMno()).getNick();
+			
+			replyList.put(nick, reply);
+		}
 		
 		model.addAttribute("board", board);
-		model.addAttribute("replys", replys);
+		model.addAttribute("replyList", replyList);
 		model.addAttribute("replycount", replycount);
+		model.addAttribute("member", member);
 		model.addAttribute("content", "board/searchBoard.jsp");
 		return "board/searchBoard";
 	}
 	
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
-	public String searchBuyList(Model model, PageBean bean){
+	public String searchBuyList(Model model, PageBean bean, HttpSession session){
+		
+		session.setAttribute("sellbuy", 1);
+		
 		List<Board> list = boardService.searchBuyList(bean);
 		
 		model.addAttribute("list", list);
@@ -67,7 +83,9 @@ public class BoardController {
 //		return "board/searchBuyList";
 	}
 	@RequestMapping(value = "searchSellList.do", method = RequestMethod.GET)
-	public String searchSellList(Model model, PageBean bean){
+	public String searchSellList(Model model, PageBean bean, HttpSession session){
+		session.setAttribute("sellbuy", 2);
+		
 		List<Board> list = boardService.searchSellList(bean);
 		
 		model.addAttribute("list", list);
@@ -103,6 +121,15 @@ public class BoardController {
 		
 		model.addAttribute("sellbuy", sellbuy);
 		model.addAttribute("bno", bno);
+		
+		return "redirect:searchBoard.do";
+	}
+	
+	@RequestMapping(value = "deleteBoard.do", method = RequestMethod.GET)
+	public String deleteBoard(int bno, HttpSession session, Model model){
+		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		
+		boardService.deleteBoard(sellbuy, bno);
 		
 		return "redirect:searchBoard.do";
 	}

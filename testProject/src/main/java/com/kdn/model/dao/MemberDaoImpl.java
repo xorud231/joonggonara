@@ -19,7 +19,7 @@ public class MemberDaoImpl implements MemberDao {
 	public Member search(String mno) {
 		return session.selectOne("member.searchMember", mno);
 	}
-
+	
 	public List<Member> searchAll(PageBean bean) {
 		RowBounds rows = new RowBounds(bean.getStart() - 1, bean.getInterval());
 		

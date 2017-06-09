@@ -11,6 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <title>joonggonara</title>
 
@@ -56,6 +59,13 @@
 			background-color : #dedede;
 		}
 		
+		button[type="button"]{
+			background : #f5f5f5;
+			border : 0px;
+			float : right;
+			
+		}
+		
     </style>
     
     <script type="text/javascript" src="js/jquery-1.10.1.js"></script>
@@ -63,22 +73,27 @@
     	var isInCart;
     
     	$(function(){
+    		<% int index = 0; %>
+    		
     		isInCart = ${board.isInCart};
     		var cartbutton = document.getElementById("cartbutton");
     		var boardMno = ${board.mno}; 
     		var myMno = <%= session.getAttribute("mno") %>;
     		
     		if(isInCart){
-    			cartbutton.style.background = "#e8f42d";
-    			$('#cartbutton:hover').css("background", "black");
+    			cartbutton.style.background = "#acd9f2";
     		}
     		
     		if(boardMno == myMno){
     			var modifyBoard = document.getElementById("modifyBoard");
     			var deleteBoard = document.getElementById("deleteBoard");
+    			var updateReply = document.getElementById("updateReply");
+    			var deleteReply = document.getElementById("deleteReply");
     			
     			modifyBoard.style.display = "";
     			deleteBoard.style.display = "";
+    			updateReply.style.display = "";
+    			deleteReply.style.display = "";
     		}
     	})
     	
@@ -119,6 +134,14 @@
     		location.href = "updateCart.do?bno=" + ${board.bno};
     	}
     	
+    	function updateReply(){
+    		var replycontent = document.getElementById("replycontent");
+    		
+    		replycontent.style.display = "none";
+    		
+    		
+    	}
+    	
     </script>
 </head>
 
@@ -155,15 +178,15 @@
 						</a>
 					</div>
 					<div class="caption-full">
-						<a id = "cartbutton" class = "btn btn-success"
+						<a id = "cartbutton" class = "btn"
 							onclick = "update()" style = "color : black;">담기</a>
-						<a class = "btn btn-success" onclick = "back()" 
-							style = "background-color : #d041ff;">목록</a>
-						<a style = "background-color : #d041ff; display : none;"
-							class = "btn btn-success" onclick = "back()" id = "modifyBoard">수정</a>
-							<a style = "background-color : #d041ff; display : none;"
-							class = "btn btn-success" onclick = "back()" id = "deleteBoard">삭제</a>
-                    	<h4 style = "font-weight : bold;">작성자: ${board.mno}</h4>
+						<a class = "btn" onclick = "back()" 
+							style = "background-color : #63A69F; color : #fff">목록</a>
+						<a style = "background-color : #F2E1AC; display : none; color : #fff;" class = "btn" 
+							href = "updateBoardForm.do?bno=${board.bno}" id = "modifyBoard">수정</a>
+						<a style = "background-color : #F2836B; display : none; color : #fff;" class = "btn"
+						 	href = "deleteBoard.do?bno=${board.bno}" id = "deleteBoard">삭제</a>
+                    	<h4 style = "font-weight : bold;">작성자: ${member.nick}</h4>
                     	<a style = "color:black">작성일 : ${board.regdate}</a>
                     </div>
                     
@@ -196,12 +219,37 @@
 
 					<!-- 디비에서 댓글 가져와서 div 하나씩 생성하자 -->
 					<div id = "replyDiv">
-						<c:forEach var = "reply" items="${replys}">
+						<c:forEach var = "reply" items="${replyList}">
 							<div class="row" style = "border-top : 1px solid #d3d3d3; padding-top : 7px;">
 		                        <div class="col-md-12">
-		                        	<span style = "font-weight : bold;">작성자: ${reply.mno}</span>
-		                            <span class="pull-right" style = "font-weight : bold;">${reply.regdate}</span>
-		                            <p style = "margin-top : 5px;">${reply.reply}</p>
+		                        	<span style = "font-weight : bold;">
+		                        		작성자: <c:out value = "${reply.key}"/>
+		                        	</span>
+		                            <span class="pull-right" style = "font-weight : bold;">
+		                            	<c:out value = "${reply.value.regdate}"/>
+		                            </span>
+		                            <table style = "width : 100%;">
+			                            <tr>
+			                            	<td style = "width : 88%;">
+					                            <p style = "margin-top : 5px;" id = "reply<%=index%>">
+					                            	<c:out value = "${reply.value.reply}"/>
+					                            </p>
+				                            </td>
+				                            <td>
+				                            	<button type="button" class="btn btn-default btn-sm" 
+										        	id = "deleteReply" style = "display : none;"
+										        	onclick = "updateReply()">
+										        	<span class="glyphicon glyphicon-remove"></span> 
+										        </button>
+										        <!-- <textarea class = "reply" id = >
+										        </textarea> -->
+					                            <button type="button" class="btn btn-default btn-sm" 
+					                            	id = "updateReply" style = "display : none;">
+										        	<span class="glyphicon glyphicon-edit"></span>
+										        </button>
+									        </td>
+								        </tr>
+							        </table>
 		                        </div>
 	                    	</div>
 						</c:forEach>

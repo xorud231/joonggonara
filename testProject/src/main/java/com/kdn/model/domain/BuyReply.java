@@ -6,4 +6,8 @@ public class BuyReply extends Reply{
 	public BuyReply(int rno, String reply, int bno, String regdate, String mno){
 		super(rno, reply, bno, regdate, mno);
 	}
+	
+	public BuyReply(int rno, String reply, int bno, String regdate, String mno, String nick){
+		super(rno, reply, bno, regdate, mno, nick);
+	}
 }
