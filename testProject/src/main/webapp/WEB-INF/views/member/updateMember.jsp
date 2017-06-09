@@ -31,7 +31,7 @@
 	<tr>
 	   <td colspan='2' align='center' class='tfoot tspacial'>
 	     <button type="submit" class="btn btn-primary" >수정</button>
-		 <a href="myPage.do" class="btn btn-default">취소</a>
+		 <a href="myInfo.do" class="btn btn-default">취소</a>
 	   </td>
 	</tr>
 </table>

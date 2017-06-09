@@ -113,4 +113,13 @@ public class BoardServiceImpl implements BoardService {
 			throw new UpdateException("게시글 작성 중 오류 발생");
 		}
 	}
+	
+	public void deleteBoard(int sellbuy, int bno){
+		try {
+			dao.deleteBoard(sellbuy, bno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UpdateException("게시글 작성 중 오류 발생");
+		}
+	}
 }

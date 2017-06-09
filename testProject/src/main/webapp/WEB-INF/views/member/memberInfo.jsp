@@ -3,13 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript">
-	function confirmFunc(){
-	  if( confirm(" 정말로 탈퇴하시겠습니까?" ) ){
-		location.href="main";
-	   }
-	}
-</script>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -41,11 +35,12 @@
 
 		</tr>
 	</table>
+	
+		
 	<td colspan='2' align='center' class='tfoot tspacial'>
-		<button type="button" class="btn btn-primary btn-lg"
+			<button type="button" class="btn btn-primary btn-lg"
 			data-toggle="modal" data-target="#updateModal">수   정</button>
-		&nbsp;&nbsp;&nbsp;&nbsp; <a href="delete.do:onClick=confirmFunc()" class="btn btn-default-lg" >탈  퇴</a>
-		<form method="post" action="memberUpdate.do">
+		&nbsp;&nbsp;&nbsp;&nbsp; <a href="delete.do" class="btn btn-default-lg" >탈  퇴</a>
 			<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
 				aria-labelledby="updateModalLabel" aria-hidden="true"
 				style="margin-top: 270px">
@@ -55,11 +50,12 @@
 							<button type="button" class="close" data-dismiss="modal">
 								<span aria-hidden="true">×</span><span class="sr-only">Close</span>
 							</button>
-							<h2 class="modal-title" id="insertModalLabel" align="center">
+							<h2 class="modal-title" id="updateModalLabel" align="center">
 								<font color="black">정보수정</font>
 							</h2>
 						</div>
 						<div class="modal-body">
+						<form method="post" action="memberUpdate.do">
 							<table align='center' style="color: black">
 								<tr>
 									<td class='tbasic'>사 번</td>
@@ -118,6 +114,7 @@
 									</td>
 								</tr>-->
 							</table>
+							</form>
 						</div>
 						<div class="modal-footer">
 						<button type="submit" class="btn btn-primary" value="전송" >수  정</button>
@@ -128,7 +125,7 @@
 					</div>
 				</div>
 			</div>
-		</form> <script src="http://code.jquery.com/jquery-latest.min.js"></script> <script
+		 <script src="http://code.jquery.com/jquery-latest.min.js"></script> <script
 			src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 		<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script>
 		<!-- ie10-viewport-bug-workaround.js --> <script

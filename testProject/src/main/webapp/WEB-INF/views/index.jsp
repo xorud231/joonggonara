@@ -1,86 +1,81 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
+ 
 <head>
-<<<<<<< HEAD
-	
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">f
-=======
->>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
-
+ 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-
+ 
 <title>Shop Homepage - Start Bootstrap Template</title>
-
+ 
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
-
+ 
 <!-- Custom CSS -->
 <link href="css/shop-homepage.css" rel="stylesheet">
-
+ 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+ 
 <script type="text/javascript" src="js/jquery-1.10.1.js"></script>
 <script type="text/javascript">
+ 
+ 
 	var click;
-	window.onload = function() {
-		click = document.getElementById("9_hello");
-	}
-
+	
+	$(function(){
+		var sellbuy = <%= session.getAttribute("sellbuy")%>
+		click = document.getElementById("9_hello")
+		/* alert(sellbuy); */
+		
+		if(sellbuy == 1){
+			click.style.display = "none";
+			var buy = document.getElementById("3_buy");
+			buy.style.display = "";
+			var sell = document.getElementById("3_sell");
+			sell.style.display = "none";
+			var my = document.getElementById("myPage");
+			my.style.display = "none";
+			click = document.getElementById("searchAll");
+			click.style.display = "";
+		}
+		
+		else if(sellbuy == 2){
+			click.style.display = "none";		
+			var buy = document.getElementById("3_buy");
+			buy.style.display = "none";
+			var sell = document.getElementById("3_sell");
+			sell.style.display = "";
+			var my = document.getElementById("myPage");
+			my.style.display = "none";
+			click = document.getElementById("searchAll");
+			click.style.display = "";
+		}
+		
+		else if(sellbuy == 3){
+			var buy = document.getElementById("3_buy");
+			buy.style.display = "none";
+			var sell = document.getElementById("3_sell");
+			sell.style.display = "none";
+			var my = document.getElementById("myPage");
+			my.style.display = "";
+		}
+	});
+	
 	function md3() {
 		var board = document.getElementById("col-md-9-board");
 		board.style.display = "";
 	}
 	
-	function buy() {
-		click.style.display = "none";
-		var buy = document.getElementById("3_buy");
-		buy.style.display = "";
-		var sell = document.getElementById("3_sell");
-		sell.style.display = "none";
-		var my = document.getElementById("myPage");
-		my.style.display = "none";
-		click = document.getElementById("searchAll");
-		click.style.display = "";
-		location.href="searchBuyList.do";
-	}
-	function sell() {
-		click.style.display = "none";		
-		var buy = document.getElementById("3_buy");
-		buy.style.display = "none";
-		var sell = document.getElementById("3_sell");
-		sell.style.display = "";
-		var my = document.getElementById("myPage");
-		my.style.display = "none";
-		click = document.getElementById("searchAll");
-		click.style.display = "";
-		location.href="searchSellList.do";
-
-	}
-	function myPage() {
-		var buy = document.getElementById("3_buy");
-		buy.style.display = "none";
-		var sell = document.getElementById("3_sell");
-		sell.style.display = "none";
-		var my = document.getElementById("myPage");
-		my.style.display = "";
-	}
-
 	function sell_1() {
 		click.style.display = "none";
 		click = document.getElementById("9_sell_1");
@@ -116,7 +111,7 @@
 		click = document.getElementById("9_sell_7");
 		click.style.display = "";
 	}
-
+ 
 	function buy_1() {
 		click.style.display = "none";
 		click = document.getElementById("9_buy_1");
@@ -176,17 +171,19 @@
 		var item = document.getElementById('item_'+count);
 		if(item !=null) item.parentNode.removeChild(item);
 	}
-	/* 진환이형 코드 시작 */
-
-		
 	
-	/* 진환이형코드 여기까지 */
+	
+	
+ 
+	
+	
+	
 </script>
-
+ 
 </head>
-
+ 
 <body>
-
+ 
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -205,20 +202,20 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a onclick="buy()">팝니다</a></li>
-					<li><a onclick="sell()">삽니다</a></li>
-					<li><a onclick="myPage()">My page</a></li>
-					<li><a href="gomain.do" onclick="alert('<%=(String)session.getAttribute("mno")%>님 로그아웃 되었습니다')">Logout</a></li>
+					<li><a href="searchBuyList.do" >팝니다</a></li>
+					<li><a href="searchSellList.do">삽니다</a></li>
+					<li><a href="myBoardPage.do">My page</a></li>
+					<li><a href="logout.do" onclick="alert('"+${mno}+'"님 로그아웃 되었습니다')">Logout</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container -->
 	</nav>
-
+ 
 	<!-- Page Content -->
 	<div class="container">
-
+ 
 		<div class="row" id="row">
 			<div class="col-md-3" id = "col-md-3" onclick="md3()">
 			<div id="3_buy" style="display: none">
@@ -255,46 +252,14 @@
 				</div>
 			</div>			
 			</div>
-
-<<<<<<< HEAD
-            <div class="col-md-3" id="3_buy" style="display:none">
-                <p class="lead">팝니다</p>
-                <div class="list-group">
-                    <a href="searchBoard.do?sellbuy=1&bno=1" class="list-group-item">팝니다 카테고리1</a>
-                    <a href="#col-md-9" class="list-group-item">팝니다 카테고리2</a>
-                    <a href="#col-md-9" class="list-group-item">팝니다 카테고리3</a>
-                </div>
-            </div>
-            <div class="col-md-3" id="3_sell" style="display:none">
-                <p class="lead">삽니다</p>
-                <div class="list-group">
-                    <a href="#col-md-9" class="list-group-item">삽니다 카테고리1</a>
-                    <a href="#col-md-9" class="list-group-item">삽니다 카테고리2</a>
-                    <a href="#col-md-9" class="list-group-item">삽니다 카테고리3</a>
-                </div>
-            </div>
-            <div class="col-md-3" id="myPage" style="display:">
-                <p class="lead">My Page</p>
-                <div class="list-group">
-                    <a href="#col-md-9" class="list-group-item">회원정보확인</a>
-                    <a href="#col-md-9" class="list-group-item">장바구니</a>
-                    <a href="#col-md-9" class="list-group-item">내 게시물 관리</a>
-                </div>
-            </div>
-            
-			<c:if test = '${!empty content }'>
-	            <jsp:include page="${content}"/>
-			</c:if>
-            	
-=======
+ 
 			<!-- div9 -->
 			<div class="col-md-9">
 				<div id=col-md-9-board>
 					<div id="9_hello">
->>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
-
+ 
 						<div class="row carousel-holder">
-
+ 
 							<div class="col-md-12">
 								<div id="carousel-example-generic" class="carousel slide"
 									data-ride="carousel">
@@ -305,7 +270,7 @@
                             </ol> -->
 									<div class="carousel-inner">
 										<div class="item active">
-										<h1><%=(String)session.getAttribute("mno") %>님 환영합니다</h1>
+										<h1>${mno}님 환영합니다</h1>
 											<img class="slide-image" src="img/welcome.PNG"  alt="">
 										</div>
 										<!-- <div class="item">
@@ -323,23 +288,23 @@
                             </a> -->
 								</div>
 							</div>
-
+ 
 						</div>
-
-
-
+ 
+ 
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9  팝니다-->
-
+ 
 					<!-- div9_sell_1-->
 					<div id="9_sell_1" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4" onclick="smallBoard()">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -366,7 +331,7 @@
 									</div>
 								</div>
 							</div>
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -390,22 +355,22 @@
 									</div>
 								</div>
 							</div>
-
-
-
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9_sell_1-->
 					<!-- div9_sell_2-->
 					<div id="9_sell_2" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -432,7 +397,7 @@
 									</div>
 								</div>
 							</div>
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -479,22 +444,22 @@
 									</div>
 								</div>
 							</div>
-
-
-
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9_sell_2-->
 					<!-- div9_sell_3-->
 					<div id="9_sell_3" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -521,23 +486,23 @@
 									</div>
 								</div>
 							</div>
-
-
-
-
+ 
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9_sell_3-->
 					<!-- div9_sell_4-->
 					<div id="9_sell_4" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -564,23 +529,23 @@
 									</div>
 								</div>
 							</div>
-
-
-
-
+ 
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9_sell_4-->
 					<!-- div9_sell_5-->
 					<div id="9_sell_5" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -607,23 +572,23 @@
 									</div>
 								</div>
 							</div>
-
-
-
-
+ 
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9_sell_5-->
 					<!-- div9_sell_6-->
 					<div id="9_sell_6" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -650,23 +615,23 @@
 									</div>
 								</div>
 							</div>
-
-
-
-
+ 
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9_sell_6-->
 					<!-- div9_sell_7-->
 					<div id="9_sell_7" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -693,29 +658,29 @@
 									</div>
 								</div>
 							</div>
-
-
-
-
+ 
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9_sell_7-->
-
-
-
-
+ 
+ 
+ 
+ 
 					<!-- 바이 -->
-
+ 
 					<!-- div9_buy_1-->
 					<div id="9_buy_1" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -742,7 +707,7 @@
 									</div>
 								</div>
 							</div>
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -766,22 +731,22 @@
 									</div>
 								</div>
 							</div>
-
-
-
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9_buy_1-->
 					<!-- div9_buy_2-->
 					<div id="9_buy_2" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -808,7 +773,7 @@
 									</div>
 								</div>
 							</div>
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -855,22 +820,22 @@
 									</div>
 								</div>
 							</div>
-
-
-
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9_buy_2-->
 					<!-- div9_buy_3-->
 					<div id="9_buy_3" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -897,23 +862,23 @@
 									</div>
 								</div>
 							</div>
-
-
-
-
+ 
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9_buy_3-->
 					<!-- div9_buy_4-->
 					<div id="9_buy_4" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -940,23 +905,23 @@
 									</div>
 								</div>
 							</div>
-
-
-
-
+ 
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9_buy_4-->
 					<!-- div9_buy_5-->
 					<div id="9_buy_5" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -983,23 +948,23 @@
 									</div>
 								</div>
 							</div>
-
-
-
-
+ 
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9_buy_5-->
 					<!-- div9_buy_6-->
 					<div id="9_buy_6" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -1026,23 +991,23 @@
 									</div>
 								</div>
 							</div>
-
-
-
-
+ 
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
-
-
+ 
+ 
 					<!-- div9_buy_6-->
 					<!-- div9_buy_7-->
 					<div id="9_buy_7" style="display: none">
-
-
-
+ 
+ 
+ 
 						<div class="row">
-
+ 
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -1069,22 +1034,22 @@
 									</div>
 								</div>
 							</div>
-
-
-
-
+ 
+ 
+ 
+ 
 						</div>
-
+ 
 					</div>
 				</div>
-
-
+ 
+ 
 				<!-- div9_buy_7-->
-
+ 
 				<!-- 바이끝 -->
-
+ 
 				<!-- 여기서부터는 입력보드 폼 -->
-
+ 
 				<div id="col-md-9-smallBoard" >
 				<div id = "smallBoard" style="display: none">
 					<form method="post" action="insertBoard.do" enctype="multipart/form-data" >
@@ -1131,21 +1096,21 @@
 						
 						
 			</div><!-- 9끝 -->
-
-
-
+ 
+ 
+ 
 			
-
+ 
 		</div>
 		
-
+ 
 	</div>
 	<!-- /.container -->
-
+ 
 	<div class="container">
-
+ 
 		<hr>
-
+ 
 		<!-- Footer -->
 		<footer>
 			<div class="row">
@@ -1154,16 +1119,16 @@
 				</div>
 			</div>
 		</footer>
-
+ 
 	</div>
 	<!-- /.container -->
-
+ 
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
-
+ 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
-
+ 
 </body>
-
+ 
 </html>

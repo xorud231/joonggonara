@@ -104,4 +104,12 @@ public class BoardDaoImpl implements BoardDao {
 			session.insert("board.insertCart", temp);
 		}
 	}
+	
+	public void deleteBoard(int sellbuy, int bno){
+		if(sellbuy == 1)
+			session.delete("board.deleteBuyBoard", bno);
+		
+		else
+			session.delete("board.deleteSellBoard", bno);
+	}
 }

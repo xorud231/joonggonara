@@ -8,6 +8,7 @@ public class Reply implements Serializable{
 	private int bno;
 	private String regdate;
 	private String mno;
+	private String nick;
 	
 	public Reply(){}
 
@@ -19,6 +20,24 @@ public class Reply implements Serializable{
 		this.mno = mno;
 	}
 	
+	public Reply(int rno, String reply, int bno, String regdate, String mno,
+			String nick) {
+		this.rno = rno;
+		this.reply = reply;
+		this.bno = bno;
+		this.regdate = regdate;
+		this.mno = mno;
+		this.nick = nick;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
 	public String getMno() {
 		return mno;
 	}
