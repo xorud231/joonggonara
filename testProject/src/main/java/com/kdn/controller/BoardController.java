@@ -62,26 +62,33 @@ public class BoardController {
 		model.addAttribute("content", "board/searchBoard.jsp");
 		return "index";
 	}
-	
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
-	public String searchBuyList(Model model, PageBean bean, HttpSession session){
-		
+	public String searchBuyList(Model model, PageBean bean,HttpSession session){
 		session.setAttribute("sellbuy", 1);
 		
 		List<Board> list = boardService.searchBuyList(bean);
-		
+		for (Board board : list) {
+			int bno = board.getBno();
+			if(boardService.searchBuyFile(bno).getFiles()!=null){
+				board.setFiles(boardService.searchBuyFile(bno).getFiles());	
+				}
+			}
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchBuyList.jsp");
 		
 		return "index";
-//		return "board/searchBuyList";
 	}
 	@RequestMapping(value = "searchSellList.do", method = RequestMethod.GET)
 	public String searchSellList(Model model, PageBean bean, HttpSession session){
 		session.setAttribute("sellbuy", 2);
 		
 		List<Board> list = boardService.searchSellList(bean);
-		
+		for (Board board : list) {
+			int bno = board.getBno();
+			if(boardService.searchSellFile(bno).getFiles()!=null){
+				board.setFiles(boardService.searchSellFile(bno).getFiles());	
+				}
+			}
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchSellList.jsp");
 		

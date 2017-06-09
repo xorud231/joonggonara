@@ -60,7 +60,14 @@ public class BoardServiceImpl implements BoardService {
 			throw new UpdateException("게시글 검색 중 오류 발생");
 		}
 	}
-	
+	public Board searchBuyFile(int bno) {
+		System.out.println("bno"+dao.searchBuyFile( bno));
+		return dao.searchBuyFile( bno);
+	}
+	public Board searchSellFile(int bno) {
+		System.out.println("bno"+dao.searchSellFile( bno));
+		return dao.searchSellFile( bno);
+	}
 	public List<Reply> searchReply(int sellbuy, int bno){
 		try {
 			/*int total = dao.getBuyCount( bean);

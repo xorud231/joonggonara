@@ -49,14 +49,17 @@
 					 <c:forEach  var="board" items="${list}">
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-<%--                         <c:choose> --%>
-<%--                         <c:when test="1"> --%>
+                      <c:forEach  var="file"  items='${board.files}'>
+                             <c:choose>
+                     		 <c:when test="${!empty file.sfilename}">
+<%--                             <img src="filedown.do?sfilename=${file.sfilename}&rfilename=${file.rfilename}" alt="없음"> --%>
+                            <img src="img/portfolio/fullsize/${file.sfilename}" alt="없음">
+                             </c:when>
+                             <c:otherwise>
                             <img src="http://placehold.it/320x150" alt="">
-<%--                         </c:when> --%>
-<%--                         <c:otherwise> --%>
-<%--                             <img src="${board.title}" alt=""> --%>
-<%--                         </c:otherwise> --%>
-<%--                         </c:choose> --%>
+                        </c:otherwise>
+                         </c:choose>
+                            </c:forEach>
                             <div class="caption">
                                 <h4 class="pull-right">${board.price}</h4>
                                 <h4><a href="#" onclick="getBoard(${board.bno})">${board.title}</a>
