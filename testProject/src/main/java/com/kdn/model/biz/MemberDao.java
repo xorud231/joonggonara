@@ -15,4 +15,6 @@ public interface MemberDao {
 	/** withdraw를 Y로 update해야 한다.*/
 	public void update(String mno)  ;
 	public void update(Member member) ;
+
+	
 }

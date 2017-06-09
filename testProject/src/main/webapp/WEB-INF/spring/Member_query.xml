@@ -9,7 +9,11 @@
 		from member
 		where mno = #{mno}
 	</select>
-	
+	<select id = "findNick" parameterType="String" resultType="member">
+		select nick
+		from member
+		where mno =#{mno}
+	</select>
 	<select id = "getCount" parameterType = "pagebean" resultType = "int">
 		select count(*)
 		from member
