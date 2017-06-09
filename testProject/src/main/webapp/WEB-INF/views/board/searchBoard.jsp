@@ -60,13 +60,25 @@
     
     <script type="text/javascript" src="js/jquery-1.10.1.js"></script>
     <script type="text/javascript">
+    	var isInCart;
+    
     	$(function(){
-    		var isInCart = ${board.isInCart}; 
+    		isInCart = ${board.isInCart};
     		var cartbutton = document.getElementById("cartbutton");
+    		var boardMno = ${board.mno}; 
+    		var myMno = <%= session.getAttribute("mno") %>;
     		
     		if(isInCart){
     			cartbutton.style.background = "#e8f42d";
     			$('#cartbutton:hover').css("background", "black");
+    		}
+    		
+    		if(boardMno == myMno){
+    			var modifyBoard = document.getElementById("modifyBoard");
+    			var deleteBoard = document.getElementById("deleteBoard");
+    			
+    			modifyBoard.style.display = "";
+    			deleteBoard.style.display = "";
     		}
     	})
     	
@@ -87,7 +99,7 @@
     	}
     	
     	function back(){
-    		var sellbuy = sessionStorage.getItem('sellbuy');
+    		var sellbuy = <%= session.getAttribute("sellbuy") %>;
 			
     		if(sellbuy == 1){
     			location.href = "searchBuyList.do?sellbuy=1"
@@ -96,6 +108,15 @@
     		else{
     			location.href = "searchSellList.do?sellbuy=2"
     		}
+    	}
+    	
+    	function update(){
+    		if(isInCart)
+    			alert("장바구니에서 제거하였습니다.");
+    		else
+    			alert("장바구니에 추가하였습니다.");
+    		
+    		location.href = "updateCart.do?bno=" + ${board.bno};
     	}
     	
     </script>
@@ -135,9 +156,13 @@
 					</div>
 					<div class="caption-full">
 						<a id = "cartbutton" class = "btn btn-success"
-							href = "updateCart.do?bno=${board.bno}" style = "color : black;">담기</a>
+							onclick = "update()" style = "color : black;">담기</a>
 						<a class = "btn btn-success" onclick = "back()" 
-							style = "margin-right : 10px; background-color : #d041ff;">목록</a>
+							style = "background-color : #d041ff;">목록</a>
+						<a style = "background-color : #d041ff; display : none;"
+							class = "btn btn-success" onclick = "back()" id = "modifyBoard">수정</a>
+							<a style = "background-color : #d041ff; display : none;"
+							class = "btn btn-success" onclick = "back()" id = "deleteBoard">삭제</a>
                     	<h4 style = "font-weight : bold;">작성자: ${board.mno}</h4>
                     	<a style = "color:black">작성일 : ${board.regdate}</a>
                     </div>
@@ -148,7 +173,9 @@
                         <p>${board.contents}</p>
                     </div>
                     <div class="ratings">
-                        <a class="pull-right" href = "#" onclick = "review()">${replycount} replies</a>
+                        <a class="pull-right" href = "#" onclick = "review()" style = "font-size : 18px">
+                        	${replycount} replies
+                        </a>
                         <p>&nbsp;</p>
                     </div>
                 </div>
