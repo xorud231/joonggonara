@@ -9,6 +9,8 @@ import com.kdn.model.domain.Reply;
 public interface BoardDao {
 
 	public Board 	searchBoard(int sellbuy, int bno) 		;
+	public Board 		searchBuyFile(int bno);
+	public Board 		searchSellFile(int bno);
 	public List<Board> searchBuyList(PageBean bean) ;
 	public List<Board> searchSellList(PageBean bean) ;
 	public int 		getBuyCount(PageBean bean) ;
@@ -19,6 +21,7 @@ public interface BoardDao {
 	public boolean searchInCart(String mno, int sellbuy, int bno);
 	public void updateCart(String mno, int sellbuy, int bno, boolean isInCart);
 	public void deleteBoard(int sellbuy, int bno);
+	public void updateReply(int sellbuy, Reply reply, String editReply);
 }
 
 

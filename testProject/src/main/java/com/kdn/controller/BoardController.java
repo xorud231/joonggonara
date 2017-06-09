@@ -41,7 +41,6 @@ public class BoardController {
 	@RequestMapping(value = "searchBoard.do", method = RequestMethod.GET)
 	public String searchBoard(int bno, Model model, HttpSession session){
 		//sellbuy가 1이면 삽니다, 2면 팝니다
-		session.setAttribute("sellbuy", 1);
 		
 		String mno = (String)session.getAttribute("mno");
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
@@ -61,28 +60,35 @@ public class BoardController {
 		model.addAttribute("replycount", replycount);
 		model.addAttribute("member", member);
 		model.addAttribute("content", "board/searchBoard.jsp");
-		return "board/searchBoard";
+		return "index";
 	}
-	
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
-	public String searchBuyList(Model model, PageBean bean, HttpSession session){
-		
+	public String searchBuyList(Model model, PageBean bean,HttpSession session){
 		session.setAttribute("sellbuy", 1);
 		
 		List<Board> list = boardService.searchBuyList(bean);
-		
+		for (Board board : list) {
+			int bno = board.getBno();
+			if(boardService.searchBuyFile(bno).getFiles()!=null){
+				board.setFiles(boardService.searchBuyFile(bno).getFiles());	
+				}
+			}
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchBuyList.jsp");
 		
 		return "index";
-//		return "board/searchBuyList";
 	}
 	@RequestMapping(value = "searchSellList.do", method = RequestMethod.GET)
 	public String searchSellList(Model model, PageBean bean, HttpSession session){
 		session.setAttribute("sellbuy", 2);
 		
 		List<Board> list = boardService.searchSellList(bean);
-		
+		for (Board board : list) {
+			int bno = board.getBno();
+			if(boardService.searchSellFile(bno).getFiles()!=null){
+				board.setFiles(boardService.searchSellFile(bno).getFiles());	
+				}
+			}
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchSellList.jsp");
 		
@@ -92,6 +98,9 @@ public class BoardController {
 	@RequestMapping(value = "myBoardPage.do", method = RequestMethod.GET)
 	public String myboardPage(HttpSession session, Model model){
 		session.setAttribute("sellbuy", 3);
+		
+		Member member = memberService2.search((String)session.getAttribute("mno"));
+		model.addAttribute("nick", member.getNick());
 		
 		String mno = (String)session.getAttribute("mno");
 		
@@ -135,6 +144,16 @@ public class BoardController {
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
 		
 		boardService.deleteBoard(sellbuy, bno);
+		
+		return "redirect:searchBoard.do";
+	}
+	
+	@RequestMapping(value = "updateReply.do", method = RequestMethod.GET)
+	public String updateReply(Reply reply, String editReply, HttpSession session, Model model){
+		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		
+		boardService.updateReply(sellbuy, reply, editReply);
+		model.addAttribute("bno", reply.getBno());
 		
 		return "redirect:searchBoard.do";
 	}

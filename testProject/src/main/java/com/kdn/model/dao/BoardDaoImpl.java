@@ -46,6 +46,14 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return session.selectList("board.searchSellList", bean, rows);
 	}
+	public Board searchBuyFile(int bno) {
+		System.out.println(session.selectOne("board.searchBuyFile", bno));
+			return session.selectOne("board.searchBuyFile", bno);
+	}
+	public Board searchSellFile(int bno) {
+		System.out.println(session.selectOne("board.searchSellFile", bno));
+		return session.selectOne("board.searchSellFile", bno);
+	}
 	
 	public List<Reply> searchReply(int sellbuy, int bno){
 		if(sellbuy == 1)
@@ -111,5 +119,17 @@ public class BoardDaoImpl implements BoardDao {
 		
 		else
 			session.delete("board.deleteSellBoard", bno);
+	}
+	
+	public void updateReply(int sellbuy, Reply reply, String editReply){
+		HashMap<String, Object> temp = new HashMap<String, Object>();
+		temp.put("reply", reply);
+		temp.put("editReply", editReply);
+		
+		if(sellbuy == 1)
+			session.update("board.updateBuyReply", temp);
+		
+		else
+			session.update("board.updateSellReply", temp);
 	}
 }
