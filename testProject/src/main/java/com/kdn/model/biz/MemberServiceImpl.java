@@ -76,7 +76,7 @@ public class MemberServiceImpl implements MemberService {
 				dao.update(mno);
 			}
 		
-	}
+	}	
 
 
 	public void update(Member member) {

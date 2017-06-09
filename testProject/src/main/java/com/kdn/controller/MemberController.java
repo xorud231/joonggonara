@@ -74,7 +74,7 @@ public class MemberController {
 		return "main";
 	}
 	
-	@RequestMapping(value = "myPage.do", method = RequestMethod.GET)
+	@RequestMapping(value = "myInfo.do", method = RequestMethod.GET)
 	public String myPage(Model model, HttpSession session){
 		model.addAttribute("member", memberService.search((String)session.getAttribute("mno")));
 		model.addAttribute("content", "member/memberInfo.jsp");
@@ -90,11 +90,18 @@ public class MemberController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "memberUpdate.do", method = RequestMethod.GET)
+	@RequestMapping(value = "memberUpdate.do", method = RequestMethod.POST)
 	public String memberUpdate(Member member){
 		memberService.update(member);
 		
-		return "redirect:myPage.do";
+		return "redirect:myInfo.do";
+	}
+	
+	@RequestMapping(value="delete.do", method=RequestMethod.GET)
+	public String removeMember(HttpSession session){
+		String mno = (String)session.getAttribute("mno");
+		memberService.withdraw(mno);
+		return "main";
 	}
 	
 	
