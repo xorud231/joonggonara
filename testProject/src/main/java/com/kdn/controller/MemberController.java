@@ -39,10 +39,12 @@ public class MemberController {
 	}*/
 	
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String login(String mno, String password, HttpSession session){
+	public String login(String mno, String password, HttpSession session, Model model){
 		
 		memberService.login(mno, password);
 		session.setAttribute("mno", mno);
+		
+		model.addAttribute("nick", memberService.search(mno).getNick());
 		
 		return "index";
 		//return "redirect:index.do";
@@ -68,28 +70,31 @@ public class MemberController {
 	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
 	public String insertMemberForm(HttpSession session, Model model){
 		session.removeAttribute("mno");
-		
+		session.removeAttribute("sellbuy");
+		session.removeAttribute("myPage");
 		model.addAttribute("content", "main");
 		
 		return "main";
 	}
 	
-	@RequestMapping(value = "myPage.do", method = RequestMethod.GET)
+	@RequestMapping(value = "myInfo.do", method = RequestMethod.GET)
 	public String myPage(Model model, HttpSession session){
 		model.addAttribute("member", memberService.search((String)session.getAttribute("mno")));
 		model.addAttribute("content", "member/memberInfo.jsp");
 		
-		return "index";
-	}
-	
-	@RequestMapping(value = "memberUpdateForm.do", method = RequestMethod.GET)
-	public String memberUpdateForm(Model model, HttpSession session){
-		model.addAttribute("member", memberService.search((String)session.getAttribute("mno")));
-		model.addAttribute("content", "member/updateMember.jsp");
+		session.setAttribute("myPage", 1);
 		
 		return "index";
 	}
 	
+//	@RequestMapping(value = "memberUpdateForm.do", method = RequestMethod.GET)
+//	public String memberUpdateForm(Model model, HttpSession session){
+//		model.addAttribute("member", memberService.search((String)session.getAttribute("mno")));
+//		model.addAttribute("content", "member/updateMember.jsp");
+//		
+//		return "index";
+//	}
+//	
 	@RequestMapping(value = "memberUpdate.do", method = RequestMethod.GET)
 	public String memberUpdate(Member member){
 		memberService.update(member);
@@ -108,6 +113,7 @@ public class MemberController {
 	@RequestMapping(value = "gomain.do", method = RequestMethod.GET)
 	public String logout(HttpSession session){
 		session.removeAttribute("mno");
+		
 		return "main";
 	}
 }

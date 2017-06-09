@@ -45,7 +45,7 @@ public class BoardController {
 		
 		String mno = (String)session.getAttribute("mno");
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
-		
+
 		Board board = boardService.searchBoard(sellbuy, bno);
 		List<Reply> replys = boardService.searchReply(sellbuy, bno);
 		int replycount = boardService.getCountReply(sellbuy, bno);
@@ -90,8 +90,12 @@ public class BoardController {
 //		return "board/searchSellList";
 	}
 	@RequestMapping(value = "myBoardPage.do", method = RequestMethod.GET)
-	public String myboardPage(HttpSession session){
+	public String myboardPage(HttpSession session, Model model){
 		session.setAttribute("sellbuy", 3);
+		
+		String mno = (String)session.getAttribute("mno");
+		
+		model.addAttribute("nick", memberService2.search(mno).getNick());
 		
 		return "index";
 	}

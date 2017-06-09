@@ -33,23 +33,15 @@
 	var click;
 	
 	$(function(){
-		var sellbuy = <%= session.getAttribute("sellbuy")%>
+		var sellbuy = <%= session.getAttribute("sellbuy")%>;
+		var myPage = <%=session.getAttribute("myPage")%>;
+		
+		<%-- alert('<%= session.getAttribute("sellbuy")%>');
+		alert('<%= session.getAttribute("myPage")%>');
+		 --%>
 		click = document.getElementById("9_hello")
-		/* alert(sellbuy); */
 		
 		if(sellbuy == 1){
-			click.style.display = "none";
-			var buy = document.getElementById("3_buy");
-			buy.style.display = "";
-			var sell = document.getElementById("3_sell");
-			sell.style.display = "none";
-			var my = document.getElementById("myPage");
-			my.style.display = "none";
-			click = document.getElementById("searchAll");
-			click.style.display = "";
-		}
-		
-		else if(sellbuy == 2){
 			click.style.display = "none";		
 			var buy = document.getElementById("3_buy");
 			buy.style.display = "none";
@@ -61,13 +53,34 @@
 			click.style.display = "";
 		}
 		
+		else if(sellbuy == 2){
+			click.style.display = "none";
+			var buy = document.getElementById("3_buy");
+			buy.style.display = "";
+			var sell = document.getElementById("3_sell");
+			sell.style.display = "none";
+			var my = document.getElementById("myPage");
+			my.style.display = "none";
+			click = document.getElementById("searchAll");
+			click.style.display = "";
+		}
+		
 		else if(sellbuy == 3){
+			click.style.display = "none";
 			var buy = document.getElementById("3_buy");
 			buy.style.display = "none";
 			var sell = document.getElementById("3_sell");
 			sell.style.display = "none";
 			var my = document.getElementById("myPage");
 			my.style.display = "";
+		}
+		
+		if(myPage == 1){
+			click.style.display = "none";
+			click = document.getElementById("myInfo");
+			click.style.display = "";
+			<%session.setAttribute("myPage", 0);%>
+			<%-- alert("<%=session.getAttribute("myPage")%>"); --%>
 		}
 	});
 	
@@ -154,6 +167,10 @@
 		click = document.getElementById("smallBoard");
 		click.style.display = "";
 	}
+	
+	
+	
+	
 	$(function(){
 		$("#addFile").click(addFileForm);
 	});
@@ -202,10 +219,10 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="searchBuyList.do" >팝니다</a></li>
-					<li><a href="searchSellList.do">삽니다</a></li>
+					<li><a href="searchSellList.do" >팝니다</a></li>
+					<li><a href="searchBuyList.do">삽니다</a></li>
 					<li><a href="myBoardPage.do">My page</a></li>
-					<li><a href="logout.do" onclick="alert('"+${mno}+"'님 로그아웃 되었습니다')">Logout</a></li>
+					<li><a href="logout.do" onclick="alert('<%=(String)session.getAttribute("mno")%>님이 로그아웃 하셨습니다')">Logout</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -246,7 +263,7 @@
 				<p class="lead">My Page</p>
 				<div class="list-group">
 					
-					<a href="#col-md-9" class="list-group-item" >회원정보확인</a> 
+					<a href="myInfo.do" id="clickInfo" class="list-group-item" >회원정보확인</a> 
 					<a href="#col-md-9" class="list-group-item">장바구니</a> 
 					<a href="#col-md-9" class="list-group-item">내 게시물 관리</a>
 				</div>
@@ -270,7 +287,7 @@
                             </ol> -->
 									<div class="carousel-inner">
 										<div class="item active">
-										<h1>${mno}님 환영합니다</h1>
+										<h1>${nick}님 환영합니다</h1>
 											<img class="slide-image" src="img/welcome.PNG"  alt="">
 										</div>
 										<!-- <div class="item">
@@ -1084,6 +1101,11 @@
 			
 			<!-- selectAll -->
 			<div id="searchAll" style="display: none">
+				<c:if test = '${!empty content }'>
+		            <jsp:include page="${content}"/>
+				</c:if>
+			</div>
+			<div id="myInfo" style="display: none">
 				<c:if test = '${!empty content }'>
 		            <jsp:include page="${content}"/>
 				</c:if>
