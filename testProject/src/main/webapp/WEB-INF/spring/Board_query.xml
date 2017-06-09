@@ -134,15 +134,19 @@
 	</select>
 	
 	<select id = "searchBuyReply" parameterType = "int" resultType = "reply">
-		select *
-		from buyreply
-		where bno = #{bno:INTEGER}
+		select a.*, nick
+		from (select *
+			  from buyreply
+			  where bno = #{bno:INTEGER}) a, member m
+		where a.mno = m.mno
 	</select>
 	
 	<select id = "searchSellReply" parameterType = "int" resultType = "reply">
-		select *
-		from sellreply
-		where bno = #{bno:INTEGER}
+		select a.*, nick
+		from (select *
+			  from sellreply
+			  where bno = #{bno:INTEGER}) a, member m
+		where a.mno = m.mno
 	</select>
 	
 	<select id = "getCountBuyReply" parameterType = "int" resultType = "int">

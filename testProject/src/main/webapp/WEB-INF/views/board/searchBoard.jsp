@@ -87,13 +87,9 @@
     		if(boardMno == myMno){
     			var modifyBoard = document.getElementById("modifyBoard");
     			var deleteBoard = document.getElementById("deleteBoard");
-    			var updateReply = document.getElementById("updateReply");
-    			var deleteReply = document.getElementById("deleteReply");
     			
     			modifyBoard.style.display = "";
     			deleteBoard.style.display = "";
-    			updateReply.style.display = "";
-    			deleteReply.style.display = "";
     		}
     	})
     	
@@ -138,8 +134,6 @@
     		var replycontent = document.getElementById("replycontent");
     		
     		replycontent.style.display = "none";
-    		
-    		
     	}
     	
     </script>
@@ -219,35 +213,36 @@
 
 					<!-- 디비에서 댓글 가져와서 div 하나씩 생성하자 -->
 					<div id = "replyDiv">
-						<c:forEach var = "reply" items="${replyList}">
+						<c:forEach var = "reply" items="${replys}">
 							<div class="row" style = "border-top : 1px solid #d3d3d3; padding-top : 7px;">
 		                        <div class="col-md-12">
 		                        	<span style = "font-weight : bold;">
-		                        		작성자: <c:out value = "${reply.key}"/>
+		                        		작성자: <c:out value = "${reply.nick}"/>
 		                        	</span>
 		                            <span class="pull-right" style = "font-weight : bold;">
-		                            	<c:out value = "${reply.value.regdate}"/>
+		                            	<c:out value = "${reply.regdate}"/>
 		                            </span>
 		                            <table style = "width : 100%;">
 			                            <tr>
 			                            	<td style = "width : 88%;">
 					                            <p style = "margin-top : 5px;" id = "reply<%=index%>">
-					                            	<c:out value = "${reply.value.reply}"/>
+					                            	<c:out value = "${reply.reply}"/>
 					                            </p>
 				                            </td>
-				                            <td>
-				                            	<button type="button" class="btn btn-default btn-sm" 
-										        	id = "deleteReply" style = "display : none;"
-										        	onclick = "updateReply()">
-										        	<span class="glyphicon glyphicon-remove"></span> 
-										        </button>
-										        <!-- <textarea class = "reply" id = >
-										        </textarea> -->
-					                            <button type="button" class="btn btn-default btn-sm" 
-					                            	id = "updateReply" style = "display : none;">
-										        	<span class="glyphicon glyphicon-edit"></span>
-										        </button>
-									        </td>
+				                            <c:if test = "${reply.mno == member.mno}">
+					                            <td>
+					                            	<button type="button" class="btn btn-default btn-sm" 
+											        	id = "deleteReply" onclick = "updateReply()">
+											        	<span class="glyphicon glyphicon-remove"></span> 
+											        </button>
+											        <!-- <textarea class = "reply" id = >
+											        </textarea> -->
+						                            <button type="button" class="btn btn-default btn-sm" 
+						                            	id = "updateReply">
+											        	<span class="glyphicon glyphicon-edit"></span>
+											        </button>
+										        </td>
+									        </c:if>
 								        </tr>
 							        </table>
 		                        </div>
