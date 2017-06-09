@@ -228,15 +228,16 @@
 					                            <p style = "margin-top : 5px;" id = "reply<%=index%>">
 					                            	<c:out value = "${reply.reply}"/>
 					                            </p>
+					                            <textarea class = "reply" id = "editReply">
+											    </textarea>
 				                            </td>
 				                            <c:if test = "${reply.mno == member.mno}">
 					                            <td>
 					                            	<button type="button" class="btn btn-default btn-sm" 
-											        	id = "deleteReply" onclick = "updateReply()">
+											        	id = "deleteReply" 
+											        	onclick = "updateReply(${reply}, <%=index %>)">
 											        	<span class="glyphicon glyphicon-remove"></span> 
 											        </button>
-											        <!-- <textarea class = "reply" id = >
-											        </textarea> -->
 						                            <button type="button" class="btn btn-default btn-sm" 
 						                            	id = "updateReply">
 											        	<span class="glyphicon glyphicon-edit"></span>
