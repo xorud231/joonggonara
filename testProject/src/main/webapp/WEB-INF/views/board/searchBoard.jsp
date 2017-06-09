@@ -42,6 +42,7 @@
 		          user-select: none;
 		  border: 1px solid transparent;
 		  border-radius: 4px;
+		  resize:none;
 		}
 		
 		.ratings > a {
@@ -130,10 +131,24 @@
     		location.href = "updateCart.do?bno=" + ${board.bno};
     	}
     	
-    	function updateReply(){
-    		var replycontent = document.getElementById("replycontent");
+    	function updateReply(reply, index){
+    		var replycontent = document.getElementById("reply" + index);
+    		var editReply = document.getElementById("editReply");
+    		var updateReply = document.getElementById("updateReply");
+    		var deleteReply = document.getElementById("deleteReply");
+    		var editReplyButton = document.getElementById("editReplyButton");
     		
     		replycontent.style.display = "none";
+    		editReply.style.display = "";
+    		updateReply.style.display = "none";
+    		deleteReply.style.display = "none";
+    		editReplyButton.style.display = "";
+    	}
+    	
+    	function updateReplyButton(reply){
+    		var editReply = document.getElementById("editReply");
+    		
+    		location.href = "updateReply.do?reply=" + reply + "&editReply=" + editReply;
     	}
     	
     </script>
@@ -144,33 +159,37 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <div class="thumbnail">
-					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-						<ol class="carousel-indicators">
-							<!-- 여기에 넘어가는 사진들 index 번호랑 해서 넣으면 됨 -->
-						    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-						    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-						    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-						</ol>
-						<div class="carousel-inner">
-							<!-- 여기에 넘어가는 사진들 넣으면 됨 -->
-						    <div class="item active">
-						        <img class="slide-image" src="img/header.jpg" alt="" style = "height : 400px;">
-						    </div>
-						    <div class="item">
-						        <img class="slide-image" src="http://placehold.it/800x300" alt="">
-						    </div>
-						    <div class="item">
-						        <img class="slide-image" src="http://placehold.it/800x300" alt="">
-						    </div>
+            	<div class="row carousel-holder">
+                    <div class="col-md-12">
+						<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+							<ol class="carousel-indicators">
+								<!-- 여기에 넘어가는 사진들 index 번호랑 해서 넣으면 됨 -->
+							    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+							    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+							    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+							</ol>
+							<div class="carousel-inner">
+								<!-- 여기에 넘어가는 사진들 넣으면 됨 -->
+							    <div class="item active">
+							        <img class="slide-image" src="img/header.jpg" alt="" style = "height : 400px;">
+							    </div>
+							    <div class="item">
+							        <img class="slide-image" src="http://placehold.it/800x300" alt="">
+							    </div>
+							    <div class="item">
+							        <img class="slide-image" src="http://placehold.it/800x300" alt="">
+							    </div>
+							</div>
+							<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+							    <span class="glyphicon glyphicon-chevron-left"></span>
+							</a>
+							<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+							    <span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
 						</div>
-						<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-						    <span class="glyphicon glyphicon-chevron-left"></span>
-						</a>
-						<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-						    <span class="glyphicon glyphicon-chevron-right"></span>
-						</a>
-					</div>
+					</div>            
+            	</div>
+                <div class="thumbnail">
 					<div class="caption-full">
 						<a id = "cartbutton" class = "btn"
 							onclick = "update()" style = "color : black;">담기</a>
@@ -203,8 +222,7 @@
 	                    <div class="text-right">
 	                    	<input type = "hidden" id = "sellbuy" value = "1"  name="sellbuy">
 							<input type = "hidden" id = "bno" value = "1"  name="bno">
-	                    	<textarea class = "reply" id = "replycontent"  name="replycontent">
-	                    	</textarea>
+	                    	<textarea class = "reply" id = "replycontent"  name="replycontent"></textarea>
 	                    	<input type = 'submit' class = "btn btn-success" value = "댓글달기"/>
 	                    </div>
                     </form>
@@ -217,32 +235,37 @@
 							<div class="row" style = "border-top : 1px solid #d3d3d3; padding-top : 7px;">
 		                        <div class="col-md-12">
 		                        	<span style = "font-weight : bold;">
-		                        		작성자: <c:out value = "${reply.nick}"/>
+		                        		작성자: ${reply.nick}
 		                        	</span>
 		                            <span class="pull-right" style = "font-weight : bold;">
-		                            	<c:out value = "${reply.regdate}"/>
+		                            	${reply.regdate}
 		                            </span>
 		                            <table style = "width : 100%;">
 			                            <tr>
 			                            	<td style = "width : 88%;">
 					                            <p style = "margin-top : 5px;" id = "reply<%=index%>">
-					                            	<c:out value = "${reply.reply}"/>
+					                            	${reply.reply}
 					                            </p>
-					                            <textarea class = "reply" id = "editReply" 
-					                            	style = "display : none;">
-											    </textarea>
+					                            <textarea class = "reply" id = "editReply" style = "display : none; height : 40px; margin-top : 10px;">${reply.reply}</textarea>
 				                            </td>
 				                            <c:if test = "${reply.mno == member.mno}">
 					                            <td>
 					                            	<button type="button" class="btn btn-default btn-sm" 
 											        	id = "deleteReply" 
-											        	onclick = "updateReply(${reply}, <%=index %>)">
+											        	onclick = "deleteReply()">
 											        	<span class="glyphicon glyphicon-remove"></span> 
 											        </button>
 						                            <button type="button" class="btn btn-default btn-sm" 
-						                            	id = "updateReply">
+						                            	id = "updateReply" 
+						                            	onclick = "updateReply('${reply}', <%=index++%>)">
 											        	<span class="glyphicon glyphicon-edit"></span>
 											        </button>
+											        <a class = "btn btn-success" 
+											        	id = "editReplyButton"
+											        	style = "display : none; margin-left : 30px;"
+											        	onclick = "updateReplyButton('${reply}')">
+											        	완료
+											        </a>
 										        </td>
 									        </c:if>
 								        </tr>

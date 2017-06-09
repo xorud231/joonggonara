@@ -83,7 +83,7 @@ public class BoardServiceImpl implements BoardService {
 			return dao.getCountReply(sellbuy, bno);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new UpdateException("게시글 검색 중 오류 발생");
+			throw new UpdateException("댓글 개수 검색 중 오류 발생");
 		}
 	}
 	
@@ -92,7 +92,7 @@ public class BoardServiceImpl implements BoardService {
 			dao.insertReply(sellbuy, bno, replycontent, mno);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new UpdateException("게시글 작성 중 오류 발생");
+			throw new UpdateException("댓글 작성 중 오류 발생");
 		}
 	}
 	
@@ -101,7 +101,7 @@ public class BoardServiceImpl implements BoardService {
 			return dao.searchInCart(mno, sellbuy, bno);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new UpdateException("게시글 작성 중 오류 발생");
+			throw new UpdateException("장바구니 검색 중 오류 발생");
 		}
 	}
 	
@@ -110,7 +110,7 @@ public class BoardServiceImpl implements BoardService {
 			dao.updateCart(mno, sellbuy, bno, isInCart);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new UpdateException("게시글 작성 중 오류 발생");
+			throw new UpdateException("장바구니 수정 중 오류 발생");
 		}
 	}
 	
@@ -119,7 +119,16 @@ public class BoardServiceImpl implements BoardService {
 			dao.deleteBoard(sellbuy, bno);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new UpdateException("게시글 작성 중 오류 발생");
+			throw new UpdateException("게시글 삭제 중 오류 발생");
+		}
+	}
+	
+	public void updateReply(int sellbuy, Reply reply, String editReply){
+		try {
+			dao.updateReply(sellbuy, reply, editReply);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UpdateException("댓글 수정 중 오류 발생");
 		}
 	}
 }

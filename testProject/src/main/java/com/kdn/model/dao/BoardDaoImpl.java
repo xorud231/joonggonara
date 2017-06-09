@@ -112,4 +112,16 @@ public class BoardDaoImpl implements BoardDao {
 		else
 			session.delete("board.deleteSellBoard", bno);
 	}
+	
+	public void updateReply(int sellbuy, Reply reply, String editReply){
+		HashMap<String, Object> temp = new HashMap<String, Object>();
+		temp.put("reply", reply);
+		temp.put("editReply", editReply);
+		
+		if(sellbuy == 1)
+			session.update("board.updateBuyReply", temp);
+		
+		else
+			session.update("board.updateSellReply", temp);
+	}
 }

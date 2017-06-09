@@ -19,6 +19,7 @@ public interface BoardDao {
 	public boolean searchInCart(String mno, int sellbuy, int bno);
 	public void updateCart(String mno, int sellbuy, int bno, boolean isInCart);
 	public void deleteBoard(int sellbuy, int bno);
+	public void updateReply(int sellbuy, Reply reply, String editReply);
 }
 
 

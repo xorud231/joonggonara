@@ -35,7 +35,6 @@
 	$(function(){
 		var sellbuy = <%= session.getAttribute("sellbuy")%>
 		click = document.getElementById("9_hello")
-		/* alert(sellbuy); */
 		
 		if(sellbuy == 1){
 			click.style.display = "none";		
@@ -270,7 +269,7 @@
                             </ol> -->
 									<div class="carousel-inner">
 										<div class="item active">
-										<h1>${mno}님 환영합니다</h1>
+										<h1>${nick}님 환영합니다</h1>
 											<img class="slide-image" src="img/welcome.PNG"  alt="">
 										</div>
 										<!-- <div class="item">

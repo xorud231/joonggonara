@@ -190,4 +190,14 @@
 	<delete id = "deleteSellReply" parameterType = "int">
 		delete from sellboard where bno = ${bno}
 	</delete>
+	
+	<update id = "updateBuyReply" parameterType = "hashmap">
+		update buyreply set reply = ${editReply}, regdate = sysdate
+		where rno = ${reply.rno}
+	</update>
+	
+	<update id = "updateSellReply" parameterType = "hashmap">
+		update sellreply set reply = ${editReply}, regdate = sysdate
+		where rno = ${reply.rno}
+	</update>
 </mapper>

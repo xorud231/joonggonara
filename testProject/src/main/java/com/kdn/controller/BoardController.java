@@ -74,7 +74,6 @@ public class BoardController {
 		model.addAttribute("content", "board/searchBuyList.jsp");
 		
 		return "index";
-//		return "board/searchBuyList";
 	}
 	@RequestMapping(value = "searchSellList.do", method = RequestMethod.GET)
 	public String searchSellList(Model model, PageBean bean, HttpSession session){
@@ -89,8 +88,11 @@ public class BoardController {
 //		return "board/searchSellList";
 	}
 	@RequestMapping(value = "myBoardPage.do", method = RequestMethod.GET)
-	public String myboardPage(HttpSession session){
+	public String myboardPage(HttpSession session, Model model){
 		session.setAttribute("sellbuy", 3);
+		
+		Member member = memberService2.search((String)session.getAttribute("mno"));
+		model.addAttribute("nick", member.getNick());
 		
 		return "index";
 	}
@@ -130,6 +132,16 @@ public class BoardController {
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
 		
 		boardService.deleteBoard(sellbuy, bno);
+		
+		return "redirect:searchBoard.do";
+	}
+	
+	@RequestMapping(value = "updateReply.do", method = RequestMethod.GET)
+	public String updateReply(Reply reply, String editReply, HttpSession session, Model model){
+		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		
+		boardService.updateReply(sellbuy, reply, editReply);
+		model.addAttribute("bno", reply.getBno());
 		
 		return "redirect:searchBoard.do";
 	}
