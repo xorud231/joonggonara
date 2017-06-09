@@ -39,10 +39,12 @@ public class BoardController {
 	private MemberService memberService2;
 	
 	@RequestMapping(value = "searchBoard.do", method = RequestMethod.GET)
-	public String searchBoard(int sellbuy, int bno, Model model, HttpSession session){
+	public String searchBoard(int bno, Model model, HttpSession session){
 		//sellbuy가 1이면 삽니다, 2면 팝니다
 		
 		String mno = (String)session.getAttribute("mno");
+		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		
 		Board board = boardService.searchBoard(sellbuy, bno);
 		List<Reply> replys = boardService.searchReply(sellbuy, bno);
 		int replycount = boardService.getCountReply(sellbuy, bno);
@@ -93,6 +95,12 @@ public class BoardController {
 		
 		return "index";
 //		return "board/searchSellList";
+	}
+	@RequestMapping(value = "myBoardPage.do", method = RequestMethod.GET)
+	public String myboardPage(HttpSession session){
+		session.setAttribute("sellbuy", 3);
+		
+		return "index";
 	}
 	
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
