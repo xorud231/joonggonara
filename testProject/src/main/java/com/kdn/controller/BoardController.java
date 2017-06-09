@@ -41,7 +41,6 @@ public class BoardController {
 	@RequestMapping(value = "searchBoard.do", method = RequestMethod.GET)
 	public String searchBoard(int bno, Model model, HttpSession session){
 		//sellbuy가 1이면 삽니다, 2면 팝니다
-		session.setAttribute("sellbuy", 1);
 		
 		String mno = (String)session.getAttribute("mno");
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
@@ -61,7 +60,7 @@ public class BoardController {
 		model.addAttribute("replycount", replycount);
 		model.addAttribute("member", member);
 		model.addAttribute("content", "board/searchBoard.jsp");
-		return "board/searchBoard";
+		return "index";
 	}
 	
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)

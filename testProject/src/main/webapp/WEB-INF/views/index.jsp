@@ -38,11 +38,11 @@
 		/* alert(sellbuy); */
 		
 		if(sellbuy == 1){
-			click.style.display = "none";
+			click.style.display = "none";		
 			var buy = document.getElementById("3_buy");
-			buy.style.display = "";
+			buy.style.display = "none";
 			var sell = document.getElementById("3_sell");
-			sell.style.display = "none";
+			sell.style.display = "";
 			var my = document.getElementById("myPage");
 			my.style.display = "none";
 			click = document.getElementById("searchAll");
@@ -50,11 +50,11 @@
 		}
 		
 		else if(sellbuy == 2){
-			click.style.display = "none";		
+			click.style.display = "none";
 			var buy = document.getElementById("3_buy");
-			buy.style.display = "none";
+			buy.style.display = "";
 			var sell = document.getElementById("3_sell");
-			sell.style.display = "";
+			sell.style.display = "none";
 			var my = document.getElementById("myPage");
 			my.style.display = "none";
 			click = document.getElementById("searchAll");
@@ -195,15 +195,15 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><img src="img/translogo.png"
+				<a class="navbar-brand" href="/"><img src="img/translogo.png"
 					width="150px"></a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="searchBuyList.do" >팝니다</a></li>
-					<li><a href="searchSellList.do">삽니다</a></li>
+					<li><a href="searchSellList.do" >팝니다</a></li>
+					<li><a href="searchBuyList.do">삽니다</a></li>
 					<li><a href="myBoardPage.do">My page</a></li>
 					<li><a href="logout.do" onclick="alert('"+${mno}+"'님 로그아웃 되었습니다')">Logout</a></li>
 				</ul>

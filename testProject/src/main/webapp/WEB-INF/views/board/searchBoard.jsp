@@ -228,7 +228,8 @@
 					                            <p style = "margin-top : 5px;" id = "reply<%=index%>">
 					                            	<c:out value = "${reply.reply}"/>
 					                            </p>
-					                            <textarea class = "reply" id = "editReply">
+					                            <textarea class = "reply" id = "editReply" 
+					                            	style = "display : none;">
 											    </textarea>
 				                            </td>
 				                            <c:if test = "${reply.mno == member.mno}">
