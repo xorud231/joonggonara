@@ -3,11 +3,11 @@ package com.kdn.model.domain;
 public class BuyReply extends Reply{
 	public BuyReply(){super();}
 	
-	public BuyReply(int rno, String reply, int bno, String regdate, String mno){
-		super(rno, reply, bno, regdate, mno);
+	public BuyReply(int rno, String replyContent, int bno, String regdate, int mno){
+		super(rno, replyContent, bno, regdate, mno);
 	}
 	
-	public BuyReply(int rno, String reply, int bno, String regdate, String mno, String nick){
-		super(rno, reply, bno, regdate, mno, nick);
+	public BuyReply(int rno, String replyContent, int bno, String regdate, int mno, String nick){
+		super(rno, replyContent, bno, regdate, mno, nick);
 	}
 }

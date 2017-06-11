@@ -1,6 +1,5 @@
 package com.kdn.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -60,7 +59,9 @@ public class BoardController {
 		model.addAttribute("replycount", replycount);
 		model.addAttribute("member", member);
 		model.addAttribute("content", "board/searchBoard.jsp");
+		//model.addAttribute("content", "board/test.jsp");
 		return "index";
+		//return "board/test";
 	}
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
 	public String searchBuyList(Model model, PageBean bean,HttpSession session){
@@ -149,11 +150,34 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "updateReply.do", method = RequestMethod.GET)
-	public String updateReply(Reply reply, String editReply, HttpSession session, Model model){
+	public String updateReply(String replyTemp, String editReply, HttpSession session, Model model){
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		
+		String rnoString = replyTemp.split("=")[1].split(",")[0];
+		String replyContent = replyTemp.split("=")[2].split(",")[0];
+		String bnoString = replyTemp.split("=")[3].split(",")[0];
+		String regdate = replyTemp.split("=")[4].split(",")[0];
+		String mnoString = replyTemp.split("=")[5].split(",")[0];
+		
+		int rno = Integer.parseInt(rnoString);
+		int bno = Integer.parseInt(bnoString);
+		int mno = Integer.parseInt(mnoString);
+		
+		Reply reply = new Reply(rno, replyContent, bno, regdate, mno);
 		
 		boardService.updateReply(sellbuy, reply, editReply);
 		model.addAttribute("bno", reply.getBno());
+		
+		return "redirect:searchBoard.do";
+	}
+
+	@RequestMapping(value = "deleteReply.do", method = RequestMethod.GET)
+	public String deleteReply(String rnoString, int bno, HttpSession session, Model model){
+		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		int rno = Integer.parseInt(rnoString);
+		
+		boardService.deleteReply(sellbuy, rno);
+		model.addAttribute("bno", bno);
 		
 		return "redirect:searchBoard.do";
 	}

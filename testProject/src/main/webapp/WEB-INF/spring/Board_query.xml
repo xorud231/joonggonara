@@ -191,6 +191,7 @@
 			  from buyreply
 			  where bno = #{bno:INTEGER}) a, member m
 		where a.mno = m.mno
+		order by regdate
 	</select>
 	
 	<select id = "searchSellReply" parameterType = "int" resultType = "reply">
@@ -199,6 +200,7 @@
 			  from sellreply
 			  where bno = #{bno:INTEGER}) a, member m
 		where a.mno = m.mno
+		order by regdate
 	</select>
 	
 	<select id = "getCountBuyReply" parameterType = "int" resultType = "int">
@@ -224,32 +226,40 @@
 	<select id = "searchInCart" parameterType = "hashmap" resultType = "int">
 		select count(*)
 		from cart
-		where mno = ${mno} and bno = ${bno} and bkind = ${sellbuy}
+		where mno = #{mno} and bno = #{bno} and bkind = #{sellbuy}
 	</select>
 	
 	<delete id = "deleteCart" parameterType = "hashmap">
-		delete from cart where mno = ${mno} and bno = ${bno} and bkind = ${sellbuy}
+		delete from cart where mno = #{mno} and bno = #{bno} and bkind = #{sellbuy}
 	</delete>
 	
 	<insert id = "insertCart" parameterType = "hashmap">
-		insert into cart values (${mno}, ${bno}, ${sellbuy})
+		insert into cart values (#{mno}, #{bno}, #{sellbuy})
 	</insert>
 	
-	<delete id = "deleteBuyReply" parameterType = "int">
-		delete from buyboard where bno = ${bno}
+	<delete id = "deleteBuyBoard" parameterType = "int">
+		delete from buyboard where bno = #{bno}
 	</delete>
 	
-	<delete id = "deleteSellReply" parameterType = "int">
-		delete from sellboard where bno = ${bno}
+	<delete id = "deleteSellBoard" parameterType = "int">
+		delete from sellboard where bno = #{bno}
 	</delete>
 	
 	<update id = "updateBuyReply" parameterType = "hashmap">
-		update buyreply set reply = ${editReply}, regdate = sysdate
-		where rno = ${reply.rno}
+		update buyreply set replyContent = '#{editReply}', regdate = sysdate
+		where rno = #{reply.rno}
 	</update>
 	
 	<update id = "updateSellReply" parameterType = "hashmap">
-		update sellreply set reply = ${editReply}, regdate = sysdate
-		where rno = ${reply.rno}
+		update sellreply set replyContent = '#{editReply}', regdate = sysdate
+		where rno = #{reply.rno}
 	</update>
+	
+	<delete id = "deleteBuyReply" parameterType = "int">
+		delete from buyreply where rno = #{rno}
+	</delete>
+	
+	<delete id = "deleteSellReply" parameterType = "int">
+		delete from sellreply where rno = #{rno}
+	</delete>
 </mapper>
