@@ -2,43 +2,25 @@ package com.kdn.model.domain;
 
 import java.io.Serializable;
 public class BoardFile implements Serializable {
-	private int no;
-	private String rfileName;
-	private String fileName;
+	private int fno;
+	private String rfilename;
+	private String sfilename;
 	private int bno;
 	public BoardFile(){}
-	public BoardFile(int no, String rfileName, String fileName, int bno) {
+	public BoardFile(int fno, String rfilename, String sfilename, int bno) {
 		super();
-		this.no = no;
-		this.rfileName = rfileName;
-		this.fileName = fileName;
+		this.fno = fno;
+		this.rfilename = rfilename;
+		this.sfilename = sfilename;
 		this.bno = bno;
 	}
 	@Override
 	public String toString() {
-		return  new StringBuilder().append("BoardFile [no=")
-				.append(no).append(", rfileName=")
-				.append(rfileName).append(", fileName=")
-				.append(fileName).append(", bno=")
+		return  new StringBuilder().append("BoardFile [fno=")
+				.append(fno).append(", rfilename=")
+				.append(rfilename).append(", sfilename=")
+				.append(sfilename).append(", bno=")
 				.append(bno).append("]").toString();
-	}
-	public int getNo() {
-		return no;
-	}
-	public void setNo(int no) {
-		this.no = no;
-	}
-	public String getRfileName() {
-		return rfileName;
-	}
-	public void setRfileName(String rfileName) {
-		this.rfileName = rfileName;
-	}
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
 	}
 	public int getBno() {
 		return bno;
@@ -46,7 +28,24 @@ public class BoardFile implements Serializable {
 	public void setBno(int bno) {
 		this.bno = bno;
 	}
-	
+	public int getFno() {
+		return fno;
+	}
+	public void setFno(int fno) {
+		this.fno = fno;
+	}
+	public String getRfilename() {
+		return rfilename;
+	}
+	public void setRfilename(String rfilename) {
+		this.rfilename = rfilename;
+	}
+	public String getSfilename() {
+		return sfilename;
+	}
+	public void setSfilename(String sfilename) {
+		this.sfilename = sfilename;
+	}
 }
 
 
