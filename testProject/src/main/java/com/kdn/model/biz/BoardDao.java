@@ -3,6 +3,7 @@ package com.kdn.model.biz;
 import java.util.List;
 
 import com.kdn.model.domain.Board;
+import com.kdn.model.domain.BoardFile;
 import com.kdn.model.domain.PageBean;
 import com.kdn.model.domain.Reply;
 
@@ -22,7 +23,11 @@ public interface BoardDao {
 	public void updateCart(String mno, int sellbuy, int bno, boolean isInCart);
 	public void deleteBoard(int sellbuy, int bno);
 	public void updateReply(int sellbuy, Reply reply, String editReply);
+	public void 		add(Board board);
+	public int 			getBoardNo() ;
+	public void 		addFiles(List<BoardFile> files, int bno) ;
 	public void deleteReply(int sellbuy, int rno);
+	public int getBoardNo(int sellbuy);
 }
 
 

@@ -2,6 +2,7 @@ package com.kdn.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,14 +47,14 @@ public class BoardController {
 
 		Board board = boardService.searchBoard(sellbuy, bno);
 		List<Reply> replys = boardService.searchReply(sellbuy, bno);
-		int replycount = boardService.getCountReply(sellbuy, bno);
+		int replycount = boardService.getCountReply(sellbuy, bno);	
 		
 		boolean isInCart = boardService.searchInCart(mno, sellbuy, bno);
 		
-		board.setInCart(isInCart);
+		board.setIsInCart(isInCart);
 		
 		Member member = memberService2.search(mno);
-		
+		System.out.println(board.getPhoneNum());
 		model.addAttribute("board", board);
 		model.addAttribute("replys", replys);
 		model.addAttribute("replycount", replycount);
@@ -66,12 +67,7 @@ public class BoardController {
 		session.setAttribute("sellbuy", 1);
 		
 		List<Board> list = boardService.searchBuyList(bean);
-		for (Board board : list) {
-			int bno = board.getBno();
-			if(boardService.searchBuyFile(bno).getFiles()!=null){
-				board.setFiles(boardService.searchBuyFile(bno).getFiles());	
-				}
-			}
+		System.out.println(list);
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchBuyList.jsp");
 		
@@ -82,17 +78,10 @@ public class BoardController {
 		session.setAttribute("sellbuy", 2);
 		
 		List<Board> list = boardService.searchSellList(bean);
-		for (Board board : list) {
-			int bno = board.getBno();
-			if(boardService.searchSellFile(bno).getFiles()!=null){
-				board.setFiles(boardService.searchSellFile(bno).getFiles());	
-				}
-			}
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchSellList.jsp");
 		
 		return "index";
-//		return "board/searchSellList";
 	}
 	@RequestMapping(value = "myBoardPage.do", method = RequestMethod.GET)
 	public String myboardPage(HttpSession session, Model model){
@@ -175,6 +164,26 @@ public class BoardController {
 		int rno = Integer.parseInt(rnoString);
 		
 		boardService.deleteReply(sellbuy, rno);
+		model.addAttribute("bno", bno);
+		
+		return "redirect:searchBoard.do";
+	}
+	
+	@RequestMapping(value = "insertBoard.do", method = RequestMethod.POST)
+	public String insertBoard(Board board, HttpSession session, Model model, HttpServletRequest request){
+		String mnoString = (String)session.getAttribute("mno");
+		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		int mno = Integer.parseInt(mnoString);
+		int bno = boardService.getBoardNo(sellbuy);
+		
+		board.setBno(bno);
+		board.setMno(mno);
+		
+		System.out.println(board);
+		String dir = request.getRealPath("upload/");
+		
+		//boardService.insertBoard(board, dir);
+		
 		model.addAttribute("bno", bno);
 		
 		return "redirect:searchBoard.do";

@@ -14,6 +14,10 @@ public class BoardFile implements Serializable {
 		this.sfilename = sfilename;
 		this.bno = bno;
 	}
+	public BoardFile(String rfilename, String sfilename) {
+		this.rfilename = rfilename;
+		this.sfilename = sfilename;
+	}
 	@Override
 	public String toString() {
 		return  new StringBuilder().append("BoardFile [fno=")

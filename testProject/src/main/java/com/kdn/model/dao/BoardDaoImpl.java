@@ -1,6 +1,5 @@
 package com.kdn.model.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kdn.model.biz.BoardDao;
 import com.kdn.model.domain.Board;
+import com.kdn.model.domain.BoardFile;
 import com.kdn.model.domain.PageBean;
 import com.kdn.model.domain.Reply;
 
@@ -20,6 +20,17 @@ public class BoardDaoImpl implements BoardDao {
 	@Autowired
 	private SqlSessionTemplate session;
 
+	public int getBoardNo() {
+		return session.selectOne("board.getBoardNo");
+	}
+	
+	public void addFiles(List<BoardFile> files, int bno) {
+		for (BoardFile fileBean : files) {
+			fileBean.setBno(bno);
+			session.insert("board.insertFile", fileBean);
+		}
+	}
+	
 	public Board searchBoard(int sellbuy, int bno) {
 		if(sellbuy == 1){
 			return session.selectOne("board.searchBuyBoard", bno);
@@ -85,7 +96,7 @@ public class BoardDaoImpl implements BoardDao {
 	public boolean searchInCart(String mno, int sellbuy, int bno){
 		HashMap<String, Object> temp = new HashMap<String, Object>();
 		temp.put("mno", Integer.parseInt(mno));
-		temp.put("sellbuy", sellbuy + "");
+		temp.put("sellbuy", sellbuy);
 		temp.put("bno", bno);
 		
 		int check = session.selectOne("board.searchInCart", temp);
@@ -99,7 +110,7 @@ public class BoardDaoImpl implements BoardDao {
 	public void updateCart(String mno, int sellbuy, int bno, boolean isInCart){
 		HashMap<String, Object> temp = new HashMap<String, Object>();
 		temp.put("mno", Integer.parseInt(mno));
-		temp.put("sellbuy", sellbuy + "");
+		temp.put("sellbuy", sellbuy);
 		temp.put("bno", bno);
 		
 		if(isInCart){
@@ -121,7 +132,7 @@ public class BoardDaoImpl implements BoardDao {
 	
 	public void updateReply(int sellbuy, Reply reply, String editReply){
 		HashMap<String, Object> temp = new HashMap<String, Object>();
-		temp.put("reply", reply);
+		temp.put("rno", reply.getRno());
 		temp.put("editReply", editReply);
 		
 		if(sellbuy == 1)
@@ -131,11 +142,22 @@ public class BoardDaoImpl implements BoardDao {
 			session.update("board.updateSellReply", temp);
 	}
 	
+	public void add(Board board) {
+		session.insert("board.insert", board);
+	}
 	public void deleteReply(int sellbuy, int rno){
 		if(sellbuy == 1)
 			session.delete("board.deleteBuyReply", rno);
 		
 		else
 			session.delete("board.deleteSellReply", rno);
+	}
+	
+	public int getBoardNo(int sellbuy){
+		if(sellbuy == 1)
+			return session.selectOne("board.getBuyBoardNo");
+		
+		else
+			return session.selectOne("board.getSellBoardNo");
 	}
 }

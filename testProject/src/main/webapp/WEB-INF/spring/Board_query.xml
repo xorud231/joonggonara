@@ -24,6 +24,7 @@
 		<result	column="mno"		property="mno"/>
 		<result	column="dno"		property="dno"/>
 		<result	column="cno"		property="cno"/>
+		<result	column="phoneNum"	property="phoneNum"/>
 		<!-- join data 처리 
 			 1 : 1     association  태그 사용
 			 1 : N     collection   태그 사용
@@ -56,8 +57,13 @@
 		       where   bno = #{bno}   ) b                           
 		where b.bno = bf.bno(+)                    	
 	</select>
-	<select id = "getBoardNo" resultType = "int">
-		select board_no.nextval from dual
+	
+	<select id = "getBuyBoardNo" resultType = "int">
+		select buyboard_no.nextval from dual
+	</select>
+	
+	<select id = "getSellBoardNo" resultType = "int">
+		select sellboard_no.nextval from dual
 	</select>
 	
 	<insert id = "addBoard" parameterType = "board">
@@ -159,28 +165,50 @@
 			</if>
 		</where>
 	</select>
-	<select id = "searchBuyList" parameterType = "pagebean" resultType = "board">
-		select b.bno bno, b.title title, B.CONTENTS contents,b.price price, to_char(regdate, 'yyyy-mm-dd') regdate, bf.RFILENAME rfilename 
-		from BUYBOARD b, BUYBOARDFILE bf
-        where b.BNO = bf.BNO(+)
-        order by b.bno DESC
+	<select id = "searchBuyList" parameterType = "pagebean" resultMap="boardmap">
+		SELECT  c.* , fno, rfilename, sfilename      
+		FROM  (    SELECT b.*   
+		           FROM ( SELECT ROWNUM ro, a.*    
+		                    FROM   ( select bno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
+		                              from BUYBOARD
+		                              order by bno DESC
+		                            ) a
+		                 ) b   
+		            WHERE    ro BETWEEN 1 AND 5        
+		      ) c, BUYBOARDFILE  bf 
+		WHERE   c.bno = bf.bno(+)
+			<if test="word != null ">
+				<choose>
+					<when test="key == 'id'">		
+						and id =#{word}
+					</when>
+					<when test="key == 'title'">		
+						and title like '%'||#{word}||'%'
+					</when>
+					<when test="key == 'contents'">		
+						and contents like '%'||#{word}||'%'
+					</when>
+				</choose>
+			</if>
 	</select>
 	
-	<select id = "searchSellList" parameterType = "pagebean" resultType = "board">
+	<select id = "searchSellList" parameterType = "pagebean" resultMap="boardmap">
 		select b.bno bno, b.title title, B.CONTENTS contents,b.price price, to_char(regdate, 'yyyy-mm-dd') regdate, bf.RFILENAME rfilename 
 		from SELLBOARD b, SELLBOARDFILE bf
         where b.bNO = bf.bNO(+)
         order by b.bno DESC
 	</select>
 	
-	<select id = "searchBuyBoard" parameterType = "int" resultType = "board">
-		select bno, price, dealstate, mno, dno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
-		from buyboard
-		where bno = #{bno:INTEGER}
+	<select id = "searchBuyBoard" parameterType = "int" resultMap="boardmap">
+		SELECT a.*, rfilename, sfilename, fno
+		FROM    (select bno, price, dealstate, mno, dno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate, phoneNum
+		         from buyboard
+		         where bno = #{bno}) a, BUYBOARDFILE bf
+		WHERE a.bno = bf.bno
 	</select>
 	
 	<select id = "searchSellBoard" parameterType = "int" resultType = "board">
-		select bno, price, dealstate, mno, dno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
+		select bno, price, dealstate, mno, dno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate, phoneNum
 		from sellboard
 		where bno = #{bno:INTEGER}
 	</select>
@@ -246,13 +274,13 @@
 	</delete>
 	
 	<update id = "updateBuyReply" parameterType = "hashmap">
-		update buyreply set replyContent = '#{editReply}', regdate = sysdate
-		where rno = #{reply.rno}
+		update buyreply set replyContent = #{editReply}, regdate = sysdate
+		where rno = #{rno}
 	</update>
 	
 	<update id = "updateSellReply" parameterType = "hashmap">
-		update sellreply set replyContent = '#{editReply}', regdate = sysdate
-		where rno = #{reply.rno}
+		update sellreply set replyContent = #{editReply}, regdate = sysdate
+		where rno = #{rno}
 	</update>
 	
 	<delete id = "deleteBuyReply" parameterType = "int">

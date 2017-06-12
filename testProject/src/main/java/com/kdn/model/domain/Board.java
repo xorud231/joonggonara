@@ -1,7 +1,10 @@
 package com.kdn.model.domain;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class Board implements Serializable{
 	private int bno;
@@ -13,10 +16,12 @@ public class Board implements Serializable{
 	private int mno;
 	private int dno;
 	private int cno;
-	private List<FileBean> files;
+	private List<BoardFile> files;
 	private boolean isInCart;
 	private List<Reply> replys;
-	
+	private MultipartFile[] fileup;
+	private String phoneNum;
+
 	public Board(){}
 
 	public Board(int bno, String regdate, String title, int price,
@@ -33,11 +38,45 @@ public class Board implements Serializable{
 		this.isInCart = isInCart;
 	}
 	
-	public List<FileBean> getFiles() {
+	public Board(int bno, String regdate, String title, int price, String contents, 
+			String dealstate, int mno, int dno, int cno, boolean isInCart, String phoneNum) {
+		this.bno = bno;
+		this.regdate = regdate;
+		this.title = title;
+		this.price = price;
+		this.contents = contents;
+		this.dealstate = dealstate;
+		this.mno = mno;
+		this.dno = dno;
+		this.cno = cno;
+		this.isInCart = isInCart;
+		this.phoneNum = phoneNum;
+	}
+
+	public String getPhoneNum() {
+		return phoneNum;
+	}
+
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
+	}
+
+	public void setInCart(boolean isInCart) {
+		this.isInCart = isInCart;
+	}
+
+	public MultipartFile[] getFileup() {
+		return fileup;
+	}
+	public void setFileup(MultipartFile[] fileup) {
+		this.fileup = fileup;
+	}
+	
+	public List<BoardFile> getFiles() {
 		return files;
 	}
 
-	public void setFiles(List<FileBean> files) {
+	public void setFiles(List<BoardFile> files) {
 		this.files = files;
 	}
 
@@ -45,7 +84,7 @@ public class Board implements Serializable{
 		return isInCart;
 	}
 
-	public void setInCart(boolean isInCart) {
+	public void setIsInCart(boolean isInCart) {
 		this.isInCart = isInCart;
 	}
 
@@ -135,6 +174,7 @@ public class Board implements Serializable{
 				+ title + ", price=" + price + ", contents=" + contents
 				+ ", dealstate=" + dealstate + ", mno=" + mno + ", dno=" + dno
 				+ ", cno=" + cno + ", files=" + files + ", isInCart="
-				+ isInCart + ", replys=" + replys;
+				+ isInCart + ", replys=" + replys + ", fileup="
+				+ Arrays.toString(fileup) + ", phoneNum=" + phoneNum;
 	}
 }

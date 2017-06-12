@@ -182,22 +182,42 @@
                     <div class="col-md-12">
 						<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 							<ol class="carousel-indicators">
-								<!-- 여기에 넘어가는 사진들 index 번호랑 해서 넣으면 됨 -->
-							    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-							    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-							    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+								<% int imageIndex = 0; %>
+								<c:forEach var = "boardfile" items="${board.files}">
+									<!-- 여기에 넘어가는 사진들 index 번호랑 해서 넣으면 됨 -->
+									<% 
+										if(imageIndex == 0){
+									%>
+								    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+								    <%  imageIndex++;
+								    	}
+										else{ 
+									%>
+								    <li data-target="#carousel-example-generic" data-slide-to="<%=imageIndex++%>"></li>
+								    <% } %>
+							    </c:forEach>
 							</ol>
 							<div class="carousel-inner">
 								<!-- 여기에 넘어가는 사진들 넣으면 됨 -->
-							    <div class="item active">
-							        <img class="slide-image" src="img/header.jpg" alt="" style = "height : 400px;">
-							    </div>
-							    <div class="item">
-							        <img class="slide-image" src="http://placehold.it/800x300" alt="">
-							    </div>
-							    <div class="item">
-							        <img class="slide-image" src="http://placehold.it/800x300" alt="">
-							    </div>
+								<% boolean imageFirst = true; %>
+								<c:forEach var = "boardfile" items="${board.files}">
+									<% 
+										if(imageFirst){
+									%>
+									    <div class="item active">
+									        <img class="slide-image" src="img/portfolio/fullsize/${boardfile.rfilename}" alt="" style = "height : 400px;">
+									    </div>
+									<% 
+										imageFirst = false;
+										} 
+										else{
+									%>
+									    <div class="item">
+									        <img class="slide-image" src="img/portfolio/fullsize/${boardfile.rfilename}" alt="" style = "height : 400px;">
+									    </div>
+									<% } %>
+
+							    </c:forEach>
 							</div>
 							<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
 							    <span class="glyphicon glyphicon-chevron-left"></span>
@@ -219,7 +239,8 @@
 						<a style = "background-color : #F2836B; display : none; color : #fff;" class = "btn"
 						 	href = "deleteBoard.do?bno=${board.bno}" id = "deleteBoard">삭제</a>
                     	<h4 style = "font-weight : bold;">작성자: ${member.nick}</h4>
-                    	<a style = "color:black">작성일 : ${board.regdate}</a>
+                    	<a style = "color:black; display:block;">작성일 : ${board.regdate}</a>
+                    	<a style = "color:black;">연락처 : 0${board.phoneNum}</a>
                     </div>
                     
                     <div class="caption-full">
