@@ -39,7 +39,7 @@ public class BoardServiceImpl implements BoardService {
 					new PageUtility(bean.getInterval()
 							, total
 							, bean.getPageNo()
-							, "images/");
+							, "img/");
 			bean.setPagelink(bar.getPageBar());
 			
 			return dao.searchBuyList(bean);
@@ -55,7 +55,7 @@ public class BoardServiceImpl implements BoardService {
 					new PageUtility(bean.getInterval()
 							, total
 							, bean.getPageNo()
-							, "images/");
+							, "img/");
 			bean.setPagelink(bar.getPageBar());
 			
 			return dao.searchSellList(bean);
@@ -185,6 +185,7 @@ public class BoardServiceImpl implements BoardService {
 			throw new UpdateException("게시글 작성 중 오류 발생");
 		}
 		} 
+	
 	public void deleteReply(int sellbuy, int rno){
 		try {
 			dao.deleteReply(sellbuy, rno);

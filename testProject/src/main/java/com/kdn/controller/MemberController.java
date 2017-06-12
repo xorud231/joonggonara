@@ -40,12 +40,10 @@ public class MemberController {
 	
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String login(String mno, String password, HttpSession session, Model model){
-		
 		memberService.login(mno, password);
 		Member member = memberService.search(mno);
 		
 		session.setAttribute("mno", mno);
-		
 		model.addAttribute("nick", memberService.search(mno).getNick());
 		
 		model.addAttribute("nick", member.getNick());
