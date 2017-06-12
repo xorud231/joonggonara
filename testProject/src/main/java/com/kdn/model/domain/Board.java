@@ -13,7 +13,7 @@ public class Board implements Serializable{
 	private int mno;
 	private int dno;
 	private int cno;
-	private List<FileBean> files;
+	private List<BoardFile> files;
 	private boolean isInCart;
 	private List<Reply> replys;
 	
@@ -33,11 +33,11 @@ public class Board implements Serializable{
 		this.isInCart = isInCart;
 	}
 	
-	public List<FileBean> getFiles() {
+	public List<BoardFile> getFiles() {
 		return files;
 	}
 
-	public void setFiles(List<FileBean> files) {
+	public void setFiles(List<BoardFile> files) {
 		this.files = files;
 	}
 

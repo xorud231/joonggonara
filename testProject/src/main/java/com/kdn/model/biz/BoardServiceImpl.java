@@ -35,7 +35,7 @@ public class BoardServiceImpl implements BoardService {
 					new PageUtility(bean.getInterval()
 							, total
 							, bean.getPageNo()
-							, "images/");
+							, "img/");
 			bean.setPagelink(bar.getPageBar());
 			
 			return dao.searchBuyList(bean);
@@ -51,7 +51,7 @@ public class BoardServiceImpl implements BoardService {
 					new PageUtility(bean.getInterval()
 							, total
 							, bean.getPageNo()
-							, "images/");
+							, "img/");
 			bean.setPagelink(bar.getPageBar());
 			
 			return dao.searchSellList(bean);
@@ -61,11 +61,9 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	public Board searchBuyFile(int bno) {
-		System.out.println("bno"+dao.searchBuyFile( bno));
 		return dao.searchBuyFile( bno);
 	}
 	public Board searchSellFile(int bno) {
-		System.out.println("bno"+dao.searchSellFile( bno));
 		return dao.searchSellFile( bno);
 	}
 	public List<Reply> searchReply(int sellbuy, int bno){

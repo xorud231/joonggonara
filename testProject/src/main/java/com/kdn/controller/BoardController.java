@@ -67,12 +67,7 @@ public class BoardController {
 		session.setAttribute("sellbuy", 1);
 		
 		List<Board> list = boardService.searchBuyList(bean);
-		for (Board board : list) {
-			int bno = board.getBno();
-			if(boardService.searchBuyFile(bno).getFiles()!=null){
-				board.setFiles(boardService.searchBuyFile(bno).getFiles());	
-				}
-			}
+		System.out.println(list);
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchBuyList.jsp");
 		
@@ -83,17 +78,10 @@ public class BoardController {
 		session.setAttribute("sellbuy", 2);
 		
 		List<Board> list = boardService.searchSellList(bean);
-		for (Board board : list) {
-			int bno = board.getBno();
-			if(boardService.searchSellFile(bno).getFiles()!=null){
-				board.setFiles(boardService.searchSellFile(bno).getFiles());	
-				}
-			}
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchSellList.jsp");
 		
 		return "index";
-//		return "board/searchSellList";
 	}
 	@RequestMapping(value = "myBoardPage.do", method = RequestMethod.GET)
 	public String myboardPage(HttpSession session, Model model){
