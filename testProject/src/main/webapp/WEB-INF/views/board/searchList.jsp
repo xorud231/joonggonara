@@ -78,7 +78,13 @@ select::-ms-expand {
 		//input 양식의 hidden으로 선언된 page에 요청된 페이지 정보 셋팅 
 		document.getElementById("pageNo").value=cpage;
 		var frm = document.getElementById("frm");
-		frm.action="searchBuyList.do";
+		var sellbuy = <%= session.getAttribute("sellbuy") %>;
+		
+		if(sellbuy == 1)
+			frm.action="searchBuyList.do";
+		else
+			frm.action="searchSellList.do";
+			
 		frm.submit();
 	}
 	//게시글 번호나 타이틀을 클릭하면 해당 게시글 요청을 위한 메서드 
@@ -182,7 +188,7 @@ select::-ms-expand {
 	  	 <td colspan="3" height="100" align="center">
 	  	  <select  name="key" id="key">
 	  		<option value="all"  selected="selected"   >--all--</option>
-	  		<option value="id"      <%=pageBean.getKey("id")%> >아이디</option>
+	  		<option value="mno"      <%=pageBean.getKey("mno")%> >아이디</option>
 	  		<option value="title"   <%=pageBean.getKey("title")%>  >제목</option>
 	  		<option value="contents" <%=pageBean.getKey("contents")%>  >내용</option>
 	  	  </select>

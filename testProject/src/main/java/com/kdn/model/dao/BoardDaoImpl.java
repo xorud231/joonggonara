@@ -24,13 +24,7 @@ public class BoardDaoImpl implements BoardDao {
 	public int getBoardNo() {
 		return session.selectOne("board.getBoardNo");
 	}
-	
-	public void addFiles(List<BoardFile> files, int bno) {
-		for (BoardFile fileBean : files) {
-			fileBean.setBno(bno);
-			session.insert("board.insertFile", fileBean);
-		}
-	}
+
 	
 	public Board searchBoard(int sellbuy, int bno) {
 		if(sellbuy == 1){
@@ -142,10 +136,7 @@ public class BoardDaoImpl implements BoardDao {
 		else
 			session.update("board.updateSellReply", temp);
 	}
-	
-	public void add(Board board) {
-		session.insert("board.insert", board);
-	}
+
 	public void deleteReply(int sellbuy, int rno){
 		if(sellbuy == 1)
 			session.delete("board.deleteBuyReply", rno);
@@ -185,5 +176,4 @@ public class BoardDaoImpl implements BoardDao {
 			}
 		}
 	}
-
 }

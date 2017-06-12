@@ -41,8 +41,7 @@ public class MemberController {
 	}*/
 	
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String login(String mno, String password, HttpSession session, 
-			Model model, HttpServletRequest request){
+	public String login(String mno, String password, HttpSession session){
 		memberService.login(mno, password);
 		Member member = memberService.search(mno);
 		
@@ -53,10 +52,7 @@ public class MemberController {
 		
 		session.setAttribute("dir", dir);
 		
-		model.addAttribute("nick", memberService.search(mno).getNick());
-		model.addAttribute("nick", member.getNick());
-		
-		return "index";
+		return "redirect:helloBoard.do";
 		//return "redirect:index.do";
 	}
 	

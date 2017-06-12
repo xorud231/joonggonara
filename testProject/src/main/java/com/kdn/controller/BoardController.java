@@ -84,23 +84,10 @@ public class BoardController {
 		
 		return "index";
 	}
-	@RequestMapping(value = "myBoardPage.do", method = RequestMethod.GET)
-	public String myboardPage(HttpSession session, Model model){
-		session.setAttribute("sellbuy", 3);
-		
-		Member member = memberService2.search((String)session.getAttribute("mno"));
-		model.addAttribute("nick", member.getNick());
-		
-		String mno = (String)session.getAttribute("mno");
-		
-		model.addAttribute("nick", memberService2.search(mno).getNick());
-		
-		return "index";
-	}
 	
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
 	public String insertReply(int bno, String replycontent, HttpSession session, Model model){
-		
+		System.out.println(bno);
 		String mno = (String)session.getAttribute("mno");
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
 		
@@ -135,6 +122,17 @@ public class BoardController {
 		boardService.deleteBoard(sellbuy, bno);
 		
 		return "redirect:searchBoard.do";
+	}
+	@RequestMapping(value = "helloBoard.do", method = RequestMethod.GET)
+	public String helloBoard(Model model ,HttpSession session){
+		String mno = (String)session.getAttribute("mno");
+		
+		session.setAttribute("sellbuy", 3);
+		
+		model.addAttribute("nick", memberService2.search(mno).getNick());
+		model.addAttribute("content", "board/helloBoard.jsp");
+		
+		return "index";
 	}
 	
 	@RequestMapping(value = "updateReply.do", method = RequestMethod.GET)

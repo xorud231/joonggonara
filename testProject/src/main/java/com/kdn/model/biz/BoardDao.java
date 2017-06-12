@@ -24,9 +24,7 @@ public interface BoardDao {
 	public void updateCart(String mno, int sellbuy, int bno, boolean isInCart);
 	public void deleteBoard(int sellbuy, int bno);
 	public void updateReply(int sellbuy, Reply reply, String editReply);
-	public void 		add(Board board);
 	public int 			getBoardNo() ;
-	public void 		addFiles(List<BoardFile> files, int bno) ;
 	public void deleteReply(int sellbuy, int rno);
 	public int getBoardNo(int sellbuy);
 	public void insertBoard(int sellbuy, Board board);

@@ -260,8 +260,7 @@
 					
 					<form action = "reply.do">
 	                    <div class="text-right">
-	                    	<input type = "hidden" id = "sellbuy" value = "1"  name="sellbuy">
-							<input type = "hidden" id = "bno" value = "1"  name="bno">
+							<input type = "hidden" id = "bno" value = "${board.bno}"  name="bno">
 	                    	<textarea class = "reply" id = "replycontent"  name="replycontent"></textarea>
 	                    	<input type = 'submit' class = "btn btn-success" value = "댓글달기"/>
 	                    </div>
