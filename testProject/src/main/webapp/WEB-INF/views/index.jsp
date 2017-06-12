@@ -37,15 +37,20 @@
 	}
 </style>
 
-<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
+<!-- <script type="text/javascript" src="js/jquery-1.10.1.js"></script> -->
+
+<!-- jQuery -->
+	<script src="js/jquery.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
  
  
 	var click;
 	
-	$(function(){
+	$(function (){
 		var sellbuy = <%=session.getAttribute("sellbuy")%>;
-		var myPage = <%=session.getAttribute("myPage")%>;
 		
 		<%-- alert('<%= session.getAttribute("sellbuy")%>');
 		alert('<%= session.getAttribute("myPage")%>');
@@ -84,15 +89,10 @@
 			sell.style.display = "none";
 			var my = document.getElementById("myPage");
 			my.style.display = "";
+			var s = document.getElementById("searchAll");
+			s.style.display = "";
 		}
 		
-		if(myPage == 1){
-			click.style.display = "none";
-			click = document.getElementById("myInfo");
-			click.style.display = "";
-			<%session.setAttribute("myPage", 0);%>
-			<%-- alert("<%=session.getAttribute("myPage")%>"); --%>
-		}
 	});
 	
 	function md3() {
@@ -100,77 +100,6 @@
 		board.style.display = "";
 	}
 	
-	function sell_1() {
-		click.style.display = "none";
-		click = document.getElementById("9_sell_1");
-		click.style.display = "";
-	}
-	function sell_2() {
-		click.style.display = "none";
-		click = document.getElementById("9_sell_2");
-		click.style.display = "";
-	}
-	function sell_3() {
-		click.style.display = "none";
-		click = document.getElementById("9_sell_3");
-		click.style.display = "";
-	}
-	function sell_4() {
-		click.style.display = "none";
-		click = document.getElementById("9_sell_4");
-		click.style.display = "";
-	}
-	function sell_5() {
-		click.style.display = "none";
-		click = document.getElementById("9_sell_5");
-		click.style.display = "";
-	}
-	function sell_6() {
-		click.style.display = "none";
-		click = document.getElementById("9_sell_6");
-		click.style.display = "";
-	}
-	function sell_7() {
-		click.style.display = "none";
-		click = document.getElementById("9_sell_7");
-		click.style.display = "";
-	}
- 
-	function buy_1() {
-		click.style.display = "none";
-		click = document.getElementById("9_buy_1");
-		click.style.display = "";
-	}
-	function buy_2() {
-		click.style.display = "none";
-		click = document.getElementById("9_buy_2");
-		click.style.display = "";
-	}
-	function buy_3() {
-		click.style.display = "none";
-		click = document.getElementById("9_buy_3");
-		click.style.display = "";
-	}
-	function buy_4() {
-		click.style.display = "none";
-		click = document.getElementById("9_buy_4");
-		click.style.display = "";
-	}
-	function buy_5() {
-		click.style.display = "none";
-		click = document.getElementById("9_buy_5");
-		click.style.display = "";
-	}
-	function buy_6() {
-		click.style.display = "none";
-		click = document.getElementById("9_buy_6");
-		click.style.display = "";
-	}
-	function buy_7() {
-		click.style.display = "none";
-		click = document.getElementById("9_buy_7");
-		click.style.display = "";
-	}
 	function smallBoard() {
 		click.style.display = "none";
 		document.getElementById("col-md-9-board").style.display = "none";
@@ -222,8 +151,13 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><img src="img/translogo.png"
-					width="150px"></a>
+				<div class="navbar-brand"><img src="img/translogo.png"
+					width="150px" onclick="" ></div> 
+					
+					
+				
+					
+					
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
@@ -249,25 +183,25 @@
 				<div id="3_buy" style="display: none">
 					<p class="lead">팝니다</p>
 					<div class="list-group">
-						<a href="#col-md-9" class="list-group-item" onclick="sell_1()">전체</a>
-						<a href="#col-md-9" class="list-group-item" onclick="sell_2()">가전제품</a>
-						<a href="#col-md-9" class="list-group-item" onclick="sell_3()">가구</a>
-						<a href="#col-md-9" class="list-group-item" onclick="sell_4()">의류/잡화</a>
-						<a href="#col-md-9" class="list-group-item" onclick="sell_5()">생활용품</a>
-						<a href="#col-md-9" class="list-group-item" onclick="sell_6()">취미용품</a>
-						<a href="#col-md-9" class="list-group-item" onclick="sell_7()">기타</a>
+						<a class="list-group-item" href="searchSellList.do">전체</a>
+						<a class="list-group-item" href="searchSellList.do">가전제품</a>
+						<a class="list-group-item" href="searchSellList.do">가구</a>
+						<a class="list-group-item" href="searchSellList.do">의류/잡화</a>
+						<a class="list-group-item" href="searchSellList.do">생활용품</a>
+						<a class="list-group-item" href="searchSellList.do">취미용품</a>
+						<a class="list-group-item" href="searchSellList.do">기타</a>
 					</div>
 				</div>
 				<div id="3_sell" style="display: none">
 					<p class="lead">삽니다</p>
 					<div class="list-group" id = "category_bg">
-						<a href="#col-md-9" class="list-group-item" onclick="buy_1()">전체</a>
-						<a href="#col-md-9" class="list-group-item" onclick="buy_2()">가전제품</a>
-						<a href="#col-md-9" class="list-group-item" onclick="buy_3()">가구</a>
-						<a href="#col-md-9" class="list-group-item" onclick="buy_4()">의류/잡화</a>
-						<a href="#col-md-9" class="list-group-item" onclick="buy_5()">생활용품</a>
-						<a href="#col-md-9" class="list-group-item" onclick="buy_6()">취미용품</a>
-						<a href="#col-md-9" class="list-group-item" onclick="buy_7()">기타</a>
+						<a class="list-group-item" href="searchBuyList.do">전체</a>
+						<a class="list-group-item" href="searchBuyList.do">가전제품</a>
+						<a class="list-group-item" href="searchBuyList.do">가구</a>
+						<a class="list-group-item" href="searchBuyList.do">의류/잡화</a>
+						<a class="list-group-item" href="searchBuyList.do">생활용품</a>
+						<a class="list-group-item" href="searchBuyList.do">취미용품</a>
+						<a class="list-group-item" href="searchBuyList.do">기타</a>
 					</div>
 				</div>
 				<div id="myPage" style="display:">
@@ -327,843 +261,10 @@
 					<!-- div9  팝니다-->
 
 					<!-- div9_sell_1-->
-					<div id="9_sell_1" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4" onclick="smallBoard()">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$64.99</h4>
-										<h4>
-											<a href="#">Second Product</a>
-										</h4>
-										<p>This is a short description. Lorem ipsum dolor sit
-											amet, consectetur adipiscing elit.</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">12 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star-empty"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-						</div>
-
-					</div>
-
-
-					<!-- div9_sell_1-->
-					<!-- div9_sell_2-->
-					<div id="9_sell_2" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$64.99</h4>
-										<h4>
-											<a href="#">Second Product</a>
-										</h4>
-										<p>This is a short description. Lorem ipsum dolor sit
-											amet, consectetur adipiscing elit.</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">12 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star-empty"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$64.99</h4>
-										<h4>
-											<a href="#">Second Product</a>
-										</h4>
-										<p>This is a short description. Lorem ipsum dolor sit
-											amet, consectetur adipiscing elit.</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">12 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star-empty"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-						</div>
-
-					</div>
-
-
-					<!-- div9_sell_2-->
-					<!-- div9_sell_3-->
-					<div id="9_sell_3" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-
-						</div>
-
-					</div>
-
-
-					<!-- div9_sell_3-->
-					<!-- div9_sell_4-->
-					<div id="9_sell_4" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-
-						</div>
-
-					</div>
-
-
-					<!-- div9_sell_4-->
-					<!-- div9_sell_5-->
-					<div id="9_sell_5" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-
-						</div>
-
-					</div>
-
-
-					<!-- div9_sell_5-->
-					<!-- div9_sell_6-->
-					<div id="9_sell_6" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-
-						</div>
-
-					</div>
-
-
-					<!-- div9_sell_6-->
-					<!-- div9_sell_7-->
-					<div id="9_sell_7" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-
-						</div>
-
-					</div>
-
-
-					<!-- div9_sell_7-->
-
-
-
-
-					<!-- 바이 -->
-
-					<!-- div9_buy_1-->
-					<div id="9_buy_1" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$64.99</h4>
-										<h4>
-											<a href="#">Second Product</a>
-										</h4>
-										<p>This is a short description. Lorem ipsum dolor sit
-											amet, consectetur adipiscing elit.</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">12 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star-empty"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-						</div>
-
-					</div>
-
-
-					<!-- div9_buy_1-->
-					<!-- div9_buy_2-->
-					<div id="9_buy_2" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$64.99</h4>
-										<h4>
-											<a href="#">Second Product</a>
-										</h4>
-										<p>This is a short description. Lorem ipsum dolor sit
-											amet, consectetur adipiscing elit.</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">12 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star-empty"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$64.99</h4>
-										<h4>
-											<a href="#">Second Product</a>
-										</h4>
-										<p>This is a short description. Lorem ipsum dolor sit
-											amet, consectetur adipiscing elit.</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">12 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star-empty"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-						</div>
-
-					</div>
-
-
-					<!-- div9_buy_2-->
-					<!-- div9_buy_3-->
-					<div id="9_buy_3" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-
-						</div>
-
-					</div>
-
-
-					<!-- div9_buy_3-->
-					<!-- div9_buy_4-->
-					<div id="9_buy_4" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-
-						</div>
-
-					</div>
-
-
-					<!-- div9_buy_4-->
-					<!-- div9_buy_5-->
-					<div id="9_buy_5" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-
-						</div>
-
-					</div>
-
-
-					<!-- div9_buy_5-->
-					<!-- div9_buy_6-->
-					<div id="9_buy_6" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-
-						</div>
-
-					</div>
-
-
-					<!-- div9_buy_6-->
-					<!-- div9_buy_7-->
-					<div id="9_buy_7" style="display: none">
-
-
-
-						<div class="row">
-
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="">
-									<div class="caption">
-										<h4 class="pull-right">$24.99</h4>
-										<h4>
-											<a href="#">First Product</a>
-										</h4>
-										<p>
-											See more snippets like this online store item at <a
-												target="_blank" href="http://www.bootsnipp.com">Bootsnipp
-												- http://bootsnipp.com</a>.
-										</p>
-									</div>
-									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
-										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-
-
-
-						</div>
-
-					</div>
-				</div>
-
-
-				<!-- div9_buy_7-->
-
+					
 				<!-- 바이끝 -->
 
-				<!-- 여기서부터는 입력보드 폼 -->
-
-				<div id="col-md-9-smallBoard">
-					<div id="smallBoard" style="display: none">
-
-
-						<div class="container">
-								<h2>모달</h2>
-								<!-- 버튼 -->
-								<button type="button" class="btn btn-primary btn-lg"
-									data-toggle="modal" data-target="#myModal">Launch demo
-									modal</button>
-								<!-- 모달 팝업 -->
-								<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-									aria-labelledby="myModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal">
-													<span aria-hidden="true">×</span><span class="sr-only">Close</span>
-												</button>
-												<h4 class="modal-title" id="myModalLabel">${sellbuy }								
-												</h4>
-											</div>
-											<div class="modal-body">
-												
-												<table align="center" width="300">
-							<tr>
-								<th colspan="2">게시글 작성</th>
-							</tr>
-							<tr height="50">
-								<td><label for="title">제목</label></td>
-								<td><input type="text" name="title" id="title"placeholder="title" /></td>
-							</tr>
-							<tr height="50">
-								<td><label for="title">아이디</label></td>
-								<td><input type="text" name="id" id="id"
-									disabled="disabled" value="${mno }" /></td>
-							</tr>
-							<tr height="50">
-								<td><label for="title">핸드폰번호</label></td>
-								<td><input type="text" name="phonenum" id="phonenum"
-									placeholder="Phone number"/></td>
-							</tr>
-							<tr height="50">
-								<td><label for="fileup">업로드할 파일</label></td>
-								<td><input type="button" name="addFile" id="addFile"
-									value="파일 추가" /></td>
-							</tr>
-							<tr height="50">
-								<td colspan="2" id="fileUpForm"></td>
-							</tr>
-							<tr>
-								<td colspan="2"><label for="content">내용</label></td>
-							</tr>
-							<tr>
-								<td colspan="2" align="center"><textarea name="content"
-										id="content" cols="30" rows="5" placeholder="content"></textarea></td>
-							</tr>
-							<tr>
-								<td colspan="2" align="center">
-								<button type="button" class="btn btn-primary" onclick="insertBoard.do">Save
-													changes</button>
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button></td>
-							</tr>
-						</table>
-											
-										
-											
-											
-											
-											
-											
-											</div>
-											
-										</div>
-									</div>
-								</div>
-							</div>
-
-							
-
-
-					</div>
-				</div>
-
-
-				<!-- 여기까지 입력보드 폼 -->
+				
 
 				<!-- selectAll -->
 				<div id="searchAll" style="display: none">
@@ -1171,12 +272,7 @@
 						<jsp:include page="${content}" />
 					</c:if>
 				</div>
-				<div id="myInfo" style="display: none">
-					<c:if test='${!empty content }'>
-						<jsp:include page="${content}" />
-					</c:if>
-				</div>
-
+				
 				<!-- selectAll -->
 
 
@@ -1212,11 +308,7 @@
 	</div>
 	<!-- /.container -->
 
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+	
 
 </body>
 

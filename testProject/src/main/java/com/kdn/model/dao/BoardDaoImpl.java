@@ -143,16 +143,13 @@ public class BoardDaoImpl implements BoardDao {
 			session.update("board.updateSellReply", temp);
 	}
 	
-<<<<<<< HEAD
 	public void add(Board board) {
-		session.insert("board.insert", board);
-=======
+		session.insert("board.insert", board);}
 	public void deleteReply(int sellbuy, int rno){
 		if(sellbuy == 1)
 			session.delete("board.deleteBuyReply", rno);
 		
 		else
 			session.delete("board.deleteSellReply", rno);
->>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
 	}
 }
