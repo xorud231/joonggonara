@@ -65,6 +65,13 @@
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
                     <form name="sentMessage" id="contactForm" novalidate>
                         <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                           		<input type="text" value="사번 ">
+                                <input type="text" value="${member.mno}">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls" >
                                 <input type="text" value="이름  ">
                                 <input type="text" value="${member.name}">
@@ -72,13 +79,6 @@
                         </div>
                         <br/>
                         
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                           		<input type="text" value="사번 ">
-                                <input type="text" value="${member.mno}">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                            		 <input type="text" value="닉네임  ">
@@ -115,7 +115,7 @@
 	<div class="header-content">
 		<div class="header-content-inner" align="center" style="margin-left: -200px; margin-top: -100px">
 			<a type="button" class="btn btn-primary btn-lg"  
-				data-toggle="modal" data-target="#updateModal">수 정</a>
+				data-toggle="modal" data-target="#myupdateModal">수 정</a>
 			&nbsp;&nbsp;&nbsp;&nbsp; <a href="delete.do"
 				class="btn btn-default-lg">탈 퇴</a>
 		</div>
@@ -123,11 +123,88 @@
 	<div class="container">
  
 		<!-- 버튼 -->
- 
+	<form action="memberUpdate.do" method="post" >
 		<!-- 모달 팝업 -->
-		<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="myupdateModal" tabindex="-1" role="dialog"
 			aria-labelledby="updateModalLabel" aria-hidden="true"
-			style="margin-top: 350px">
+			style="margin-top: 270px">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+						</button>
+						<h2 class="modal-title" id="updateModalLabel" align="center">
+							<font color="black">회원정보</font>
+						</h2>
+					</div>
+					<div class="modal-body">
+						<table align='center'>
+							
+							<tr>
+								<th >사&nbsp;&nbsp;&nbsp;&nbsp;번</th>
+								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td>${member.mno}</td>
+								<td ><input type="hidden"  name='mno' id='mno' 
+									value='${member.mno}'></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<th >비밀번호</th>
+								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+								<td ><input type='password' name='password'
+									id='password' value='${member.password}'></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<th>이&nbsp;&nbsp;&nbsp;&nbsp;름</th>
+								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+								<td ><input type='text' name='name'
+									id='name' value='${member.name}'></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<th>닉&nbsp;네&nbsp;임</th>
+								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+								<td ><input type='text' name='nick'
+									id='nick' value='${member.nick}'>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<th>전화번호</th>
+								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+								<td><input type='text' name='phonenum'
+									id='phonenum' value='${member.phonenum}'>
+							<tr>
+							<tr>
+								<td>&nbsp;</td>
+							</tr>
+								<th>주&nbsp;&nbsp;&nbsp;&nbsp;소</th>
+								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+								<td><input type='text' name='address'
+									id='address' value='${member.address}'>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default"
+							data-dismiss="modal">닫 기</button>
+							 <button type="submit" style="color: white" class="btn btn-primary"  >수  정</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+		
+		<div class="modal fade" id="mydeleteModal" tabindex="-1" role="dialog"
+			aria-labelledby="deleteModalLabel" aria-hidden="true">
  
 			<div class="modal-dialog modal-lg">
  
@@ -139,61 +216,17 @@
  
 							<span aria-hidden="true">×</span><span class="sr-only">Close</span>
 						</button>
-						<h2 class="modal-title" id="updateModalLabel">
-							<font color="black">회원정보</font>
-						</h2>
+						<h4 class="modal-title" id="deleteModalLabel" align="center" >
+							<font color="black">정말 탈퇴하시겠습니까?</font>
+						</h4>
 					</div>
- 
-						<div class="modal-body">
- 					<form action="myInfo.do" method="get" id="frm">
- 
-							<table align='center'>
-								<tr>
-									<td class="caption" colspan='2'>회원정보수정</td>
-								</tr>
-								<tr>
-									<td >사 번</td>
-									<td ><input type='text' name='mno' id='mno'
-										value='${member.mno}'></td>
-								</tr>
-								<tr>
-									<td >비밀번호</td>
-									<td ><input type='password' name='password'
-										id='password' value='${member.password}'></td>
-								</tr>
-								<tr>
-									<td >이 &nbsp;름</td>
-									<td ><input type='text' name='name'
-										id='name' value='${member.name}'></td>
-								</tr>
-								<tr>
-									<td >닉네임</td>
-									<td ><input type='text' name='nick'
-										id='nick' value='${member.nick}'>
-								</tr>
-								<tr>
-									<td >전화번호</td>
-									<td><input type='text' name='phonenum'
-										id='phonenum' value='${member.phonenum}'>
-								<tr>
-									<td>주 &nbsp;소</td>
-									<td><input type='text' name='address'
-										id='address' value='${member.address}'>
-								</tr>
-							</table>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">닫 기</button>
-							<button type="submit" class="btn btn-primary" value="전송">
-								<a style="color: white">수 정</a>
-							</button>
-					</form>
-							
-						</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" value="취소">닫 기</button>
+						<a href="delete.do" class="btn btn-primary" value="전송" >확 인</a>
+					</div>
 				</div>
 			</div>
-		</div>
+	</div>
  
  
 	</div>
