@@ -1,31 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
- 
+
 <head>
- 
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
- 
+
 <title>Shop Homepage - Start Bootstrap Template</title>
- 
+
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
- 
+
 <!-- Custom CSS -->
 <link href="css/shop-homepage.css" rel="stylesheet">
- 
+<!-- 모달 링크 -->
+
+
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
- 
+
+<style type="text/css">
+	#category_bg{
+		/* opacity: 0!important; */
+		
+	}
+</style>
+
 <script type="text/javascript" src="js/jquery-1.10.1.js"></script>
 <script type="text/javascript">
  
@@ -33,7 +44,7 @@
 	var click;
 	
 	$(function(){
-		var sellbuy = <%= session.getAttribute("sellbuy")%>;
+		var sellbuy = <%=session.getAttribute("sellbuy")%>;
 		var myPage = <%=session.getAttribute("myPage")%>;
 		
 		<%-- alert('<%= session.getAttribute("sellbuy")%>');
@@ -170,7 +181,6 @@
 	
 	
 	
-	
 	$(function(){
 		$("#addFile").click(addFileForm);
 	});
@@ -196,11 +206,11 @@
 	
 	
 </script>
- 
+
 </head>
- 
+
 <body>
- 
+
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -219,72 +229,65 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="searchSellList.do" >팝니다</a></li>
+					<li><a href="searchSellList.do">팝니다</a></li>
 					<li><a href="searchBuyList.do">삽니다</a></li>
 					<li><a href="myBoardPage.do">My page</a></li>
-<<<<<<< HEAD
-					<li><a href="logout.do" onclick="alert('"+${mno}+'"님 로그아웃 되었습니다')">Logout</a></li>
-=======
-					<li><a href="logout.do" onclick="alert('<%=(String)session.getAttribute("mno")%>님이 로그아웃 하셨습니다')">Logout</a></li>
->>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
+					<li><a href="logout.do"
+						onclick="alert('<%=(String) session.getAttribute("mno")%>님이 로그아웃 하셨습니다')">Logout</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container -->
 	</nav>
- 
+
 	<!-- Page Content -->
 	<div class="container">
- 
+
 		<div class="row" id="row">
-			<div class="col-md-3" id = "col-md-3" onclick="md3()">
-			<div id="3_buy" style="display: none">
-				<p class="lead">팝니다</p>
-				<div class="list-group">
-					<a href="#col-md-9" class="list-group-item" onclick="sell_1()">전체</a>
-					<a href="#col-md-9" class="list-group-item" onclick="sell_2()">가전제품</a>
-					<a href="#col-md-9" class="list-group-item" onclick="sell_3()">가구</a>
-					<a href="#col-md-9" class="list-group-item" onclick="sell_4()">의류/잡화</a>
-					<a href="#col-md-9" class="list-group-item" onclick="sell_5()">생활용품</a>
-					<a href="#col-md-9" class="list-group-item" onclick="sell_6()">취미용품</a>
-					<a href="#col-md-9" class="list-group-item" onclick="sell_7()">기타</a>
+			<div class="col-md-3" id="col-md-3" onclick="md3()">
+				<div id="3_buy" style="display: none">
+					<p class="lead">팝니다</p>
+					<div class="list-group">
+						<a href="#col-md-9" class="list-group-item" onclick="sell_1()">전체</a>
+						<a href="#col-md-9" class="list-group-item" onclick="sell_2()">가전제품</a>
+						<a href="#col-md-9" class="list-group-item" onclick="sell_3()">가구</a>
+						<a href="#col-md-9" class="list-group-item" onclick="sell_4()">의류/잡화</a>
+						<a href="#col-md-9" class="list-group-item" onclick="sell_5()">생활용품</a>
+						<a href="#col-md-9" class="list-group-item" onclick="sell_6()">취미용품</a>
+						<a href="#col-md-9" class="list-group-item" onclick="sell_7()">기타</a>
+					</div>
+				</div>
+				<div id="3_sell" style="display: none">
+					<p class="lead">삽니다</p>
+					<div class="list-group" id = "category_bg">
+						<a href="#col-md-9" class="list-group-item" onclick="buy_1()">전체</a>
+						<a href="#col-md-9" class="list-group-item" onclick="buy_2()">가전제품</a>
+						<a href="#col-md-9" class="list-group-item" onclick="buy_3()">가구</a>
+						<a href="#col-md-9" class="list-group-item" onclick="buy_4()">의류/잡화</a>
+						<a href="#col-md-9" class="list-group-item" onclick="buy_5()">생활용품</a>
+						<a href="#col-md-9" class="list-group-item" onclick="buy_6()">취미용품</a>
+						<a href="#col-md-9" class="list-group-item" onclick="buy_7()">기타</a>
+					</div>
+				</div>
+				<div id="myPage" style="display:">
+					<p class="lead">My Page</p>
+					<div class="list-group" id = "category_bg">
+
+						<a href="myInfo.do" id="clickInfo" class="list-group-item">회원정보확인</a>
+						<a href="#col-md-9" class="list-group-item">장바구니</a> 
+						<a href="#col-md-9" class="list-group-item">내 게시물 관리</a>
+					</div>
 				</div>
 			</div>
-			<div  id="3_sell" style="display: none">
-				<p class="lead">삽니다</p>
-				<div class="list-group">
-					<a href="#col-md-9" class="list-group-item" onclick="buy_1()">전체</a>
-					<a href="#col-md-9" class="list-group-item" onclick="buy_2()">가전제품</a>
-					<a href="#col-md-9" class="list-group-item" onclick="buy_3()">가구</a>
-					<a href="#col-md-9" class="list-group-item" onclick="buy_4()">의류/잡화</a>
-					<a href="#col-md-9" class="list-group-item" onclick="buy_5()">생활용품</a>
-					<a href="#col-md-9" class="list-group-item" onclick="buy_6()">취미용품</a>
-					<a href="#col-md-9" class="list-group-item" onclick="buy_7()">기타</a>
-				</div>
-			</div>
-			<div id="myPage" style="display:">
-				<p class="lead">My Page</p>
-				<div class="list-group">
-					
-<<<<<<< HEAD
-					<a href="myInfo.do" class="list-group-item" >회원정보확인</a> 
-=======
-					<a href="myInfo.do" id="clickInfo" class="list-group-item" >회원정보확인</a> 
->>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
-					<a href="#col-md-9" class="list-group-item">장바구니</a> 
-					<a href="#col-md-9" class="list-group-item">내 게시물 관리</a>
-				</div>
-			</div>			
-			</div>
- 
+
 			<!-- div9 -->
 			<div class="col-md-9">
 				<div id=col-md-9-board>
 					<div id="9_hello">
- 
+
 						<div class="row carousel-holder">
- 
+
 							<div class="col-md-12">
 								<div id="carousel-example-generic" class="carousel slide"
 									data-ride="carousel">
@@ -295,8 +298,8 @@
                             </ol> -->
 									<div class="carousel-inner">
 										<div class="item active">
-										<h1>${nick}님 환영합니다</h1>
-											<img class="slide-image" src="img/welcome.PNG"  alt="">
+											<h1>${nick}님환영합니다</h1>
+											<img class="slide-image" src="img/welcome.PNG" alt="">
 										</div>
 										<!-- <div class="item">
                                     <img class="slide-image" src="http://placehold.it/800x300" alt="">
@@ -313,23 +316,23 @@
                             </a> -->
 								</div>
 							</div>
- 
+
 						</div>
- 
- 
- 
+
+
+
 					</div>
- 
- 
+
+
 					<!-- div9  팝니다-->
- 
+
 					<!-- div9_sell_1-->
 					<div id="9_sell_1" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4" onclick="smallBoard()">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -356,7 +359,7 @@
 									</div>
 								</div>
 							</div>
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -380,22 +383,22 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
+
+
+
 						</div>
- 
+
 					</div>
- 
- 
+
+
 					<!-- div9_sell_1-->
 					<!-- div9_sell_2-->
 					<div id="9_sell_2" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -422,7 +425,7 @@
 									</div>
 								</div>
 							</div>
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -469,22 +472,22 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
+
+
+
 						</div>
- 
+
 					</div>
- 
- 
+
+
 					<!-- div9_sell_2-->
 					<!-- div9_sell_3-->
 					<div id="9_sell_3" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -511,23 +514,23 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
- 
+
+
+
+
 						</div>
- 
+
 					</div>
- 
- 
+
+
 					<!-- div9_sell_3-->
 					<!-- div9_sell_4-->
 					<div id="9_sell_4" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -554,23 +557,23 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
- 
+
+
+
+
 						</div>
- 
+
 					</div>
- 
- 
+
+
 					<!-- div9_sell_4-->
 					<!-- div9_sell_5-->
 					<div id="9_sell_5" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -597,23 +600,23 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
- 
+
+
+
+
 						</div>
- 
+
 					</div>
- 
- 
+
+
 					<!-- div9_sell_5-->
 					<!-- div9_sell_6-->
 					<div id="9_sell_6" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -640,23 +643,23 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
- 
+
+
+
+
 						</div>
- 
+
 					</div>
- 
- 
+
+
 					<!-- div9_sell_6-->
 					<!-- div9_sell_7-->
 					<div id="9_sell_7" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -683,29 +686,29 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
- 
+
+
+
+
 						</div>
- 
+
 					</div>
- 
- 
+
+
 					<!-- div9_sell_7-->
- 
- 
- 
- 
+
+
+
+
 					<!-- 바이 -->
- 
+
 					<!-- div9_buy_1-->
 					<div id="9_buy_1" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -732,7 +735,7 @@
 									</div>
 								</div>
 							</div>
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -756,22 +759,22 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
+
+
+
 						</div>
- 
+
 					</div>
- 
- 
+
+
 					<!-- div9_buy_1-->
 					<!-- div9_buy_2-->
 					<div id="9_buy_2" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -798,7 +801,7 @@
 									</div>
 								</div>
 							</div>
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -845,22 +848,22 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
+
+
+
 						</div>
- 
+
 					</div>
- 
- 
+
+
 					<!-- div9_buy_2-->
 					<!-- div9_buy_3-->
 					<div id="9_buy_3" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -887,23 +890,23 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
- 
+
+
+
+
 						</div>
- 
+
 					</div>
- 
- 
+
+
 					<!-- div9_buy_3-->
 					<!-- div9_buy_4-->
 					<div id="9_buy_4" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -930,23 +933,23 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
- 
+
+
+
+
 						</div>
- 
+
 					</div>
- 
- 
+
+
 					<!-- div9_buy_4-->
 					<!-- div9_buy_5-->
 					<div id="9_buy_5" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -973,23 +976,23 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
- 
+
+
+
+
 						</div>
- 
+
 					</div>
- 
- 
+
+
 					<!-- div9_buy_5-->
 					<!-- div9_buy_6-->
 					<div id="9_buy_6" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -1016,23 +1019,23 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
- 
+
+
+
+
 						</div>
- 
+
 					</div>
- 
- 
+
+
 					<!-- div9_buy_6-->
 					<!-- div9_buy_7-->
 					<div id="9_buy_7" style="display: none">
- 
- 
- 
+
+
+
 						<div class="row">
- 
+
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
 									<img src="http://placehold.it/320x150" alt="">
@@ -1059,88 +1062,144 @@
 									</div>
 								</div>
 							</div>
- 
- 
- 
- 
+
+
+
+
 						</div>
- 
+
 					</div>
 				</div>
- 
- 
+
+
 				<!-- div9_buy_7-->
- 
+
 				<!-- 바이끝 -->
- 
+
 				<!-- 여기서부터는 입력보드 폼 -->
- 
-				<div id="col-md-9-smallBoard" >
-				<div id = "smallBoard" style="display: none">
-					<form method="post" action="insertBoard.do" enctype="multipart/form-data" >
-						<table align="center" width="300">
-								<tr><th colspan="2"> 게시글 작성 </th></tr>
-								<tr height="50"><td><label for="title">제목</label></td>
-								    <td><input type="text" name="title" id="title"/></td>
-								</tr>
-								<tr height="50"><td><label for="title">아이디</label></td>
-								    <td><input type="text" name="id" id="id"  disabled="disabled" value="<%=(String)session.getAttribute("mno")%>"/></td>
-								</tr>
-								<tr height="50" ><td><label for="fileup">업로드할 파일</label></td>
-								    <td>
-								    	<input type="button" name="addFile" id="addFile" value="파일 추가"/>
-								    </td>
-								</tr>
-								<tr height="50" ><td colspan="2" id="fileUpForm"> </td>
-								</tr>
-								<tr><td colspan="2"><label for="content">내용</label></td></tr>
-								<tr><td colspan="2" align="center">
-								    <textarea name="content" id="content" cols="30" rows="5"></textarea>
-								</td></tr>
-								<tr><td colspan="2" align="center">
-									<input type="submit" value="작성"/>
-									<input type="reset" value="취소"/>
-								</td></tr>
+
+				<div id="col-md-9-smallBoard">
+					<div id="smallBoard" style="display: none">
+
+
+						<div class="container">
+								<h2>모달</h2>
+								<!-- 버튼 -->
+								<button type="button" class="btn btn-primary btn-lg"
+									data-toggle="modal" data-target="#myModal">Launch demo
+									modal</button>
+								<!-- 모달 팝업 -->
+								<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+									aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">
+													<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+												</button>
+												<h4 class="modal-title" id="myModalLabel">${sellbuy }								
+												</h4>
+											</div>
+											<div class="modal-body">
+												
+												<table align="center" width="300">
+							<tr>
+								<th colspan="2">게시글 작성</th>
+							</tr>
+							<tr height="50">
+								<td><label for="title">제목</label></td>
+								<td><input type="text" name="title" id="title"placeholder="title" /></td>
+							</tr>
+							<tr height="50">
+								<td><label for="title">아이디</label></td>
+								<td><input type="text" name="id" id="id"
+									disabled="disabled" value="${mno }" /></td>
+							</tr>
+							<tr height="50">
+								<td><label for="title">핸드폰번호</label></td>
+								<td><input type="text" name="phonenum" id="phonenum"
+									placeholder="Phone number"/></td>
+							</tr>
+							<tr height="50">
+								<td><label for="fileup">업로드할 파일</label></td>
+								<td><input type="button" name="addFile" id="addFile"
+									value="파일 추가" /></td>
+							</tr>
+							<tr height="50">
+								<td colspan="2" id="fileUpForm"></td>
+							</tr>
+							<tr>
+								<td colspan="2"><label for="content">내용</label></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center"><textarea name="content"
+										id="content" cols="30" rows="5" placeholder="content"></textarea></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center">
+								<button type="button" class="btn btn-primary" onclick="insertBoard.do">Save
+													changes</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button></td>
+							</tr>
 						</table>
-					</form>
+											
+										
+											
+											
+											
+											
+											
+											</div>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+
+							
+
+
+					</div>
 				</div>
+
+
+				<!-- 여기까지 입력보드 폼 -->
+
+				<!-- selectAll -->
+				<div id="searchAll" style="display: none">
+					<c:if test='${!empty content }'>
+						<jsp:include page="${content}" />
+					</c:if>
 				</div>
-						<!-- 여기까지 입력보드 폼 -->
-			
-			<!-- selectAll -->
-			<div id="searchAll" style="display: none">
-				<c:if test = '${!empty content }'>
-		            <jsp:include page="${content}"/>
-				</c:if>
+				<div id="myInfo" style="display: none">
+					<c:if test='${!empty content }'>
+						<jsp:include page="${content}" />
+					</c:if>
+				</div>
+
+				<!-- selectAll -->
+
+
+
+
+
 			</div>
-			<div id="myInfo" style="display: none">
-				<c:if test = '${!empty content }'>
-		            <jsp:include page="${content}"/>
-				</c:if>
-			</div>
-			
-			<!-- selectAll -->
-                
-				
-						
-						
-						
-			</div><!-- 9끝 -->
- 
- 
- 
-			
- 
+			<!-- 9끝 -->
+
+
+
+
+
 		</div>
-		
- 
+
+
 	</div>
 	<!-- /.container -->
- 
+
 	<div class="container">
- 
+
 		<hr>
- 
+
 		<!-- Footer -->
 		<footer>
 			<div class="row">
@@ -1149,16 +1208,16 @@
 				</div>
 			</div>
 		</footer>
- 
+
 	</div>
 	<!-- /.container -->
- 
+
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
- 
+
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
- 
+
 </body>
- 
+
 </html>

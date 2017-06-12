@@ -3,6 +3,7 @@ package com.kdn.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,6 +147,13 @@ public class BoardController {
 		boardService.deleteBoard(sellbuy, bno);
 		
 		return "redirect:searchBoard.do";
+	}
+	
+	@RequestMapping(value="insertBoard.do", method=RequestMethod.POST)
+	public String insertBoard(Board board, HttpServletRequest request){
+		String dir = request.getRealPath("upload/");
+		boardService.add(board, dir);
+		return "redirect:listBoard.do";
 	}
 	
 	@RequestMapping(value = "updateReply.do", method = RequestMethod.GET)

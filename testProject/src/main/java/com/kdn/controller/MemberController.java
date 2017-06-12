@@ -91,9 +91,7 @@ public class MemberController {
 		return "index";
 	}
 	
-<<<<<<< HEAD
-	@RequestMapping(value = "memberUpdate.do", method = RequestMethod.POST)
-=======
+
 //	@RequestMapping(value = "memberUpdateForm.do", method = RequestMethod.GET)
 //	public String memberUpdateForm(Model model, HttpSession session){
 //		model.addAttribute("member", memberService.search((String)session.getAttribute("mno")));
@@ -103,7 +101,6 @@ public class MemberController {
 //	}
 //	
 	@RequestMapping(value = "memberUpdate.do", method = RequestMethod.GET)
->>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
 	public String memberUpdate(Member member){
 		memberService.update(member);
 		

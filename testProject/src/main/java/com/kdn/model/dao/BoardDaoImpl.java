@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kdn.model.biz.BoardDao;
 import com.kdn.model.domain.Board;
+import com.kdn.model.domain.BoardFile;
 import com.kdn.model.domain.PageBean;
 import com.kdn.model.domain.Reply;
 
@@ -20,6 +21,17 @@ public class BoardDaoImpl implements BoardDao {
 	@Autowired
 	private SqlSessionTemplate session;
 
+	public int getBoardNo() {
+		return session.selectOne("board.getBoardNo");
+	}
+	
+	public void addFiles(List<BoardFile> files, int bno) {
+		for (BoardFile fileBean : files) {
+			fileBean.setBno(bno);
+			session.insert("board.insertFile", fileBean);
+		}
+	}
+	
 	public Board searchBoard(int sellbuy, int bno) {
 		if(sellbuy == 1){
 			return session.selectOne("board.searchBuyBoard", bno);
@@ -131,5 +143,9 @@ public class BoardDaoImpl implements BoardDao {
 		
 		else
 			session.update("board.updateSellReply", temp);
+	}
+	
+	public void add(Board board) {
+		session.insert("board.insert", board);
 	}
 }

@@ -3,6 +3,8 @@ package com.kdn.model.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Board implements Serializable{
 	private int bno;
 	private String regdate;
@@ -16,7 +18,8 @@ public class Board implements Serializable{
 	private List<FileBean> files;
 	private boolean isInCart;
 	private List<Reply> replys;
-	
+	private MultipartFile[] fileup;
+
 	public Board(){}
 
 	public Board(int bno, String regdate, String title, int price,
@@ -31,6 +34,13 @@ public class Board implements Serializable{
 		this.dno = dno;
 		this.cno = cno;
 		this.isInCart = isInCart;
+	}
+	
+	public MultipartFile[] getFileup() {
+		return fileup;
+	}
+	public void setFileup(MultipartFile[] fileup) {
+		this.fileup = fileup;
 	}
 	
 	public List<FileBean> getFiles() {

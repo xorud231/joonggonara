@@ -3,11 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
 
-=======
  
->>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -35,12 +32,10 @@
 			<td>주 소</td>
 			<td>${member.address}</td>
 		</tr>
-<<<<<<< HEAD
 		<tr>
 
-=======
 		<button type="button" class="btn btn-primary btn-lg"
-			data-toggle="modal" data-target="#updateModal">수   정</button>
+				data-toggle="modal" data-target="#updateModal">수  정</button>
 		&nbsp;&nbsp;&nbsp;&nbsp; <a href="delete.do" class="btn btn-default-lg" >탈  퇴</a>
 		<tr>
  			<td colspan='2' align='center' class='tfoot tspacial'>
@@ -139,16 +134,15 @@
 		<!-- ie10-viewport-bug-workaround.js --> <script
 			src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script>
 		<!-- holder.js -->
->>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
 		</tr>
 	</table>
 	
-<<<<<<< HEAD
 		
 	<td colspan='2' align='center' class='tfoot tspacial'>
 			<button type="button" class="btn btn-primary btn-lg"
 			data-toggle="modal" data-target="#updateModal">수   정</button>
 		&nbsp;&nbsp;&nbsp;&nbsp; <a href="delete.do" class="btn btn-default-lg" >탈  퇴</a>
+		<form method="post" action="memberUpdate.do">
 			<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
 				aria-labelledby="updateModalLabel" aria-hidden="true"
 				style="margin-top: 270px">
@@ -163,7 +157,7 @@
 							</h2>
 						</div>
 						<div class="modal-body">
-						<form method="post" action="memberUpdate.do">
+						
 							<table align='center' style="color: black">
 								<tr>
 									<td class='tbasic'>사 번</td>
@@ -222,7 +216,7 @@
 									</td>
 								</tr>-->
 							</table>
-							</form>
+							
 						</div>
 						<div class="modal-footer">
 						<button type="submit" class="btn btn-primary" value="전송" >수  정</button>
@@ -233,13 +227,12 @@
 					</div>
 				</div>
 			</div>
+			</form>
 		 <script src="http://code.jquery.com/jquery-latest.min.js"></script> <script
 			src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 		<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script>
 		<!-- ie10-viewport-bug-workaround.js --> <script
 			src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script>
 		<!-- holder.js -->
-=======
->>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
 </body>
 </html>
