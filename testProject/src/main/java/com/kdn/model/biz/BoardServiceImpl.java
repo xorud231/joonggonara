@@ -141,7 +141,6 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	
-<<<<<<< HEAD
 	@Override
 	public void add(Board board, String dir) {
 		File[ ] files = null;
@@ -184,8 +183,8 @@ public class BoardServiceImpl implements BoardService {
 				}
 			}
 			throw new UpdateException("게시글 작성 중 오류 발생");
+		}
 		} 
-=======
 	public void deleteReply(int sellbuy, int rno){
 		try {
 			dao.deleteReply(sellbuy, rno);
@@ -193,6 +192,5 @@ public class BoardServiceImpl implements BoardService {
 			e.printStackTrace();
 			throw new UpdateException("댓글 삭제 중 오류 발생");
 		}
->>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
 	}
 }

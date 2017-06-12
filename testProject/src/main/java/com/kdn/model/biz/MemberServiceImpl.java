@@ -58,9 +58,7 @@ public class MemberServiceImpl implements MemberService {
 		if(password ==null || !password.equals(member.getPassword())){
 			throw new UpdateException("비밀번호가 맞지 않습니다.");
 		}
-		if(member.getWithdraw().equals("Y")){
-			throw new UpdateException("탈퇴한 회원 아이디입니다.");
-		}
+		
 		return true;
 	}
 	
@@ -80,10 +78,13 @@ public class MemberServiceImpl implements MemberService {
 
 
 	public void update(Member member) {
+			
 			Member find= dao.search(member.getMno());
+			System.out.println(find);
 			if(find == null){
 				throw new UpdateException("아이디에 해당하는 회원이 없어 수정할 수 없습니다.");
 			}else{
+				
 				dao.update(member);
 			}
 	}
@@ -119,7 +120,6 @@ public class MemberServiceImpl implements MemberService {
 			}
 			else{
 				dao.add(member);
-				
 			}
 		}
 	}
