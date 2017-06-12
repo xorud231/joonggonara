@@ -41,25 +41,24 @@
 </script>
 </head>
 <body>
-                <div class="row">
-					 <form id="frm" >
-					<input type="hidden" id="pageNo"  name="pageNo"  value="1"/>
+	<div class="main">
+		<form id="frm" >
+			<input type="hidden" id="pageNo"  name="pageNo"  value="1"/>
+			<input type="hidden" id="bno"  name="bno"/>
+			
+               <div class="row">
 					<input type="hidden" id="sellbuy"  name="sellbuy"  value="1"/>
-					<input type="hidden" id="bno"  name="bno"/>
 					 <c:forEach  var="board" items="${list}">
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                        <c:forEach  var="file"  items='${board.files}'>
-                             <c:choose>
-                     		 <c:when test="${!empty file.sfilename}">
-<%--                          <img src="filedown.do?sfilename=${file.sfilename}&rfilename=${file.rfilename}" alt="없음"> --%>
-                            <img src="img/portfolio/fullsize/${file.sfilename}" alt="없음">
-                             </c:when>
-                             <c:otherwise>
-                            <img src="http://placehold.it/320x150" alt="">
-                        </c:otherwise>
-                         </c:choose>
-                            </c:forEach>
+							<c:choose>
+							<c:when test="${!empty board.files[0].sfilename}">
+ 								<img src="img/portfolio/fullsize/${board.files[0].sfilename}"  width=320px height=150px	 alt="없음">
+							</c:when>
+							<c:otherwise>
+								<img src="http://placehold.it/320x150" width=320px height=150px	alt="">
+ 							</c:otherwise>
+ 							</c:choose>
                             <div class="caption">
                                 <h4 class="pull-right">${board.price}</h4>
                                 <h4><a href="#" onclick="getBoard(${board.bno})">${board.title}</a>
@@ -79,13 +78,25 @@
                         </div>
                     </div>
                     </c:forEach>
+                    </div>
+                    
+                    <table align="center">
+	  	<tr align="center">
+	  	 <td colspan="3" height="100" align="center">
+	  	  <select  name="key" id="key">
+	  		<option value="all"     >-----all-----</option>
+	  		<option value="id"      <%=pageBean.getKey("id")%> >아이디</option>
+	  		<option value="title"   <%=pageBean.getKey("title")%>  >제목</option>
+	  		<option value="contents" <%=pageBean.getKey("contents")%>  >내용</option>
+	  	  </select>
+	  	  <input type="text" id="word" name="word" value="${pageBean.word}"/>
+	  	  <a href="#" onclick="pagelist(1)">검색</a> &nbsp;&nbsp;&nbsp;
+	  	  <a href="insertBoardForm.do" >글쓰기</a>
+	  	 </td>
+	  	</tr>
+		</table>
+		<div class="bottom"><center>${pageBean.pagelink } </center></div>
                     </form>
                 </div>
-
-            </div>
-
-        </div>
-
-    </div>
 </body>
 </html>

@@ -69,12 +69,7 @@ public class BoardController {
 		session.setAttribute("sellbuy", 1);
 		
 		List<Board> list = boardService.searchBuyList(bean);
-		for (Board board : list) {
-			int bno = board.getBno();
-			if(boardService.searchBuyFile(bno).getFiles()!=null){
-				board.setFiles(boardService.searchBuyFile(bno).getFiles());	
-				}
-			}
+		System.out.println(list);
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchBuyList.jsp");
 		
@@ -85,28 +80,8 @@ public class BoardController {
 		session.setAttribute("sellbuy", 2);
 		
 		List<Board> list = boardService.searchSellList(bean);
-		for (Board board : list) {
-			int bno = board.getBno();
-			if(boardService.searchSellFile(bno).getFiles()!=null){
-				board.setFiles(boardService.searchSellFile(bno).getFiles());	
-				}
-			}
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchSellList.jsp");
-		
-		return "index";
-//		return "board/searchSellList";
-	}
-	@RequestMapping(value = "myBoardPage.do", method = RequestMethod.GET)
-	public String myboardPage(HttpSession session, Model model){
-		session.setAttribute("sellbuy", 3);
-		
-		Member member = memberService2.search((String)session.getAttribute("mno"));
-		model.addAttribute("nick", member.getNick());
-		
-		String mno = (String)session.getAttribute("mno");
-		
-		model.addAttribute("nick", memberService2.search(mno).getNick());
 		
 		return "index";
 	}
@@ -148,6 +123,17 @@ public class BoardController {
 		boardService.deleteBoard(sellbuy, bno);
 		
 		return "redirect:searchBoard.do";
+	}
+	@RequestMapping(value = "helloBoard.do", method = RequestMethod.GET)
+	public String helloBoard(Model model ,HttpSession session){
+		String mno = (String)session.getAttribute("mno");
+		
+		session.setAttribute("sellbuy", 3);
+		
+		model.addAttribute("nick", memberService2.search(mno).getNick());
+		model.addAttribute("content", "board/helloBoard.jsp");
+		
+		return "index";
 	}
 	
 	@RequestMapping(value="insertBoard.do", method=RequestMethod.POST)

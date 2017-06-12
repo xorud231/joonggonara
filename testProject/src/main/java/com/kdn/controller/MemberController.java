@@ -39,18 +39,13 @@ public class MemberController {
 	}*/
 	
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String login(String mno, String password, HttpSession session, Model model){
-		
+	public String login(String mno, String password, HttpSession session){
 		memberService.login(mno, password);
 		Member member = memberService.search(mno);
 		
 		session.setAttribute("mno", mno);
 		
-		model.addAttribute("nick", memberService.search(mno).getNick());
-		
-		model.addAttribute("nick", member.getNick());
-		
-		return "index";
+		return "redirect:helloBoard.do";
 		//return "redirect:index.do";
 	}
 	
@@ -92,15 +87,15 @@ public class MemberController {
 	}
 	
 
-//	@RequestMapping(value = "memberUpdateForm.do", method = RequestMethod.GET)
-//	public String memberUpdateForm(Model model, HttpSession session){
-//		model.addAttribute("member", memberService.search((String)session.getAttribute("mno")));
-//		model.addAttribute("content", "member/updateMember.jsp");
-//		
-//		return "index";
-//	}
-//	
-	@RequestMapping(value = "memberUpdate.do", method = RequestMethod.GET)
+/*	@RequestMapping(value = "memberUpdateForm.do", method = RequestMethod.GET)
+	public String memberUpdateForm(Model model, HttpSession session){
+		model.addAttribute("member", memberService.search((String)session.getAttribute("mno")));
+		model.addAttribute("content", "member/updateMember.jsp");
+		
+		return "index";
+	}*/
+	
+	@RequestMapping(value = "memberUpdate.do", method = RequestMethod.POST)
 	public String memberUpdate(Member member){
 		memberService.update(member);
 		
@@ -111,6 +106,7 @@ public class MemberController {
 	public String removeMember(HttpSession session){
 		String mno = (String)session.getAttribute("mno");
 		memberService.withdraw(mno);
+		session.removeAttribute("mno");
 		return "main";
 	}
 	

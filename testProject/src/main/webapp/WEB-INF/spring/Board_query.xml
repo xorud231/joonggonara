@@ -159,14 +159,34 @@
 			</if>
 		</where>
 	</select>
-	<select id = "searchBuyList" parameterType = "pagebean" resultType = "board">
-		select b.bno bno, b.title title, B.CONTENTS contents,b.price price, to_char(regdate, 'yyyy-mm-dd') regdate, bf.RFILENAME rfilename 
-		from BUYBOARD b, BUYBOARDFILE bf
-        where b.BNO = bf.BNO(+)
-        order by b.bno DESC
+	<select id = "searchBuyList" parameterType = "pagebean" resultMap="boardmap">
+		SELECT  c.* , fno, rfilename, sfilename      
+		FROM  (    SELECT b.*   
+		           FROM ( SELECT ROWNUM ro, a.*    
+		                    FROM   ( select bno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
+		                              from BUYBOARD
+		                              order by bno DESC
+		                            ) a
+		                 ) b   
+		            WHERE    ro BETWEEN 1 AND 5        
+		      ) c, BUYBOARDFILE  bf 
+		WHERE   c.bno = bf.bno(+)
+			<if test="word != null ">
+				<choose>
+					<when test="key == 'id'">		
+						and id =#{word}
+					</when>
+					<when test="key == 'title'">		
+						and title like '%'||#{word}||'%'
+					</when>
+					<when test="key == 'contents'">		
+						and contents like '%'||#{word}||'%'
+					</when>
+				</choose>
+			</if>
 	</select>
 	
-	<select id = "searchSellList" parameterType = "pagebean" resultType = "board">
+	<select id = "searchSellList" parameterType = "pagebean" resultMap="boardmap">
 		select b.bno bno, b.title title, B.CONTENTS contents,b.price price, to_char(regdate, 'yyyy-mm-dd') regdate, bf.RFILENAME rfilename 
 		from SELLBOARD b, SELLBOARDFILE bf
         where b.bNO = bf.bNO(+)

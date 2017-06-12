@@ -52,13 +52,14 @@
 	$(function (){
 		var sellbuy = <%=session.getAttribute("sellbuy")%>;
 		
-		<%-- alert('<%= session.getAttribute("sellbuy")%>');
-		alert('<%= session.getAttribute("myPage")%>');
-		 --%>
-		click = document.getElementById("9_hello")
 		
+		/* location.href = "helloBoard.do";
+		click = document.getElementById("searchAll");
+		click.style.display = ""; */
+		
+		
+				
 		if(sellbuy == 1){
-			click.style.display = "none";		
 			var buy = document.getElementById("3_buy");
 			buy.style.display = "none";
 			var sell = document.getElementById("3_sell");
@@ -70,7 +71,6 @@
 		}
 		
 		else if(sellbuy == 2){
-			click.style.display = "none";
 			var buy = document.getElementById("3_buy");
 			buy.style.display = "";
 			var sell = document.getElementById("3_sell");
@@ -82,7 +82,6 @@
 		}
 		
 		else if(sellbuy == 3){
-			click.style.display = "none";
 			var buy = document.getElementById("3_buy");
 			buy.style.display = "none";
 			var sell = document.getElementById("3_sell");
@@ -95,22 +94,10 @@
 		
 	});
 	
-	function md3() {
-		var board = document.getElementById("col-md-9-board");
-		board.style.display = "";
-	}
-	
-	function smallBoard() {
-		click.style.display = "none";
-		document.getElementById("col-md-9-board").style.display = "none";
-		document.getElementById("col-md-9-smallBoard").style.display = "";
-		click = document.getElementById("smallBoard");
-		click.style.display = "";
-	}
 	
 	
-	
-	$(function(){
+	/* 	보드 파일업로드 자바스크립트
+		$(function(){
 		$("#addFile").click(addFileForm);
 	});
 	var count=0;   //file form index
@@ -126,7 +113,7 @@
 	function removeForm(count){
 		var item = document.getElementById('item_'+count);
 		if(item !=null) item.parentNode.removeChild(item);
-	}
+	} */
 	
 	
 	
@@ -165,7 +152,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="searchSellList.do">팝니다</a></li>
 					<li><a href="searchBuyList.do">삽니다</a></li>
-					<li><a href="myBoardPage.do">My page</a></li>
+					<li><a href="helloBoard.do">My page</a></li>
 					<li><a href="logout.do"
 						onclick="alert('<%=(String) session.getAttribute("mno")%>님이 로그아웃 하셨습니다')">Logout</a></li>
 				</ul>
@@ -217,54 +204,7 @@
 
 			<!-- div9 -->
 			<div class="col-md-9">
-				<div id=col-md-9-board>
-					<div id="9_hello">
-
-						<div class="row carousel-holder">
-
-							<div class="col-md-12">
-								<div id="carousel-example-generic" class="carousel slide"
-									data-ride="carousel">
-									<!--  <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                            </ol> -->
-									<div class="carousel-inner">
-										<div class="item active">
-											<h1>${nick}님환영합니다</h1>
-											<img class="slide-image" src="img/welcome.PNG" alt="">
-										</div>
-										<!-- <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div> -->
-									</div>
-									<!-- <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a> -->
-								</div>
-							</div>
-
-						</div>
-
-
-
-					</div>
-
-
-					<!-- div9  팝니다-->
-
-					<!-- div9_sell_1-->
 					
-				<!-- 바이끝 -->
-
-				
 
 				<!-- selectAll -->
 				<div id="searchAll" style="display: none">
@@ -275,18 +215,14 @@
 				
 				<!-- selectAll -->
 
-
-
-
-
 			</div>
-			<!-- 9끝 -->
+			<!-- div9 끝 -->
 
 
 
 
 
-		</div>
+		
 
 
 	</div>

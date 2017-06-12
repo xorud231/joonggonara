@@ -27,7 +27,7 @@
 		//input 양식의 hidden으로 선언된 page에 요청된 페이지 정보 셋팅 
 		document.getElementById("pageNo").value=cpage;
 		var frm = document.getElementById("frm");
-		frm.action="searchSellList.do";
+		frm.action="searchBuyList.do";
 		frm.submit();
 	}
 	//게시글 번호나 타이틀을 클릭하면 해당 게시글 요청을 위한 메서드 
@@ -41,7 +41,7 @@
 </script>
 </head>
 <body>
-                <div class="row">
+  <div class="row">
 					 <form id="frm" >
 					<input type="hidden" id="pageNo"  name="pageNo"  value="1"/>
 					<input type="hidden" id="sellbuy"  name="sellbuy"  value="2"/>
@@ -49,17 +49,14 @@
 					 <c:forEach  var="board" items="${list}">
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                      <c:forEach  var="file"  items='${board.files}'>
-                             <c:choose>
-                     		 <c:when test="${!empty file.sfilename}">
-<%--                             <img src="filedown.do?sfilename=${file.sfilename}&rfilename=${file.rfilename}" alt="없음"> --%>
-                            <img src="img/portfolio/fullsize/${file.sfilename}" alt="없음">
-                             </c:when>
-                             <c:otherwise>
-                            <img src="http://placehold.it/320x150" alt="">
-                        </c:otherwise>
-                         </c:choose>
-                            </c:forEach>
+							<c:choose>
+							<c:when test="${!empty board.files[0].sfilename}">
+ 								<img src="img/portfolio/fullsize/${board.files[0].sfilename}" alt="없음">
+							</c:when>
+							<c:otherwise>
+								<img src="http://placehold.it/320x150" alt="">
+ 							</c:otherwise>
+ 							</c:choose>
                             <div class="caption">
                                 <h4 class="pull-right">${board.price}</h4>
                                 <h4><a href="#" onclick="getBoard(${board.bno})">${board.title}</a>
@@ -81,11 +78,5 @@
                     </c:forEach>
                     </form>
                 </div>
-
-            </div>
-
-        </div>
-
-    </div>
 </body>
 </html>

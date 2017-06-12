@@ -39,7 +39,7 @@ public class BoardServiceImpl implements BoardService {
 					new PageUtility(bean.getInterval()
 							, total
 							, bean.getPageNo()
-							, "images/");
+							, "img/");
 			bean.setPagelink(bar.getPageBar());
 			
 			return dao.searchBuyList(bean);
@@ -55,7 +55,7 @@ public class BoardServiceImpl implements BoardService {
 					new PageUtility(bean.getInterval()
 							, total
 							, bean.getPageNo()
-							, "images/");
+							, "img/");
 			bean.setPagelink(bar.getPageBar());
 			
 			return dao.searchSellList(bean);
@@ -149,7 +149,6 @@ public class BoardServiceImpl implements BoardService {
 			
 			int bno = dao.getBoardNo();
 			board.setBno(bno);
-			dao.add( board);
 			
 			MultipartFile[] fileup = board.getFileup();
 			if(fileup!=null){
@@ -169,7 +168,6 @@ public class BoardServiceImpl implements BoardService {
 					files[index] = new File(fileName);
 					file.transferTo(files[index++]);
 				}
-				dao.addFiles( fileInfos, bno);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -183,7 +181,9 @@ public class BoardServiceImpl implements BoardService {
 				}
 			}
 			throw new UpdateException("게시글 작성 중 오류 발생");}
-		} 
+			throw new UpdateException("게시글 작성 중 오류 발생");
+		}
+	
 	public void deleteReply(int sellbuy, int rno){
 		try {
 			dao.deleteReply(sellbuy, rno);

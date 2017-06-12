@@ -40,6 +40,7 @@ public class Member implements Serializable{
 		this.withdraw = withdraw;
 	}
 	
+
 	public String getMno() {
 		return mno;
 	}

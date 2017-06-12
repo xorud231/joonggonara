@@ -55,7 +55,7 @@
 	</select>
 	
 	<delete id = "removeMember" parameterType = "String">
-		update member set withdraw = 'Y' where mno = #{mno:VARCHAR}
+		delete from member where mno = #{mno:VARCHAR}
 	</delete>
 	
 	<update id = "updateMember" parameterType = "member">
