@@ -59,9 +59,7 @@ public class BoardController {
 		model.addAttribute("replycount", replycount);
 		model.addAttribute("member", member);
 		model.addAttribute("content", "board/searchBoard.jsp");
-		//model.addAttribute("content", "board/test.jsp");
 		return "index";
-		//return "board/test";
 	}
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
 	public String searchBuyList(Model model, PageBean bean,HttpSession session){

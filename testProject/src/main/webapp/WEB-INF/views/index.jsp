@@ -26,7 +26,11 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
+<!-- jQuery -->
+	<script src="js/jquery.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 
@@ -235,7 +239,7 @@
 
 		<div class="row" id="row">
 			<div class="col-md-3" id = "col-md-3" onclick="md3()">
-			<div id="3_buy" style="display: none">
+			<div id="3_buy" style="display: none; font-weight : bold">
 				<p class="lead">팝니다</p>
 				<div class="list-group">
 					<a href="#col-md-9" class="list-group-item" onclick="sell_1()">전체</a>
@@ -247,7 +251,7 @@
 					<a href="#col-md-9" class="list-group-item" onclick="sell_7()">기타</a>
 				</div>
 			</div>
-			<div  id="3_sell" style="display: none">
+			<div  id="3_sell" style="display: none; font-weight : bold">
 				<p class="lead">삽니다</p>
 				<div class="list-group">
 					<a href="#col-md-9" class="list-group-item" onclick="buy_1()">전체</a>
@@ -259,10 +263,9 @@
 					<a href="#col-md-9" class="list-group-item" onclick="buy_7()">기타</a>
 				</div>
 			</div>
-			<div id="myPage" style="display:">
+			<div id="myPage" style="display:; font-weight : bold">
 				<p class="lead">My Page</p>
 				<div class="list-group">
-					
 					<a href="myInfo.do" id="clickInfo" class="list-group-item" >회원정보확인</a> 
 					<a href="#col-md-9" class="list-group-item">장바구니</a> 
 					<a href="#col-md-9" class="list-group-item">내 게시물 관리</a>
@@ -278,41 +281,20 @@
 						<div class="row carousel-holder">
 
 							<div class="col-md-12">
-								<div id="carousel-example-generic" class="carousel slide"
-									data-ride="carousel">
-									<!--  <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                            </ol> -->
+								                           
 									<div class="carousel-inner">
 										<div class="item active">
 										<h1>${nick}님 환영합니다</h1>
 											<img class="slide-image" src="img/welcome.PNG"  alt="">
 										</div>
-										<!-- <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div> -->
+									
 									</div>
-									<!-- <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a> -->
-								</div>
+								
 							</div>
 
 						</div>
 
-
-
 					</div>
-
-
 					<!-- div9  팝니다-->
 
 					<!-- div9_sell_1-->
@@ -372,8 +354,6 @@
 									</div>
 								</div>
 							</div>
-
-
 
 						</div>
 
@@ -1145,11 +1125,7 @@
 	</div>
 	<!-- /.container -->
 
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+	
 
 </body>
 
