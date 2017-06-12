@@ -27,6 +27,7 @@
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
 <!-- Plugin CSS -->
 <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 

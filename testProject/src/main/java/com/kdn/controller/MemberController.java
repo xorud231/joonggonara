@@ -40,12 +40,10 @@ public class MemberController {
 	
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String login(String mno, String password, HttpSession session, Model model){
-		
 		memberService.login(mno, password);
 		Member member = memberService.search(mno);
 		
 		session.setAttribute("mno", mno);
-		
 		model.addAttribute("nick", memberService.search(mno).getNick());
 		
 		model.addAttribute("nick", member.getNick());
@@ -91,6 +89,7 @@ public class MemberController {
 		return "index";
 	}
 	
+
 //	@RequestMapping(value = "memberUpdateForm.do", method = RequestMethod.GET)
 //	public String memberUpdateForm(Model model, HttpSession session){
 //		model.addAttribute("member", memberService.search((String)session.getAttribute("mno")));
@@ -103,7 +102,14 @@ public class MemberController {
 	public String memberUpdate(Member member){
 		memberService.update(member);
 		
-		return "redirect:myPage.do";
+		return "redirect:myInfo.do";
+	}
+	
+	@RequestMapping(value="delete.do", method=RequestMethod.GET)
+	public String removeMember(HttpSession session){
+		String mno = (String)session.getAttribute("mno");
+		memberService.withdraw(mno);
+		return "main";
 	}
 	
 	

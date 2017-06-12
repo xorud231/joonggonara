@@ -58,9 +58,6 @@ public class MemberServiceImpl implements MemberService {
 		if(password ==null || !password.equals(member.getPassword())){
 			throw new UpdateException("비밀번호가 맞지 않습니다.");
 		}
-		if(member.getWithdraw().equals("Y")){
-			throw new UpdateException("탈퇴한 회원 아이디입니다.");
-		}
 		return true;
 	}
 	
@@ -76,7 +73,7 @@ public class MemberServiceImpl implements MemberService {
 				dao.update(mno);
 			}
 		
-	}
+	}	
 
 
 	public void update(Member member) {

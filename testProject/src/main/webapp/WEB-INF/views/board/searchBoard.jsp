@@ -11,7 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -123,20 +122,29 @@
     	}
     	
     	function update(){
-    		if(isInCart)
-    			alert("장바구니에서 제거하였습니다.");
-    		else
-    			alert("장바구니에 추가하였습니다.");
+    		if(isInCart){
+    			var cartCheck = confirm("장바구니에서 제거하시겠습니까?");
+    			
+    			if(cartCheck)
+    				alert("장바구니에서 제거하였습니다.");
+    		}
+    		
+    		else{
+    			var cartCheck = confirm("장바구니에 추가하시겠습니까?");
+    			
+    			if(cartCheck)
+    				alert("장바구니에 추가하였습니다.");
+    		}
     		
     		location.href = "updateCart.do?bno=" + ${board.bno};
     	}
     	
     	function updateReply(reply, index){
     		var replycontent = document.getElementById("reply" + index);
-    		var editReply = document.getElementById("editReply");
-    		var updateReply = document.getElementById("updateReply");
-    		var deleteReply = document.getElementById("deleteReply");
-    		var editReplyButton = document.getElementById("editReplyButton");
+    		var editReply = document.getElementById("editReply" + index);
+    		var updateReply = document.getElementById("updateReply"  + index);
+    		var deleteReply = document.getElementById("deleteReply"  + index);
+    		var editReplyButton = document.getElementById("editReplyButton"  + index);
     		
     		replycontent.style.display = "none";
     		editReply.style.display = "";
@@ -145,10 +153,19 @@
     		editReplyButton.style.display = "";
     	}
     	
-    	function updateReplyButton(reply){
-    		var editReply = document.getElementById("editReply");
+    	function updateReplyButton(reply, index){
+    		var editReply = document.getElementById("editReply" + index);
+
+    		location.href = "updateReply.do?replyTemp=" + reply + "&editReply=" + editReply.value;
+    	}
+    	
+    	function deleteReply(rno){
+    		var deleteCheck = confirm("댓글을 삭제하시겠습니까?");
     		
-    		location.href = "updateReply.do?reply=" + reply + "&editReply=" + editReply;
+    		if(deleteCheck){
+    			alert("댓글을 삭제하였습니다.")
+    			location.href = "deleteReply.do?rnoString=" + rno + "&bno=" + ${board.bno};
+    		}
     	}
     	
     </script>
@@ -244,26 +261,27 @@
 			                            <tr>
 			                            	<td style = "width : 88%;">
 					                            <p style = "margin-top : 5px;" id = "reply<%=index%>">
-					                            	${reply.reply}
+					                            	${reply.replyContent}
 					                            </p>
-					                            <textarea class = "reply" id = "editReply" style = "display : none; height : 40px; margin-top : 10px;">${reply.reply}</textarea>
+					                            <textarea class = "reply" id = "editReply<%=index %>" style = "display : none; height : 40px; margin-top : 10px;">${reply.replyContent}</textarea>
 				                            </td>
 				                            <c:if test = "${reply.mno == member.mno}">
 					                            <td>
 					                            	<button type="button" class="btn btn-default btn-sm" 
-											        	id = "deleteReply" 
-											        	onclick = "deleteReply()">
+											        	id = "deleteReply<%=index %>" 
+											        	onclick = "deleteReply('${reply.rno}')">
 											        	<span class="glyphicon glyphicon-remove"></span> 
 											        </button>
 						                            <button type="button" class="btn btn-default btn-sm" 
-						                            	id = "updateReply" 
-						                            	onclick = "updateReply('${reply}', <%=index++%>)">
+						                            	id = "updateReply<%=index %>"
+						                            	onclick = "updateReply('${reply}', <%=index%>)"
+						                            	style = "background-image : url('img/asd.PNG')">
 											        	<span class="glyphicon glyphicon-edit"></span>
 											        </button>
 											        <a class = "btn btn-success" 
-											        	id = "editReplyButton"
+											        	id = "editReplyButton<%=index%>"
 											        	style = "display : none; margin-left : 30px;"
-											        	onclick = "updateReplyButton('${reply}')">
+											        	onclick = "updateReplyButton('${reply}', <%=index++%>)">
 											        	완료
 											        </a>
 										        </td>

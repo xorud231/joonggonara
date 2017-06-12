@@ -30,8 +30,8 @@
 	</tr>
 	<tr>
 	   <td colspan='2' align='center' class='tfoot tspacial'>
-	     <input type="submit" value='전송'>
-		 <input type="reset" value='취소'>
+	     <button type="submit" class="btn btn-primary" >수정</button>
+		 <a href="myInfo.do" class="btn btn-default">취소</a>
 	   </td>
 	</tr>
 </table>
