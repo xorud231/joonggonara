@@ -4,54 +4,30 @@ import java.io.Serializable;
 
 public class Reply implements Serializable{
 	private int rno;
-	private String reply;
+	private String replyContent;
 	private int bno;
 	private String regdate;
-	private String mno;
+	private int mno;
 	private String nick;
 	
 	public Reply(){}
 
-	public Reply(int rno, String reply, int bno, String regdate, String mno) {
+	public Reply(int rno, String replyContent, int bno, String regdate, int mno) {
 		this.rno = rno;
-		this.reply = reply;
+		this.replyContent = replyContent;
 		this.bno = bno;
 		this.regdate = regdate;
 		this.mno = mno;
 	}
 	
-	public Reply(int rno, String reply, int bno, String regdate, String mno,
+	public Reply(int rno, String replyContent, int bno, String regdate, int mno,
 			String nick) {
 		this.rno = rno;
-		this.reply = reply;
+		this.replyContent = replyContent;
 		this.bno = bno;
 		this.regdate = regdate;
 		this.mno = mno;
 		this.nick = nick;
-	}
-
-	public String getNick() {
-		return nick;
-	}
-
-	public void setNick(String nick) {
-		this.nick = nick;
-	}
-
-	public String getMno() {
-		return mno;
-	}
-
-	public void setMno(String mno) {
-		this.mno = mno;
-	}
-
-	public String getRegdate() {
-		return regdate;
-	}
-
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
 	}
 
 	public int getRno() {
@@ -62,12 +38,12 @@ public class Reply implements Serializable{
 		this.rno = rno;
 	}
 
-	public String getReply() {
-		return reply;
+	public String getReplyContent() {
+		return replyContent;
 	}
 
-	public void setReply(String reply) {
-		this.reply = reply;
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
 	}
 
 	public int getBno() {
@@ -78,9 +54,33 @@ public class Reply implements Serializable{
 		this.bno = bno;
 	}
 
+	public String getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+
+	public int getMno() {
+		return mno;
+	}
+
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
 	@Override
 	public String toString() {
-		return "rno=" + rno + ", reply=" + reply + ", bno=" + bno
+		return "rno=" + rno + ", replyContent=" + replyContent + ", bno=" + bno
 				+ ", regdate=" + regdate + ", mno=" + mno;
 	}
 }

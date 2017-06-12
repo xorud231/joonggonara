@@ -59,11 +59,9 @@ public class BoardDaoImpl implements BoardDao {
 		return session.selectList("board.searchSellList", bean, rows);
 	}
 	public Board searchBuyFile(int bno) {
-		System.out.println(session.selectOne("board.searchBuyFile", bno));
 			return session.selectOne("board.searchBuyFile", bno);
 	}
 	public Board searchSellFile(int bno) {
-		System.out.println(session.selectOne("board.searchSellFile", bno));
 		return session.selectOne("board.searchSellFile", bno);
 	}
 	
@@ -145,7 +143,16 @@ public class BoardDaoImpl implements BoardDao {
 			session.update("board.updateSellReply", temp);
 	}
 	
+<<<<<<< HEAD
 	public void add(Board board) {
 		session.insert("board.insert", board);
+=======
+	public void deleteReply(int sellbuy, int rno){
+		if(sellbuy == 1)
+			session.delete("board.deleteBuyReply", rno);
+		
+		else
+			session.delete("board.deleteSellReply", rno);
+>>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
 	}
 }

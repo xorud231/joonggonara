@@ -65,11 +65,9 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	public Board searchBuyFile(int bno) {
-		System.out.println("bno"+dao.searchBuyFile( bno));
 		return dao.searchBuyFile( bno);
 	}
 	public Board searchSellFile(int bno) {
-		System.out.println("bno"+dao.searchSellFile( bno));
 		return dao.searchSellFile( bno);
 	}
 	public List<Reply> searchReply(int sellbuy, int bno){
@@ -143,6 +141,7 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	
+<<<<<<< HEAD
 	@Override
 	public void add(Board board, String dir) {
 		File[ ] files = null;
@@ -186,5 +185,14 @@ public class BoardServiceImpl implements BoardService {
 			}
 			throw new UpdateException("게시글 작성 중 오류 발생");
 		} 
+=======
+	public void deleteReply(int sellbuy, int rno){
+		try {
+			dao.deleteReply(sellbuy, rno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UpdateException("댓글 삭제 중 오류 발생");
+		}
+>>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
 	}
 }

@@ -19,7 +19,11 @@ public interface BoardService {
 	public void updateCart(String mno, int sellbuy, int bno, boolean isInCart);
 	public void deleteBoard(int sellbuy, int bno);
 	public void updateReply(int sellbuy, Reply reply, String editReply);
+<<<<<<< HEAD
 	
 	public void add(Board board, String dir);
 
+=======
+	public void deleteReply(int sellbuy, int rno);
+>>>>>>> branch 'master' of https://github.com/xorud231/joonggonara.git
 }
