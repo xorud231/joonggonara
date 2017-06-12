@@ -44,9 +44,13 @@
  
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script	type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
+
 <script type="text/javascript">
- 
- 
 	var click;
 	
 	$(function(){
@@ -1047,12 +1051,19 @@
 				<!-- 여기까지 입력보드 폼 -->
  
 				<!-- selectAll -->
+
 				<div id="searchAll" style="display: none">
 					<c:if test='${!empty content }'>
 						<jsp:include page="${content}" />
 					</c:if>
 				</div>
  
+				<div id="myInfo" style="display: none">
+					<c:if test='${!empty content }'>
+						<jsp:include page="${content}" />
+					</c:if>
+				</div>
+
 				<!-- selectAll -->
  
  
@@ -1087,9 +1098,7 @@
  
 	</div>
 	<!-- /.container -->
- 
-	
- 
+
 </body>
  
 </html>

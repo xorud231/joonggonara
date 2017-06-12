@@ -160,4 +160,5 @@ public class BoardDaoImpl implements BoardDao {
 		else
 			return session.selectOne("board.getSellBoardNo");
 	}
+
 }

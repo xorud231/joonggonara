@@ -209,10 +209,10 @@
 							<tr>
 								<td>&nbsp;</td>
 							<tr>
-								<th>연&nbsp;락&nbsp;처</th>
+								<th>전화번호</th>
 								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
 								<td><input type='text' name='phonenum' id='phonenum'
-									placeholder="연 락 처(-빼고 입력)" style="font-style: italic">
+									placeholder="(-빼고 입력)" style="font-style: italic">
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
@@ -233,9 +233,9 @@
 			</div>
 		</div>
 	</form>
- 	
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script> <script
-		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+ 	</header>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script> 
+	<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script><!-- ie10-viewport-bug-workaround.js -->
 	<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script><!-- holder.js -->
 </body>

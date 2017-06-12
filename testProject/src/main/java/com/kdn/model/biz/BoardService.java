@@ -20,6 +20,7 @@ public interface BoardService {
 	public void deleteBoard(int sellbuy, int bno);
 	public void updateReply(int sellbuy, Reply reply, String editReply);
 	public void add(Board board, String dir);
+
 	public void deleteReply(int sellbuy, int rno);
 	public int getBoardNo(int sellbuy);
 	//public void insertBoard(Board board, String dir);
