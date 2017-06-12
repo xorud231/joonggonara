@@ -23,5 +23,5 @@ public interface BoardService {
 
 	public void deleteReply(int sellbuy, int rno);
 	public int getBoardNo(int sellbuy);
-	//public void insertBoard(Board board, String dir);
+	public void insertBoard(int sellbuy, Board board, String dir);
 }

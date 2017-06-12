@@ -3,11 +3,13 @@ package com.kdn.controller;
 import java.awt.Window;
 import java.awt.event.WindowEvent;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.HttpSessionRequiredException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,13 +41,19 @@ public class MemberController {
 	}*/
 	
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String login(String mno, String password, HttpSession session, Model model){
+	public String login(String mno, String password, HttpSession session, 
+			Model model, HttpServletRequest request){
 		memberService.login(mno, password);
 		Member member = memberService.search(mno);
 		
 		session.setAttribute("mno", mno);
-		model.addAttribute("nick", memberService.search(mno).getNick());
 		
+		String dir = "C:/kdn/workspace_spring/.metadata/.plugins/"
+				+ "org.eclipse.wst.server.core/tmp0/wtpwebapps/testProject/upload/";
+		
+		session.setAttribute("dir", dir);
+		
+		model.addAttribute("nick", memberService.search(mno).getNick());
 		model.addAttribute("nick", member.getNick());
 		
 		return "index";

@@ -52,7 +52,7 @@ public class Board implements Serializable{
 		this.isInCart = isInCart;
 		this.phoneNum = phoneNum;
 	}
-
+	
 	public String getPhoneNum() {
 		return phoneNum;
 	}

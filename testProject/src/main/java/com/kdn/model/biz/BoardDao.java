@@ -1,5 +1,6 @@
 package com.kdn.model.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.kdn.model.domain.Board;
@@ -28,6 +29,8 @@ public interface BoardDao {
 	public void 		addFiles(List<BoardFile> files, int bno) ;
 	public void deleteReply(int sellbuy, int rno);
 	public int getBoardNo(int sellbuy);
+	public void insertBoard(int sellbuy, Board board);
+	public void insertFiles(ArrayList<BoardFile> fileInfos, int sellbuy, int bno);
 }
 
 

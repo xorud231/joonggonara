@@ -169,12 +169,12 @@
 		SELECT  c.* , fno, rfilename, sfilename      
 		FROM  (    SELECT b.*   
 		           FROM ( SELECT ROWNUM ro, a.*    
-		                    FROM   ( select bno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
+		                    FROM   ( select bno, price, cno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
 		                              from BUYBOARD
 		                              order by bno DESC
 		                            ) a
 		                 ) b   
-		            WHERE    ro BETWEEN 1 AND 5        
+		              
 		      ) c, BUYBOARDFILE  bf 
 		WHERE   c.bno = bf.bno(+)
 			<if test="word != null ">
@@ -193,10 +193,30 @@
 	</select>
 	
 	<select id = "searchSellList" parameterType = "pagebean" resultMap="boardmap">
-		select b.bno bno, b.title title, B.CONTENTS contents,b.price price, to_char(regdate, 'yyyy-mm-dd') regdate, bf.RFILENAME rfilename 
-		from SELLBOARD b, SELLBOARDFILE bf
-        where b.bNO = bf.bNO(+)
-        order by b.bno DESC
+		SELECT  c.* , fno, rfilename, sfilename      
+		FROM  (    SELECT b.*   
+		           FROM ( SELECT ROWNUM ro, a.*    
+		                    FROM   ( select bno, price, cno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
+		                              from SELLBOARD
+		                              order by bno DESC
+		                            ) a
+		                 ) b   
+		                   
+		      ) c, SELLBOARDFILE  bf 
+		WHERE   c.bno = bf.bno(+)
+			<if test="word != null ">
+				<choose>
+					<when test="key == 'id'">		
+						and id =#{word}
+					</when>
+					<when test="key == 'title'">		
+						and title like '%'||#{word}||'%'
+					</when>
+					<when test="key == 'contents'">		
+						and contents like '%'||#{word}||'%'
+					</when>
+				</choose>
+			</if>
 	</select>
 	
 	<select id = "searchBuyBoard" parameterType = "int" resultMap="boardmap">
@@ -207,10 +227,12 @@
 		WHERE a.bno = bf.bno
 	</select>
 	
-	<select id = "searchSellBoard" parameterType = "int" resultType = "board">
-		select bno, price, dealstate, mno, dno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate, phoneNum
-		from sellboard
-		where bno = #{bno:INTEGER}
+	<select id = "searchSellBoard" parameterType = "int" resultMap="boardmap">
+		SELECT a.*, rfilename, sfilename, fno
+		FROM    (select bno, price, dealstate, mno, dno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate, phoneNum
+		         from sellboard
+		         where bno = #{bno}) a, SELLBOARDFILE bf
+		WHERE a.bno = bf.bno
 	</select>
 	
 	<select id = "searchBuyReply" parameterType = "int" resultType = "reply">
@@ -290,4 +312,24 @@
 	<delete id = "deleteSellReply" parameterType = "int">
 		delete from sellreply where rno = #{rno}
 	</delete>
+	
+	<insert id = "insertBuyBoard" parameterType = "board">
+		insert into buyboard values (#{bno}, sysdate, #{title}, #{price}, #{contents}, 
+									#{dealstate}, #{mno}, #{dno}, #{cno}, #{phoneNum})
+	</insert>
+	
+	<insert id = "insertSellBoard" parameterType = "board">
+		insert into sellboard values (#{bno}, sysdate, #{title}, #{price}, #{contents}, 
+									#{dealstate}, #{mno}, #{dno}, #{cno}, #{phoneNum})
+	</insert>
+	
+	<insert id = "insertBuyBoardFile" parameterType = "boardfile">
+		insert into buyboardfile 
+		values(buyboardfile_no.nextval, #{rfilename}, #{sfilename}, #{bno})
+	</insert>
+	
+	<insert id = "insertSellBoardFile" parameterType = "boardfile">
+		insert into sellboardfile 
+		values(sellboardfile_no.nextval, #{rfilename}, #{sfilename}, #{bno})
+	</insert>
 </mapper>

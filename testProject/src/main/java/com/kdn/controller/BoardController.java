@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kdn.model.biz.BoardService;
@@ -54,7 +55,7 @@ public class BoardController {
 		board.setIsInCart(isInCart);
 		
 		Member member = memberService2.search(mno);
-		System.out.println(board.getPhoneNum());
+		System.out.println(board);
 		model.addAttribute("board", board);
 		model.addAttribute("replys", replys);
 		model.addAttribute("replycount", replycount);
@@ -67,9 +68,8 @@ public class BoardController {
 		session.setAttribute("sellbuy", 1);
 		
 		List<Board> list = boardService.searchBuyList(bean);
-		System.out.println(list);
 		model.addAttribute("list", list);
-		model.addAttribute("content", "board/searchBuyList.jsp");
+		model.addAttribute("content", "board/searchList.jsp");
 		
 		return "index";
 	}
@@ -78,8 +78,9 @@ public class BoardController {
 		session.setAttribute("sellbuy", 2);
 		
 		List<Board> list = boardService.searchSellList(bean);
+		System.out.println(list);
 		model.addAttribute("list", list);
-		model.addAttribute("content", "board/searchSellList.jsp");
+		model.addAttribute("content", "board/searchList.jsp");
 		
 		return "index";
 	}
@@ -175,14 +176,12 @@ public class BoardController {
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
 		int mno = Integer.parseInt(mnoString);
 		int bno = boardService.getBoardNo(sellbuy);
+		String dir = (String)session.getAttribute("dir");
 		
 		board.setBno(bno);
 		board.setMno(mno);
 		
-		System.out.println(board);
-		String dir = request.getRealPath("upload/");
-		
-		//boardService.insertBoard(board, dir);
+		boardService.insertBoard(sellbuy, board, dir);
 		
 		model.addAttribute("bno", bno);
 		

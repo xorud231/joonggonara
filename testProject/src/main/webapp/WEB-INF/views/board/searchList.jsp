@@ -52,7 +52,7 @@ select::-ms-expand {
 </style>
 
 <!-- jQuery -->
-	<script src="js/jquery.js"></script>
+<script src="js/jquery.js"></script>
  
 <script type="text/javascript">
 	$(function(){
@@ -61,7 +61,7 @@ select::-ms-expand {
 	var count=0;   //file form index
 	function addFileForm(){
 		var html="<div id='item_"+count+"'>"
-		html+="<input type='file' name='fileup'  />";
+		html+="<input type='file' id = 'fileup' name='fileup' style='display : inline' />";
 		html+="<input type='button' value='삭제' onclick='removeForm("+count+")'/></div>";
 		count++;
 		//html=$("#content").html()+html;
@@ -108,7 +108,7 @@ select::-ms-expand {
 	
 	function clickCno(value){
 		$("#cname").html(value);
-		
+		alert($("#fileup").val());
 		if(value == '가전제품'){
 			$("#cno").val("2");
 		}
@@ -149,8 +149,8 @@ select::-ms-expand {
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
 							<c:choose>
-							<c:when test="${!empty board.files[0].rfilename}">
- 								<img src="img/portfolio/fullsize/${board.files[0].rfilename}"  width=320px height=150px	 alt="없음">
+							<c:when test="${!empty board.files[0].sfilename}">
+ 								<img src="${dir}${board.files[0].sfilename}"  width=320px height=150px	 alt="없음">
 							</c:when>
 							<c:otherwise>
 								<img src="http://placehold.it/320x150" width=320px height=150px	alt="">

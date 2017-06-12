@@ -1,5 +1,6 @@
 package com.kdn.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -159,6 +160,30 @@ public class BoardDaoImpl implements BoardDao {
 		
 		else
 			return session.selectOne("board.getSellBoardNo");
+	}
+	
+	public void insertBoard(int sellbuy, Board board){
+		if(sellbuy == 1)
+			session.selectOne("board.insertBuyBoard", board);
+		
+		else
+			session.selectOne("board.insertSellBoard", board);
+	}
+	
+	public void insertFiles(ArrayList<BoardFile> fileInfos, int sellbuy, int bno){
+		if(sellbuy == 1){
+			for (BoardFile fileBean : fileInfos) {
+				fileBean.setBno(bno);
+				session.insert("board.insertBuyBoardFile", fileBean);
+			}
+		}
+		
+		else{
+			for (BoardFile fileBean : fileInfos) {
+				fileBean.setBno(bno);
+				session.insert("board.insertSellBoardFile", fileBean);
+			}
+		}
 	}
 
 }

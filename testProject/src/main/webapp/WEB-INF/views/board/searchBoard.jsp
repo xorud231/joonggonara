@@ -205,7 +205,7 @@
 										if(imageFirst){
 									%>
 									    <div class="item active">
-									        <img class="slide-image" src="img/portfolio/fullsize/${boardfile.rfilename}" alt="" style = "height : 400px;">
+									        <img class="slide-image" src="${dir}${boardfile.sfilename}" alt="" style = "height : 400px;">
 									    </div>
 									<% 
 										imageFirst = false;
@@ -213,7 +213,7 @@
 										else{
 									%>
 									    <div class="item">
-									        <img class="slide-image" src="img/portfolio/fullsize/${boardfile.rfilename}" alt="" style = "height : 400px;">
+									        <img class="slide-image" src="${dir}${boardfile.sfilename}" alt="" style = "height : 400px;">
 									    </div>
 									<% } %>
 
@@ -240,7 +240,7 @@
 						 	href = "deleteBoard.do?bno=${board.bno}" id = "deleteBoard">삭제</a>
                     	<h4 style = "font-weight : bold;">작성자: ${member.nick}</h4>
                     	<a style = "color:black; display:block;">작성일 : ${board.regdate}</a>
-                    	<a style = "color:black;">연락처 : 0${board.phoneNum}</a>
+                    	<a style = "color:black;">연락처 : ${board.phoneNum}</a>
                     </div>
                     
                     <div class="caption-full">

@@ -200,7 +200,47 @@ public class BoardServiceImpl implements BoardService {
 			return dao.getBoardNo(sellbuy);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new UpdateException("보드 번호 추출 중 오류 발생");
+			throw new UpdateException("게시판 번호 추출 중 오류 발생");
+		}
+	}
+	
+	public void insertBoard(int sellbuy, Board board, String dir){
+		File[ ] files = null;
+		int size = 0;
+		
+		try {
+			dao.insertBoard(sellbuy, board);
+			
+			MultipartFile[] fileup = board.getFileup();
+			
+			if(fileup!=null){
+				size = fileup.length;
+				files = new File[size];     
+				ArrayList<BoardFile> fileInfos = new ArrayList<BoardFile>(size);
+				String rfilename = null;
+				String sfilename = null;
+				int index =0;  
+				int bno = board.getBno();
+				int mno = board.getMno();
+				
+				for (MultipartFile file : fileup) {
+					rfilename = file.getOriginalFilename();
+					sfilename = String.format("%d_%d_%d_%s"
+											, sellbuy
+											, bno
+											, mno
+											, rfilename);
+					fileInfos.add(new BoardFile(rfilename, sfilename));
+					String fileName = String.format("%s/%s", dir, sfilename);
+					files[index] = new File(fileName);
+					file.transferTo(files[index++]);
+				}
+				dao.insertFiles(fileInfos, sellbuy, bno);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UpdateException("게시판 등록 중 오류 발생");
 		}
 	}
 }
