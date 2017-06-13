@@ -79,12 +79,18 @@ select::-ms-expand {
 		document.getElementById("pageNo").value=cpage;
 		var frm = document.getElementById("frm");
 		var sellbuy = <%= session.getAttribute("sellbuy") %>;
+		var sellbuyCheck = <%= session.getAttribute("sellbuyCheck") %>;
 		
 		if(sellbuy == 1)
 			frm.action="searchBuyList.do";
-		else
+		else if(sellbuy == 2)
 			frm.action="searchSellList.do";
-			
+		else if(sellbuy == 3){
+			if(sellbuyCheck == 1)
+				frm.action="searchBuyCart.do";
+			else
+				frm.action="searchSellCart.do";
+		}
 		frm.submit();
 	}
 	//게시글 번호나 타이틀을 클릭하면 해당 게시글 요청을 위한 메서드 
@@ -176,8 +182,6 @@ select::-ms-expand {
                                 <p style = "overflow: hidden; text-overflow: ellipsis;">${board.contents}</p><br/>
                             </div>
                             <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
-								<p>&nbsp;</p>
                             </div>
                         </div>
                     </div>

@@ -45,11 +45,47 @@
 	<select id = "getSellBoardNo" resultType = "int">
 		select sellboard_no.nextval from dual
 	</select>
-	<select id = "getBuyCartCount" resultType = "int">
-		select COUNT(*) from CART WHERE bkind=1 AND mno = #{mno}
+	<select id = "getBuyCartCount" parameterType = "pagebean" resultType = "int">
+		select COUNT(*) 
+		from CART 
+		WHERE bkind=1 AND mno = #{mno}
+			<if test = "word != null">
+				<choose>
+					<when test = "key == 'title'">
+						and title like '%'||#{word}||'%'
+					</when>
+					<when test = "key == 'mno'">
+						and mno = #{word}
+					</when>
+					<when test = "key == 'contents'">
+						and contents like '%'||#{word}||'%'
+					</when>
+					<when test="key == 'cno'">		
+						and cno =#{word}
+					</when>		
+				</choose>
+			</if>
 	</select>
-	<select id = "getSellCartCount" resultType = "int">
-		select COUNT(*) from CART WHERE bkind=2 AND mno = #{mno}
+	<select id = "getSellCartCount" parameterType = "pagebean"  resultType = "int">
+		select COUNT(*) 
+		from CART 
+		WHERE bkind=2 AND mno = #{mno}
+		<if test = "word != null">
+				<choose>
+					<when test = "key == 'title'">
+						and title like '%'||#{word}||'%'
+					</when>
+					<when test = "key == 'mno'">
+						and mno = #{word}
+					</when>
+					<when test = "key == 'contents'">
+						and contents like '%'||#{word}||'%'
+					</when>
+					<when test="key == 'cno'">		
+						and cno =#{word}
+					</when>		
+				</choose>
+			</if>
 	</select>
 	<select id = "getBuyCount" parameterType = "pagebean" resultType = "int">
 		select count(*)
@@ -93,29 +129,62 @@
 				</choose>
 			</if>
 	</select>
-	<select id = "searchBuyCart" parameterType = "int" resultMap="boardmap">
-	SELECT  c.* , fno, rfilename, sfilename
-	FROM  (    SELECT b.* 
-     				FROM	(SELECT ROWNUM ro, a.* 
-       					from	(SELECT bno, price, cno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate 
-                		FROM BUYBOARD 
-                		WHERE bno in (select bno from CART WHERE bkind=1 AND mno=#{mno})
-                		) a
-   	    		)b
-  			  ) c, BUYBOARDFILE  bf
-	WHERE   c.bno = bf.bno(+)
+	<select id = "searchBuyCart" parameterType = "pagebean" resultMap="boardmap">
+		SELECT  c.* , fno, rfilename, sfilename
+		FROM  (    SELECT b.* 
+	     				FROM	(SELECT ROWNUM ro, a.* 
+	       					from	(SELECT bno, price, cno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate 
+	                		FROM BUYBOARD 
+	                		WHERE bno in (select bno from CART WHERE bkind=1 AND mno=#{mno})
+	                		) a
+	   	    		)b
+	  			  ) c, BUYBOARDFILE  bf
+		WHERE   c.bno = bf.bno(+)
+		<if test = "word != null">
+				<choose>
+					<when test = "key == 'title'">
+						and title like '%'||#{word}||'%'
+					</when>
+					<when test = "key == 'mno'">
+						and mno = #{word}
+					</when>
+					<when test = "key == 'contents'">
+						and contents like '%'||#{word}||'%'
+					</when>
+					<when test="key == 'cno'">		
+						and cno =#{word}
+					</when>		
+				</choose>
+			</if>
+		
 	</select>
-	<select id = "searchSellCart" parameterType = "int" resultMap="boardmap">
-	SELECT  c.* , fno, rfilename, sfilename
-	FROM  (    SELECT b.* 
-     				FROM	(SELECT ROWNUM ro, a.* 
-       					from	(SELECT bno, price, cno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate 
-                		FROM SELLBOARD 
-                		WHERE bno in (select bno from CART WHERE bkind=2 AND mno=#{mno})
-                		) a
-   	    		)b
-  			  ) c, SELLBOARDFILE  bf
-	WHERE   c.bno = bf.bno(+)
+	<select id = "searchSellCart" parameterType = "pagebean" resultMap="boardmap">
+		SELECT  c.* , fno, rfilename, sfilename
+		FROM  (    SELECT b.* 
+	     				FROM	(SELECT ROWNUM ro, a.* 
+	       					from	(SELECT bno, price, cno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate 
+	                		FROM SELLBOARD 
+	                		WHERE bno in (select bno from CART WHERE bkind=2 AND mno=#{mno})
+	                		) a
+	   	    		)b
+	  			  ) c, SELLBOARDFILE  bf
+		WHERE   c.bno = bf.bno(+)
+		<if test = "word != null">
+				<choose>
+					<when test = "key == 'title'">
+						and title like '%'||#{word}||'%'
+					</when>
+					<when test = "key == 'mno'">
+						and mno = #{word}
+					</when>
+					<when test = "key == 'contents'">
+						and contents like '%'||#{word}||'%'
+					</when>
+					<when test="key == 'cno'">		
+						and cno =#{word}
+					</when>		
+				</choose>
+			</if>
 	</select>
 	<select id = "searchBuyList" parameterType = "pagebean" resultMap="boardmap">
 		SELECT  c.* , fno, rfilename, sfilename      
@@ -170,7 +239,9 @@
 					<when test="key == 'contents'">		
 						and contents like '%'||#{word}||'%'
 					</when>
-					
+					<when test="key == 'cno'">		
+						and cno =#{word}
+					</when>		
 				</choose>
 			</if>
 	</select>

@@ -31,33 +31,33 @@ public class BoardServiceImpl implements BoardService {
 			throw new UpdateException("게시글 검색 중 오류 발생");
 		}
 	}
-	public List<Board> searchBuyCart(int mno) {
+	public List<Board> searchBuyCart(PageBean bean) {
 		try {
-			int total = dao.getBuyCartCount(mno);
-//			PageUtility bar = 
-//					new PageUtility(bean.getInterval()
-//							, total
-//							, bean.getPageNo()
-//							, "img/");
-//			bean.setPagelink(bar.getPageBar());
+			int total = dao.getBuyCartCount(bean);
+			PageUtility bar = 
+					new PageUtility(bean.getInterval()
+							, total
+							, bean.getPageNo()
+							, "img/");
+			bean.setPagelink(bar.getPageBar());
 			
-			return dao.searchBuyCart(mno);
+			return dao.searchBuyCart(bean);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new UpdateException("게시글 검색 중 오류 발생");
 		}
 	}
-	public List<Board> searchSellCart(int mno) {
+	public List<Board> searchSellCart(PageBean bean) {
 		try {
-			int total = dao.getBuyCartCount(mno);
-//			PageUtility bar = 
-//					new PageUtility(bean.getInterval()
-//							, total
-//							, bean.getPageNo()
-//							, "img/");
-//			bean.setPagelink(bar.getPageBar());
+			int total = dao.getSellCartCount(bean);
+			PageUtility bar = 
+					new PageUtility(bean.getInterval()
+							, total
+							, bean.getPageNo()
+							, "img/");
+			bean.setPagelink(bar.getPageBar());
 			
-			return dao.searchSellCart(mno);
+			return dao.searchSellCart(bean);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new UpdateException("게시글 검색 중 오류 발생");

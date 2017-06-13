@@ -56,13 +56,6 @@
 			background-color : #dedede;
 		}
 		
-		td>button[type="button"]{
-			background : #f5f5f5;
-			border : 0px;
-			float : right;
-			
-		}
-		
     </style>
     
     <script type="text/javascript" src="js/jquery-1.10.1.js"></script>
@@ -163,12 +156,30 @@
     		var updateReply = document.getElementById("updateReply"  + index);
     		var deleteReply = document.getElementById("deleteReply"  + index);
     		var editReplyButton = document.getElementById("editReplyButton"  + index);
+    		var editReplyCancelButton = document.getElementById("editReplyCancelButton"  + index);
     		
     		replycontent.style.display = "none";
     		editReply.style.display = "";
     		updateReply.style.display = "none";
     		deleteReply.style.display = "none";
     		editReplyButton.style.display = "";
+    		editReplyCancelButton.style.display = "";
+    	}
+    	
+    	function updateReplyCancelButton(reply, index){
+    		var replycontent = document.getElementById("reply" + index);
+    		var editReply = document.getElementById("editReply" + index);
+    		var updateReply = document.getElementById("updateReply"  + index);
+    		var deleteReply = document.getElementById("deleteReply"  + index);
+    		var editReplyButton = document.getElementById("editReplyButton"  + index);
+    		var editReplyCancelButton = document.getElementById("editReplyCancelButton"  + index);
+    		
+    		replycontent.style.display = "";
+    		editReply.style.display = "none";
+    		updateReply.style.display = "";
+    		deleteReply.style.display = "";
+    		editReplyButton.style.display = "none";
+    		editReplyCancelButton.style.display = "none";
     	}
     	
     	function updateReplyButton(reply, index){
@@ -341,10 +352,10 @@
 							    </c:forEach>
 							</div>
 							<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-							    <span class="glyphicon glyphicon-chevron-left"></span>
+
 							</a>
 							<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-							    <span class="glyphicon glyphicon-chevron-right"></span>
+
 							</a>
 						</div>
 					</div>            
@@ -359,7 +370,7 @@
 							data-toggle = "modal" data-target="#myModal" id = "modifyBoard">수정</a>
 						<a style = "background-color : #F2836B; display : none; color : #fff;" class = "btn"
 						 	onclick = "deleteBoard()" id = "deleteBoard">삭제</a>
-                    	<h4 style = "font-weight : bold;">작성자: ${member.nick}</h4>
+                    	<h4 style = "font-weight : bold;">작성자: ${member2.nick}</h4>
                     	<p><p style = "float : left; font-weight : bold">작성일 :&nbsp;</p> ${board.regdate}</p>
                     	<p><p style = "float : left; font-weight : bold">연락처 :&nbsp;</p>${board.phoneNum}</p>
                     	<p><p style = "float : left; font-weight : bold">거래방법 :&nbsp;</p>${dealway}</p>
@@ -403,7 +414,7 @@
 		                            </span>
 		                            <table style = "width : 100%;">
 			                            <tr>
-			                            	<td style = "width : 88%;">
+			                            	<td style = "width : 80%;">
 					                            <p style = "margin-top : 5px;" id = "reply<%=index%>">
 					                            	${reply.replyContent}
 					                            </p>
@@ -413,20 +424,29 @@
 					                            <td>
 					                            	<button type="button" class="btn btn-default btn-sm" 
 											        	id = "deleteReply<%=index %>" 
-											        	onclick = "deleteReply('${reply.rno}')">
+											        	onclick = "deleteReply('${reply.rno}')"
+											        	style = "background-image : url('img/delete2.PNG'); 
+											        	border : 0px; float : right;">
 											        	<span class="glyphicon glyphicon-remove"></span> 
 											        </button>
 						                            <button type="button" class="btn btn-default btn-sm" 
 						                            	id = "updateReply<%=index %>"
 						                            	onclick = "updateReply('${reply}', <%=index%>)"
-						                            	style = "background-image : url('img/asd.PNG')">
+						                            	style = "background-image : url('img/edit.PNG'); 
+						                            	border : 0px; float : right;">
 											        	<span class="glyphicon glyphicon-edit"></span>
 											        </button>
 											        <a class = "btn btn-success" 
 											        	id = "editReplyButton<%=index%>"
 											        	style = "display : none; margin-left : 30px;"
-											        	onclick = "updateReplyButton('${reply}', <%=index++%>)">
+											        	onclick = "updateReplyButton('${reply}', <%=index%>)">
 											        	완료
+											        </a>
+											        <a class = "btn btn-success" 
+											        	id = "editReplyCancelButton<%=index%>"
+											        	style = "display : none; margin-left : 5px;"
+											        	onclick = "updateReplyCancelButton('${reply}', <%=index++%>)">
+											        	취소
 											        </a>
 										        </td>
 									        </c:if>
