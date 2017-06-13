@@ -66,39 +66,39 @@
                     <form name="sentMessage" id="contactForm" novalidate>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                           		<input type="text" value="사번 ">
-                                <input type="text" value="${member.mno}">
+                           		<input type="text" value="사번 " disabled="disabled">
+                                <input type="text" value="${member.mno}" disabled="disabled">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls" >
-                                <input type="text" value="이름  ">
-                                <input type="text" value="${member.name}">
+                                <input type="text" value="이름 " disabled="disabled">
+                                <input type="text" value="${member.name}" disabled="disabled">
                             </div>
                         </div>
                         <br/>
                         
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                           		 <input type="text" value="닉네임  ">
-                                <input type="text" value="${member.nick}">
+                           		 <input type="text" value="닉네임" disabled="disabled">
+                                <input type="text" value="${member.nick}" disabled="disabled">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <br>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                           		 <input type="text" value="전화번호  ">
-                                <input type="text" value="${member.phonenum}">
+                           		 <input type="text" value="전화번호" disabled="disabled">
+                                <input type="text" value="${member.phonenum}" disabled="disabled">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <br>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                           		 <input type="text" value="주소  ">
-                                <input type="text" value="${member.address}">
+                           		 <input type="text" value="주소" disabled="disabled">
+                                <input type="text" value="${member.address}" disabled="disabled">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>

@@ -138,8 +138,9 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<div class="navbar-brand"><img src="img/translogo.png"
-					width="150px" onclick="" ></div> 
+				<div class="navbar-brand">
+				<a href = "helloBoard.do"><img src="img/translogo.png"
+					width="150px"></a></div> 
 					
 					
 				
