@@ -205,7 +205,7 @@
 										if(imageFirst){
 									%>
 									    <div class="item active">
-									        <img class="slide-image" src="${dir}${boardfile.sfilename}" alt="" style = "height : 400px;">
+									        <img class="slide-image" src="upload/${boardfile.sfilename}" alt="" style = "height : 400px;">
 									    </div>
 									<% 
 										imageFirst = false;
@@ -213,7 +213,7 @@
 										else{
 									%>
 									    <div class="item">
-									        <img class="slide-image" src="${dir}${boardfile.sfilename}" alt="" style = "height : 400px;">
+									        <img class="slide-image" src="upload/${boardfile.sfilename}" alt="" style = "height : 400px;">
 									    </div>
 									<% } %>
 

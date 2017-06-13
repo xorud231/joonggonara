@@ -47,11 +47,6 @@ public class MemberController {
 		
 		session.setAttribute("mno", mno);
 		
-		String dir = "C:/kdn/workspace_spring/.metadata/.plugins/"
-				+ "org.eclipse.wst.server.core/tmp0/wtpwebapps/testProject/upload/";
-		
-		session.setAttribute("dir", dir);
-		
 		return "redirect:helloBoard.do";
 		//return "redirect:index.do";
 	}

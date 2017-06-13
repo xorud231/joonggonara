@@ -156,12 +156,13 @@ select::-ms-expand {
                         <div class="thumbnail">
 							<c:choose>
 							<c:when test="${!empty board.files[0].sfilename}">
- 								<img src="${dir}${board.files[0].sfilename}"  width=320px height=150px	 alt="없음">
+ 								<img src="upload/${board.files[0].sfilename}"  width=320px height=150px	 alt="없음">
 							</c:when>
 							<c:otherwise>
 								<img src="http://placehold.it/320x150" width=320px height=150px	alt="">
  							</c:otherwise>
  							</c:choose>
+
                             <div class="caption">
                                 <h4 class="pull-right">${board.price}</h4>
                                 <h4><a href="#" onclick="getBoard(${board.bno})">${board.title}</a>
