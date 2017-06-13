@@ -118,8 +118,10 @@ public class MemberServiceImpl implements MemberService {
 			else if(member.getAddress() == ""){
 				throw new UpdateException("주소 입력하세요!");
 			}
-			else{
+			else if(member.getMno() != null && member.getName() != null && member.getPassword() != null 
+					&& member.getNick() != null && member.getPhonenum() != null && member.getAddress() != null){
 				dao.add(member);
+				throw new UpdateException("회원가입이 완료되었습니다.");
 			}
 		}
 	}

@@ -114,9 +114,10 @@
 	<div class="header-content">
 		<div class="header-content-inner" align="center" style="margin-left: -200px; margin-top: -100px">
 			<a type="button" class="btn btn-primary btn-lg"  
-				data-toggle="modal" data-target="#myupdateModal">수 정</a>
-			&nbsp;&nbsp;&nbsp;&nbsp; <a href="delete.do"
-				class="btn btn-default-lg">탈 퇴</a>
+				data-toggle="modal" data-target="#myupdateModal">수   정</a>
+			&nbsp;&nbsp;&nbsp;&nbsp; 
+			<a type="button" class="btn btn-default btn-lg"  
+				data-toggle="modal" data-target="#mydeleteModal">회원탈퇴</a>
 		</div>
 	</div>
 	<div class="container">
@@ -126,7 +127,7 @@
 		<!-- 모달 팝업 -->
 		<div class="modal fade" id="myupdateModal" tabindex="-1" role="dialog"
 			aria-labelledby="updateModalLabel" aria-hidden="true"
-			style="margin-top: 270px">
+			style="margin-top: 10%">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -220,8 +221,8 @@
 						</h4>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" value="취소">닫 기</button>
-						<a href="delete.do" class="btn btn-primary" value="전송" >확 인</a>
+						<button type="button" class="btn btn-default" data-dismiss="modal" value="취소">취  소</button>
+						<a href="delete.do" class="btn btn-primary" value="전송" >탈  퇴</a>
 					</div>
 				</div>
 			</div>
