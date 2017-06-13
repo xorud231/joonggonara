@@ -45,7 +45,9 @@
 	<select id = "getSellBoardNo" resultType = "int">
 		select sellboard_no.nextval from dual
 	</select>
-	
+	<select id = "getBuyCartCount" resultType = "int">
+		select COUNT(*) from CART WHERE bkind=1 AND mno = #{mno}
+	</select>
 	<select id = "getBuyCount" parameterType = "pagebean" resultType = "int">
 		select count(*)
 		from BUYBOARD
@@ -61,6 +63,9 @@
 					<when test = "key == 'contents'">
 						and contents like '%'||#{word}||'%'
 					</when>
+					<when test="key == 'cno'">		
+						and cno =#{word}
+					</when>		
 				</choose>
 			</if>
 	</select>
@@ -79,8 +84,23 @@
 					<when test = "key == 'contents'">
 						and contents like '%'||#{word}||'%'
 					</when>
+					<when test="key == 'cno'">		
+						and cno =#{word}
+					</when>		
 				</choose>
 			</if>
+	</select>
+	<select id = "searchBuyCart" parameterType = "int" resultMap="boardmap">
+	SELECT  c.* , fno, rfilename, sfilename
+	FROM  (    SELECT b.* 
+     				FROM	(SELECT ROWNUM ro, a.* 
+       					from	(SELECT bno, price, cno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate 
+                		FROM BUYBOARD 
+                		WHERE bno in (select bno from CART WHERE bkind=1 AND mno=#{mno})
+                		) a
+   	    		)b
+  			  ) c, BUYBOARDFILE  bf
+	WHERE   c.bno = bf.bno(+)
 	</select>
 	<select id = "searchBuyList" parameterType = "pagebean" resultMap="boardmap">
 		SELECT  c.* , fno, rfilename, sfilename      
@@ -105,6 +125,9 @@
 					<when test="key == 'contents'">		
 						and contents like '%'||#{word}||'%'
 					</when>
+					<when test="key == 'cno'">		
+						and cno =#{word}
+					</when>							
 				</choose>
 			</if>
 	</select>
@@ -132,6 +155,9 @@
 					<when test="key == 'contents'">		
 						and contents like '%'||#{word}||'%'
 					</when>
+					<when test="key == 'cno'">		
+						and cno =#{word}
+					</when>							
 				</choose>
 			</if>
 	</select>

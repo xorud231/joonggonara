@@ -34,14 +34,20 @@ public class BoardDaoImpl implements BoardDao {
 			return session.selectOne("board.searchSellBoard", bno);
 		}
 	}
-	
+	public int getBuyCartCount(int mno) {
+		return session.selectOne("board.getBuyCartCount", mno);
+	}
 	public int getBuyCount(PageBean bean) {
 		return session.selectOne("board.getBuyCount", bean);
 	}
 	public int getSellCount(PageBean bean) {
 		return session.selectOne("board.getSellCount", bean);
 	}
-	
+	public List<Board> searchBuyCart(int mno) {
+//		RowBounds rows = new RowBounds(bean.getStart() - 1, bean.getInterval());
+		
+		return session.selectList("board.searchBuyCart",mno);
+	}
 	public List<Board> searchBuyList(PageBean bean) {
 		RowBounds rows = new RowBounds(bean.getStart() - 1, bean.getInterval());
 		

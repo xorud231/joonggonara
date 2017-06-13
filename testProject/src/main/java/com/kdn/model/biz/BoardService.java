@@ -10,6 +10,7 @@ public interface BoardService {
 	public Board searchBoard(int sellbuy, int bno);
 	public Board searchBuyFile(int bno);
 	public Board searchSellFile(int bno);
+	public List<Board> searchBuyCart(int mno);
 	public List<Board> searchBuyList(PageBean bean);
 	public List<Board> searchSellList(PageBean bean);
 	public List<Reply> searchReply(int sellbuy, int bno);

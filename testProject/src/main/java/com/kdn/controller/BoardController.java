@@ -70,6 +70,30 @@ public class BoardController {
 		
 		return "index";
 	}
+	@RequestMapping(value = "searchBuyCart.do", method = RequestMethod.GET)
+	public String searchCartList( Model model, PageBean bean,HttpSession session){
+		session.setAttribute("sellbuy", 3);
+		String mnoString = (String)session.getAttribute("mno");
+		int mno = Integer.parseInt(mnoString);
+		List<Board> list = boardService.searchBuyCart(mno);
+		System.out.println(list);
+		model.addAttribute("list", list);
+		model.addAttribute("content", "board/searchList.jsp");
+		
+		return "index";
+	}
+	@RequestMapping(value = "searchMyBoard.do", method = RequestMethod.GET)
+	public String searchBuyCart( Model model, PageBean bean,HttpSession session){
+		session.setAttribute("sellbuy", 3);
+		String mnoString = (String)session.getAttribute("mno");
+		int mno = Integer.parseInt(mnoString);
+		List<Board> list = boardService.searchBuyCart(mno);
+		System.out.println(list);
+		model.addAttribute("list", list);
+		model.addAttribute("content", "board/searchList.jsp");
+		
+		return "index";
+	}
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
 	public String searchBuyList(Model model, PageBean bean, HttpSession session){
 		session.setAttribute("sellbuy", 1);

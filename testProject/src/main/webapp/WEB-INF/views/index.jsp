@@ -169,24 +169,24 @@
 					<p class="lead">팝니다</p>
 					<div class="list-group">
 						<a class="list-group-item" href="searchSellList.do">전체</a> <a
-							class="list-group-item" href="searchSellList.do">가전제품</a> <a
-							class="list-group-item" href="searchSellList.do">가구</a> <a
-							class="list-group-item" href="searchSellList.do">의류/잡화</a> <a
-							class="list-group-item" href="searchSellList.do">생활용품</a> <a
-							class="list-group-item" href="searchSellList.do">취미용품</a> <a
-							class="list-group-item" href="searchSellList.do">기타</a>
+							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&key=cno&word=2">가전제품</a> <a
+							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&key=cno&word=3">가구</a> <a
+							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&key=cno&word=4">의류/잡화</a> <a
+							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&key=cno&word=5">생활용품</a> <a
+							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&key=cno&word=6">취미용품</a> <a
+							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&key=cno&word=7">기타</a>
 					</div>
 				</div>
 				<div id="3_sell" style="display: none">
 					<p class="lead">삽니다</p>
 					<div class="list-group" id="category_bg">
 						<a class="list-group-item" href="searchBuyList.do">전체</a> <a
-							class="list-group-item" href="searchBuyList.do">가전제품</a> <a
-							class="list-group-item" href="searchBuyList.do">가구</a> <a
-							class="list-group-item" href="searchBuyList.do">의류/잡화</a> <a
-							class="list-group-item" href="searchBuyList.do">생활용품</a> <a
-							class="list-group-item" href="searchBuyList.do">취미용품</a> <a
-							class="list-group-item" href="searchBuyList.do">기타</a>
+							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&key=cno&word=2">가전제품</a> <a
+							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&key=cno&word=3">가구</a> <a
+							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&key=cno&word=4">의류/잡화</a> <a
+							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&key=cno&word=5">생활용품</a> <a
+							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&key=cno&word=6">취미용품</a> <a
+							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&key=cno&word=7">기타</a>
 					</div>
 				</div>
 				<div id="myPage" style="display:">
@@ -206,9 +206,9 @@
 								</a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"  data-options="align:right">
 									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">삽니다 장바구니</a></li>
+										href="searchBuyCart.do">삽니다 장바구니</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">팝니다 장바구니</a></li>
+										href="searchSellCart.do">팝니다 장바구니</a></li>
 								</ul>
 							</div>
 						</div>
