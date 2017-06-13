@@ -149,9 +149,17 @@ public class BoardController {
 	
 	@RequestMapping(value = "reply.do", method = RequestMethod.GET)
 	public String insertReply(int bno, String replycontent, HttpSession session, Model model){
-		System.out.println(bno);
 		String mno = (String)session.getAttribute("mno");
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		int sellbuyCheck = (Integer)session.getAttribute("sellbuyCheck");
+		
+		if(sellbuy == 3){
+			if(sellbuyCheck == 1)
+				sellbuy = 1;
+			
+			else if (sellbuyCheck == 2)
+				sellbuy = 2;
+		}
 		
 		boardService.insertReply(sellbuy, bno, replycontent, mno);
 		
@@ -166,6 +174,15 @@ public class BoardController {
 		
 		String mno = (String)session.getAttribute("mno");
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		int sellbuyCheck = (Integer)session.getAttribute("sellbuyCheck");
+		
+		if(sellbuy == 3){
+			if(sellbuyCheck == 1)
+				sellbuy = 1;
+			
+			else if (sellbuyCheck == 2)
+				sellbuy = 2;
+		}
 		
 		boolean isInCart = boardService.searchInCart(mno, sellbuy, bno);
 		
@@ -180,6 +197,15 @@ public class BoardController {
 	@RequestMapping(value = "deleteBoard.do", method = RequestMethod.GET)
 	public String deleteBoard(int bno, HttpSession session, Model model){
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		int sellbuyCheck = (Integer)session.getAttribute("sellbuyCheck");
+		
+		if(sellbuy == 3){
+			if(sellbuyCheck == 1)
+				sellbuy = 1;
+			
+			else if (sellbuyCheck == 2)
+				sellbuy = 2;
+		}
 		
 		boardService.deleteBoard(sellbuy, bno);
 		
@@ -207,6 +233,15 @@ public class BoardController {
 	@RequestMapping(value = "updateReply.do", method = RequestMethod.GET)
 	public String updateReply(String replyTemp, String editReply, HttpSession session, Model model){
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		int sellbuyCheck = (Integer)session.getAttribute("sellbuyCheck");
+		
+		if(sellbuy == 3){
+			if(sellbuyCheck == 1)
+				sellbuy = 1;
+			
+			else if (sellbuyCheck == 2)
+				sellbuy = 2;
+		}
 		
 		String rnoString = replyTemp.split("=")[1].split(",")[0];
 		String replyContent = replyTemp.split("=")[2].split(",")[0];
@@ -230,6 +265,15 @@ public class BoardController {
 	public String deleteReply(String rnoString, int bno, HttpSession session, Model model){
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
 		int rno = Integer.parseInt(rnoString);
+		int sellbuyCheck = (Integer)session.getAttribute("sellbuyCheck");
+		
+		if(sellbuy == 3){
+			if(sellbuyCheck == 1)
+				sellbuy = 1;
+			
+			else if (sellbuyCheck == 2)
+				sellbuy = 2;
+		}
 		
 		boardService.deleteReply(sellbuy, rno);
 		model.addAttribute("bno", bno);

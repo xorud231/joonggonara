@@ -51,12 +51,6 @@
 	<select id = "getSellCartCount" resultType = "int">
 		select COUNT(*) from CART WHERE bkind=2 AND mno = #{mno}
 	</select>
-	<select id = "getBuyCartCount" resultType = "int">
-		select COUNT(*) from CART WHERE bkind=1 AND mno = #{mno}
-	</select>
-	<select id = "getSellCartCount" resultType = "int">
-		select COUNT(*) from CART WHERE bkind=2 AND mno = #{mno}
-	</select>
 	<select id = "getBuyCount" parameterType = "pagebean" resultType = "int">
 		select count(*)
 		from BUYBOARD
