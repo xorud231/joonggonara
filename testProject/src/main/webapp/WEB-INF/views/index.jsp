@@ -121,7 +121,7 @@
 </head>
 
 <body>
-	
+
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"
 		style="background-color: #131313">
@@ -192,16 +192,19 @@
 				<div id="myPage" style="display:">
 					<p class="lead">My Page</p>
 					<div class="list-group" id="category_bg">
-
-						<a href="myInfo.do" id="clickInfo" class="list-group-item">회원정보확인</a>
+					
+							
+					<a href="myInfo.do" id="clickInfo" class="list-group-item">회원정보확인</a>
 						<!-- 장바구니 드롭다운시작 -->
 						<div class="container">
+							
 							<div class="list-group-item">
-								<a id="dLabel" data-target="#" 
+								<a id="dLabel" data-target="#" href="http://naver.com"
 									data-toggle="dropdown" aria-haspopup="true" role="button"
-									aria-expanded="false" style="color: #9D9D9D"> 장바구니 <span class="caret"></span>
+									aria-expanded="false" style="color: #9D9D9D"  > 장바구니 <span
+									class="caret"></span>
 								</a>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"  data-options="align:right">
 									<li role="presentation"><a role="menuitem" tabindex="-1"
 										href="#">삽니다 장바구니</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"
@@ -209,16 +212,18 @@
 								</ul>
 							</div>
 						</div>
-						<!-- 장바구니 드롭다운 끝 --> 
-						<br/>
+						
+						<!-- 장바구니 드롭다운 끝 -->
+						<br />
 						<!-- 내게시물관리 드롭다운시작 -->
-						<div class="container"> 
+						<div class="container">
 							<div class="list-group-item">
 								<a id="dLabel" data-target="#" href="http://naver.com"
 									data-toggle="dropdown" aria-haspopup="true" role="button"
-									aria-expanded="false" style="color: #9D9D9D"> 내 게시물 관리 <span class="caret"></span>
+									aria-expanded="false" style="color: #9D9D9D;margin-left: -30px;margin-top: -100px" > 내 게시물 관리 <span
+									class="caret"></span>
 								</a>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"  data-options="align:right">
 									<li role="presentation"><a role="menuitem" tabindex="-1"
 										href="#">삽니다 게시물</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"
@@ -226,8 +231,8 @@
 								</ul>
 							</div>
 						</div>
-						<!-- 내게시물관리 드롭다운 끝 --> 
-						
+						<!-- 내게시물관리 드롭다운 끝 -->
+
 					</div>
 				</div>
 			</div>

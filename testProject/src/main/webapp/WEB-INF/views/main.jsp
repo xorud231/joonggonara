@@ -62,8 +62,7 @@
 } */
 
 </script>
-=======
->>>>>>> branch 'master' of https://github.com/xorud231/joonggonara
+
 
 </head>
 
