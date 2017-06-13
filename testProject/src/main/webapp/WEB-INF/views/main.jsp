@@ -85,11 +85,15 @@
  	if(mno ==null){    //로긴을 하지 않은 경우   로그인 화면 출력
  	  Cookie[] cookies = request.getCookies();
  		String idSave ="";
- 	    for(Cookie cookie: cookies){
- 	    	if(cookie.getName().equals("idsave")){
- 	    		idSave = cookie.getValue();
- 	    	}
- 	    }
+ 		if(cookies==null){
+ 			}
+ 		else{
+	 	    for(Cookie cookie: cookies){
+	 	    	if(cookie.getName().equals("idsave")){
+	 	    		idSave = cookie.getValue();
+	 	    	}
+ 	   	 }
+ 		}
  	    String msg = (String)request.getAttribute("msg");
  	    if(msg!=null && !msg.equals("")){ 
  	    	out.println("<script type='text/javascript'>"
@@ -103,7 +107,7 @@
 		<!-- 모달 팝업 -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true"
-			style="margin-top: 350px">
+			style="margin-top: 17%">
 		
 			<div class="modal-dialog modal-lg">
 				
@@ -160,7 +164,7 @@
 	<form method="post" action="insertMember.do">
 		<div class="modal fade" id="insertModal" tabindex="-1" role="dialog"
 			aria-labelledby="insertModalLabel" aria-hidden="true"
-			style="margin-top: 270px">
+			style="margin-top: 11%">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
