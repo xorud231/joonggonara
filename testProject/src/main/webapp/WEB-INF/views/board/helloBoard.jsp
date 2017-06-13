@@ -20,7 +20,7 @@
 									<div class="carousel-inner">
 										<div class="item active">
 											<h1>${nick} 님환영합니다</h1>
-											<img class="slide-image" src="img/welcome.PNG" alt="">
+											<img class="slide-image" src="img/trade.png" alt="" >
 										</div>
 									</div>
 								</div>

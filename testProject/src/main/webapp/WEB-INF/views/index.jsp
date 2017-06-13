@@ -60,6 +60,7 @@
 		
 				
 		if(sellbuy == 1){
+			
 			var buy = document.getElementById("3_buy");
 			buy.style.display = "none";
 			var sell = document.getElementById("3_sell");
@@ -128,7 +129,7 @@
 <body>
 
 	<!-- Navigation -->
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: #131313">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -139,7 +140,7 @@
 						class="icon-bar"></span>
 				</button>
 				<div class="navbar-brand">
-				<a href = "helloBoard.do"><img src="img/translogo.png"
+				<a href = "helloBoard.do"><img src="img/translogo.png " 
 					width="150px"></a></div> 
 					
 					

@@ -42,6 +42,25 @@
     <![endif]-->
 
 
+<!-- <script type="text/javascript">
+
+function passwordCheck() {
+	var password = document.getElementById("password").value;
+	var passwordCheck = document.getElementById("passwordCheck").value;
+	alert("dd");
+	if(passwordCheck==""){
+		document.getElementById("passwordCheckText").innerHTML = "";
+	}else if(password != passwordCheck){
+		document.getElementById("passwordCheckText").innerHTML = "<font color = black>Not Ok PW</font>";
+		
+	}else{
+		
+		document.getElementById("passwordCheckText").innerHTML = "<font color = black>Ok PW</font>";
+	}
+
+}
+
+</script> -->
 
 </head>
 
@@ -197,6 +216,7 @@
 								<td><input type='password' name='password' id='password'
 									placeholder="비밀번호" style="font-style: italic"></td>
 							</tr>
+							
 							<tr>
 								<td>&nbsp;</td>
 							</tr>
