@@ -198,6 +198,7 @@ select::-ms-expand {
 	  		<option value="contents" <%=pageBean.getKey("contents")%>  >내용</option>
 	  	  </select>
 	  	  <input type="text" id="word" name="word" value="${pageBean.word}"/>
+	  	  <input type = "hidden" id = "cno" name = "cno" value="${pageBean.cno}"/>
 	  	  <a href="#" onclick="pagelist(1)" class="myButton">검색</a>
 	  	  <a data-toggle = "modal" class="myButton" data-target="#myModal">글쓰기</a>
 

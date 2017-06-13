@@ -8,7 +8,13 @@ public class PageBean implements Serializable {
 	 * pagelink : 목록의 페이지 링크를 표시
 	 */
 	private String key, word, pagelink;
-	private int pageNo, interval = 6, start=1 , end=interval, mno ;
+	private int pageNo, interval = 6, start=1 , end=interval, mno, cno;
+	public int getCno() {
+		return cno;
+	}
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
 	public String getKey() {
 		return key;
 	}
@@ -86,6 +92,22 @@ public class PageBean implements Serializable {
 		setPagelink(pagelink);
 		setPageNo(pageNo);
 		setMno(mno);
+	}
+	public PageBean(String key, String word, String pagelink, int pageNo, int mno, int cno) {
+		setKey(key);
+		setWord(word);
+		setPagelink(pagelink);
+		setPageNo(pageNo);
+		setMno(mno);
+		setCno(cno);
+	}
+	public PageBean(String key, String word, String pagelink, String pageNo, int mno, int cno) {
+		setKey(key);
+		setWord(word);
+		setPagelink(pagelink);
+		setPageNo(pageNo);
+		setMno(mno);
+		setCno(cno);
 	}
 	public int getInterval() {
 		return interval;

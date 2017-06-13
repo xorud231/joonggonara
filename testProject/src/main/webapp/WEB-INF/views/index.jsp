@@ -148,8 +148,8 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="searchSellList.do">팝니다</a></li>
-					<li><a href="searchBuyList.do">삽니다</a></li>
+					<li><a href="searchSellList.do?pageNo=1&bno=&sellbuy=2&cno=1">팝니다</a></li>
+					<li><a href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&cno=1">삽니다</a></li>
 					<li><a href="helloBoard.do">My page</a></li>
 					<li><a href="logout.do"
 						onclick="alert('<%=(String) session.getAttribute("mno")%>님이 로그아웃 하셨습니다')">Logout</a></li>
@@ -168,25 +168,25 @@
 				<div id="3_buy" style="display: none">
 					<p class="lead">팝니다</p>
 					<div class="list-group">
-						<a class="list-group-item" href="searchSellList.do">전체</a> <a
-							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&key=cno&word=2">가전제품</a> <a
-							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&key=cno&word=3">가구</a> <a
-							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&key=cno&word=4">의류/잡화</a> <a
-							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&key=cno&word=5">생활용품</a> <a
-							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&key=cno&word=6">취미용품</a> <a
-							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&key=cno&word=7">기타</a>
+						<a class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&cno=1">전체</a> <a
+							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&cno=2">가전제품</a> <a
+							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&cno=3">가구</a> <a
+							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&cno=4">의류/잡화</a> <a
+							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&cno=5">생활용품</a> <a
+							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&cno=6">취미용품</a> <a
+							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&cno=7">기타</a>
 					</div>
 				</div>
 				<div id="3_sell" style="display: none">
 					<p class="lead">삽니다</p>
 					<div class="list-group" id="category_bg">
-						<a class="list-group-item" href="searchBuyList.do">전체</a> <a
-							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&key=cno&word=2">가전제품</a> <a
-							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&key=cno&word=3">가구</a> <a
-							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&key=cno&word=4">의류/잡화</a> <a
-							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&key=cno&word=5">생활용품</a> <a
-							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&key=cno&word=6">취미용품</a> <a
-							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&key=cno&word=7">기타</a>
+						<a class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&cno=1">전체</a> <a
+							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&cno=2">가전제품</a> <a
+							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&cno=3">가구</a> <a
+							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&cno=4">의류/잡화</a> <a
+							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&cno=5">생활용품</a> <a
+							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&cno=6">취미용품</a> <a
+							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&cno=7">기타</a>
 					</div>
 				</div>
 				<div id="myPage" style="display:">

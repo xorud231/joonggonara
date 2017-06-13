@@ -49,43 +49,11 @@
 		select COUNT(*) 
 		from CART 
 		WHERE bkind=1 AND mno = #{mno}
-			<if test = "word != null">
-				<choose>
-					<when test = "key == 'title'">
-						and title like '%'||#{word}||'%'
-					</when>
-					<when test = "key == 'mno'">
-						and mno = #{word}
-					</when>
-					<when test = "key == 'contents'">
-						and contents like '%'||#{word}||'%'
-					</when>
-					<when test="key == 'cno'">		
-						and cno =#{word}
-					</when>		
-				</choose>
-			</if>
 	</select>
 	<select id = "getSellCartCount" parameterType = "pagebean"  resultType = "int">
 		select COUNT(*) 
 		from CART 
 		WHERE bkind=2 AND mno = #{mno}
-		<if test = "word != null">
-				<choose>
-					<when test = "key == 'title'">
-						and title like '%'||#{word}||'%'
-					</when>
-					<when test = "key == 'mno'">
-						and mno = #{word}
-					</when>
-					<when test = "key == 'contents'">
-						and contents like '%'||#{word}||'%'
-					</when>
-					<when test="key == 'cno'">		
-						and cno =#{word}
-					</when>		
-				</choose>
-			</if>
 	</select>
 	<select id = "getBuyCount" parameterType = "pagebean" resultType = "int">
 		select count(*)
@@ -198,6 +166,9 @@
 		              
 		      ) c, BUYBOARDFILE  bf 
 		WHERE   c.bno = bf.bno(+)
+			<if test = "cno != 1">
+				and cno = #{cno}
+			</if>
 			<if test="word != null ">
 				<choose>
 					<when test="key == 'mno'">		
@@ -208,9 +179,6 @@
 					</when>
 					<when test="key == 'contents'">		
 						and contents like '%'||#{word}||'%'
-					</when>
-					<when test="key == 'cno'">		
-						and cno =#{word}
 					</when>							
 				</choose>
 			</if>
@@ -228,6 +196,9 @@
 		                   
 		      ) c, SELLBOARDFILE  bf 
 		WHERE   c.bno = bf.bno(+)
+			<if test = "cno != 1">
+				and cno = #{cno}
+			</if>
 			<if test="word != null ">
 				<choose>
 					<when test="key == 'mno'">		

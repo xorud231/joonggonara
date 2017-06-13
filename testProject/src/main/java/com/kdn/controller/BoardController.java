@@ -45,8 +45,7 @@ public class BoardController {
 		
 		String mno = (String)session.getAttribute("mno");
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
-		int sellbuyCheck = (Integer)session.getAttribute("sellbuyCheck"); 
-
+		int sellbuyCheck = (Integer)session.getAttribute("sellbuyCheck");
 		if(sellbuy == 3){
 			if(sellbuyCheck == 1)
 				sellbuy = 1;
@@ -54,9 +53,7 @@ public class BoardController {
 			else if (sellbuyCheck == 2)
 				sellbuy = 2;
 		}
-				
 		Board board = boardService.searchBoard(sellbuy, bno);
-		System.out.println(board);
 		List<Reply> replys = boardService.searchReply(sellbuy, bno);
 		int replycount = boardService.getCountReply(sellbuy, bno);
 		boolean isInCart = boardService.searchInCart(mno, sellbuy, bno);
@@ -84,6 +81,7 @@ public class BoardController {
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
 	public String searchBuyList(Model model, PageBean bean, HttpSession session){
 		session.setAttribute("sellbuy", 1);
+		session.setAttribute("cnoSession", bean.getCno());
 		
 		List<Board> list = boardService.searchBuyList(bean);
 		model.addAttribute("list", list);
@@ -94,6 +92,7 @@ public class BoardController {
 	@RequestMapping(value = "searchSellList.do", method = RequestMethod.GET)
 	public String searchSellList(Model model, PageBean bean, HttpSession session){
 		session.setAttribute("sellbuy", 2);
+		session.setAttribute("cnoSession", bean.getCno());
 		
 		List<Board> list = boardService.searchSellList(bean);
 		System.out.println(list);

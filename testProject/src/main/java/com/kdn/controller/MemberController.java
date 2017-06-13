@@ -46,6 +46,7 @@ public class MemberController {
 		Member member = memberService.search(mno);
 		
 		session.setAttribute("mno", mno);
+		session.setAttribute("sellbuyCheck", 0);
 		
 		return "redirect:helloBoard.do";
 		//return "redirect:index.do";
@@ -73,6 +74,7 @@ public class MemberController {
 		session.removeAttribute("mno");
 		session.removeAttribute("sellbuy");
 		session.removeAttribute("myPage");
+		session.removeAttribute("sellbuyCheck");
 		model.addAttribute("content", "main");
 		
 		return "main";
@@ -109,6 +111,9 @@ public class MemberController {
 		String mno = (String)session.getAttribute("mno");
 		memberService.withdraw(mno);
 		session.removeAttribute("mno");
+		session.removeAttribute("sellbuy");
+		session.removeAttribute("myPage");
+		session.removeAttribute("sellbuyCheck");
 		return "main";
 	}
 	
