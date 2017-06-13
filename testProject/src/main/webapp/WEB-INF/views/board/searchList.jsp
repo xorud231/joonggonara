@@ -114,7 +114,7 @@ select::-ms-expand {
 	
 	function clickCno(value){
 		$("#cname").html(value);
-		alert($("#fileup").val());
+		
 		if(value == '가전제품'){
 			$("#cno").val("2");
 		}
@@ -140,6 +140,20 @@ select::-ms-expand {
 		}
 	}
  
+	function insertBoard(){
+		var frm2 = document.getElementById("frm2");
+		
+		var insertCheck = confirm("게시글을 등록하시겠습니까?");
+		
+		if(insertCheck){
+			alert("게시글을 등록하였습니다.");
+			frm2.submit();
+		}
+		
+		else{
+			alert("취소하였습니다.");
+		}
+	}
 </script>
 
 </head>
@@ -154,30 +168,16 @@ select::-ms-expand {
 					 <c:forEach  var="board" items="${list}">
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-							<c:choose>
-							<c:when test="${!empty board.files[0].sfilename}">
- 								<img src="upload/${board.files[0].sfilename}"  width=320px height=150px	 alt="없음">
-							</c:when>
-							<c:otherwise>
-								<img src="http://placehold.it/320x150" width=320px height=150px	alt="">
- 							</c:otherwise>
- 							</c:choose>
-
+ 							<img class="slide-image" src="upload/${board.files[0].sfilename}"  style = "width:320px; height:150px" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">${board.price}</h4>
+                                <h4 class="pull-right">￦${board.price}</h4>
                                 <h4><a href="#" onclick="getBoard(${board.bno})">${board.title}</a>
                                 </h4>
-                                <p>${board.contents}<br/></p><p><a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                                <p style = "overflow: hidden; text-overflow: ellipsis;">${board.contents}</p><br/>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">15 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
+								<p>&nbsp;</p>
                             </div>
                         </div>
                     </div>
@@ -206,105 +206,105 @@ select::-ms-expand {
         
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">×</span><span class="sr-only">Close</span>
-							</button>
-							<h4 class="modal-title" id="myModalLabel"
-								style = "font-weight : bold; text-align: center; font-size : 20px;">								
-								<c:if test = '${sellbuy == 1}'>
-									구매게시글 등록
-								</c:if>
-								<c:if test = '${sellbuy == 2}'>
-									판매게시글 등록
-								</c:if>
-							</h4>
-						</div>
-						<form method = 'post' action = "insertBoard.do" enctype="multipart/form-data">
-							<div class="modal-body">
-								<table align="center" width="300">
-									<tr height="50">
-										<td><label for="mno">아이디</label></td>
-										<td><input type="text" name="mno" id="mno"
-											disabled="disabled" value="${mno }" /></td>
-									</tr>
-									<tr height="50">
-										<td><label for="title">제목</label></td>
-										<td><input type="text" name="title" id="title"placeholder="title" /></td>
-									</tr>
-									<tr height="50">
-										<td><label for="phonenum">연락처</label></td>
-										<td><input type="text" name="phoneNum" id="phoneNum"
-											placeholder="phone number"/></td>
-									</tr>
-									<tr height="50">
-										<td><label for="price">가격</label></td>
-										<td><input type="text" name="price" id="price"
-											placeholder="price"/></td>
-									</tr>
-									<input type="hidden" name="dealstate" id="dealstate" value = "1"/>
-									<tr height="50">
-										<td><label for="dno">거래방법</label></td>
-										<td>
-											<div class="btn-group">
-											  <a id = "dname" name = "dname" href="#" class="btn btn-default">거래방법</a>
-											  <input type = "hidden" id = "dno" name = "dno" value = ""/>
-											  <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
-											  <ul class="dropdown-menu">
-											    <li onclick = "clickDno('직거래')"><a href="#">직거래</a></li>
-											    <li onclick = "clickDno('택배')"><a href="#">택배</a></li>
-											    <li onclick = "clickDno('퀵택배')"><a href="#">퀵택배</a></li>
-											  </ul>
-											</div>
-										</td>
-									</tr>
-									<tr height="50">
-										<td><label for="cno">카테고리</label></td>
-										<td>
-											<div class="btn-group">
-											  <a id = "cname" href="#" class="btn btn-default">거래방법</a>
-											  <input type = "hidden" id = "cno" name = "cno" value = ""/>
-											  <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
-											  <ul class="dropdown-menu">
-											    <li onclick = "clickCno('가전제품')"><a href="#">가전제품</a></li>
-											    <li onclick = "clickCno('가구')"><a href="#">가구</a></li>
-											    <li onclick = "clickCno('의류잡화')"><a href="#">의류잡화</a></li>
-											    <li onclick = "clickCno('생활용품')"><a href="#">생활용품</a></li>
-											    <li onclick = "clickCno('취미용품')"><a href="#">취미용품</a></li>
-											    <li onclick = "clickCno('기타')"><a href="#">기타</a></li>
-											  </ul>
-											</div>
-										</td>
-									</tr>
-									<tr height="50">
-										<td><label for="fileup">업로드할 파일</label></td>
-										<td><input type="button" name="addFile" id="addFile"
-											value="파일 추가" /></td>
-									</tr>
-									<tr height="50">
-										<td colspan="2" id="fileUpForm"></td>
-									</tr>
-									<tr>
-										<td colspan="2"><label for="content">내용</label></td>
-									</tr>
-									<tr>
-										<td colspan="2" align="center"><textarea name="contents"
-												id="contents" cols="70" rows="15" placeholder="content"></textarea></td>
-									</tr>
-									<tr>
-										<td colspan="2" align="center">
-										<button type="submit" class="btn btn-primary">
-											게시글등록
-										</button>
-										<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button></td>
-									</tr>
-								</table>
-							</div>
-						</form>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel"
+							style = "font-weight : bold; text-align: center; font-size : 20px;">								
+							<c:if test = '${sellbuy == 1}'>
+								구매게시글 등록
+							</c:if>
+							<c:if test = '${sellbuy == 2}'>
+								판매게시글 등록
+							</c:if>
+						</h4>
 					</div>
+					<form method = 'post' action = "insertBoard.do" enctype="multipart/form-data" id = "frm2">
+						<div class="modal-body">
+							<table align="center" width="300">
+								<tr height="50">
+									<td><label for="mno">아이디</label></td>
+									<td><input type="text" name="mno" id="mno"
+										disabled="disabled" value="${mno }" /></td>
+								</tr>
+								<tr height="50">
+									<td><label for="title">제목</label></td>
+									<td><input type="text" name="title" id="title"placeholder="title" /></td>
+								</tr>
+								<tr height="50">
+									<td><label for="phonenum">연락처</label></td>
+									<td><input type="text" name="phoneNum" id="phoneNum"
+										placeholder="phone number"/></td>
+								</tr>
+								<tr height="50">
+									<td><label for="price">가격</label></td>
+									<td><input type="text" name="price" id="price"
+										placeholder="price"/></td>
+								</tr>
+								<input type="hidden" name="dealstate" id="dealstate" value = "1"/>
+								<tr height="50">
+									<td><label for="dno">거래방법</label></td>
+									<td>
+										<div class="btn-group">
+										  <a id = "dname" name = "dname" href="#" class="btn btn-default">거래방법</a>
+										  <input type = "hidden" id = "dno" name = "dno" value = ""/>
+										  <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+										  <ul class="dropdown-menu">
+										    <li onclick = "clickDno('직거래')"><a href="#">직거래</a></li>
+										    <li onclick = "clickDno('택배')"><a href="#">택배</a></li>
+										    <li onclick = "clickDno('퀵택배')"><a href="#">퀵택배</a></li>
+										  </ul>
+										</div>
+									</td>
+								</tr>
+								<tr height="50">
+									<td><label for="cno">카테고리</label></td>
+									<td>
+										<div class="btn-group">
+										  <a id = "cname" href="#" class="btn btn-default">거래방법</a>
+										  <input type = "hidden" id = "cno" name = "cno" value = ""/>
+										  <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+										  <ul class="dropdown-menu">
+										    <li onclick = "clickCno('가전제품')"><a href="#">가전제품</a></li>
+										    <li onclick = "clickCno('가구')"><a href="#">가구</a></li>
+										    <li onclick = "clickCno('의류잡화')"><a href="#">의류잡화</a></li>
+										    <li onclick = "clickCno('생활용품')"><a href="#">생활용품</a></li>
+										    <li onclick = "clickCno('취미용품')"><a href="#">취미용품</a></li>
+										    <li onclick = "clickCno('기타')"><a href="#">기타</a></li>
+										  </ul>
+										</div>
+									</td>
+								</tr>
+								<tr height="50">
+									<td><label for="fileup">업로드할 파일</label></td>
+									<td><input type="button" name="addFile" id="addFile"
+										value="파일 추가" /></td>
+								</tr>
+								<tr height="50">
+									<td colspan="2" id="fileUpForm"></td>
+								</tr>
+								<tr>
+									<td colspan="2"><label for="content">내용</label></td>
+								</tr>
+								<tr>
+									<td colspan="2" align="center"><textarea name="contents"
+											id="contents" cols="70" rows="15" placeholder="content"></textarea></td>
+								</tr>
+								<tr>
+									<td colspan="2" align="center">
+									<button type="button" onclick = "insertBoard()" class="btn btn-primary">
+										게시글등록
+									</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button></td>
+								</tr>
+							</table>
+						</div>
+					</form>
 				</div>
 			</div>
+		</div>
 </body>
 </html>

@@ -47,24 +47,31 @@ public class BoardController {
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
 
 		Board board = boardService.searchBoard(sellbuy, bno);
-		List<Reply> replys = boardService.searchReply(sellbuy, bno);
-		int replycount = boardService.getCountReply(sellbuy, bno);	
-		
-		boolean isInCart = boardService.searchInCart(mno, sellbuy, bno);
-		
-		board.setIsInCart(isInCart);
-		
-		Member member = memberService2.search(mno);
 		System.out.println(board);
+		List<Reply> replys = boardService.searchReply(sellbuy, bno);
+		int replycount = boardService.getCountReply(sellbuy, bno);
+		boolean isInCart = boardService.searchInCart(mno, sellbuy, bno);
+
+		board.setIsInCart(isInCart);
+
+		Member member = memberService2.search(mno);
+		String category = boardService.getCategory(board.getCno());
+		String dealway = boardService.getDealway(board.getDno());
+		int imageCount = boardService.getImageCount(sellbuy, bno);
+
 		model.addAttribute("board", board);
 		model.addAttribute("replys", replys);
 		model.addAttribute("replycount", replycount);
 		model.addAttribute("member", member);
+		model.addAttribute("category", category);
+		model.addAttribute("dealway", dealway);
+		model.addAttribute("imageCount", imageCount);
 		model.addAttribute("content", "board/searchBoard.jsp");
+		
 		return "index";
 	}
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
-	public String searchBuyList(Model model, PageBean bean,HttpSession session){
+	public String searchBuyList(Model model, PageBean bean, HttpSession session){
 		session.setAttribute("sellbuy", 1);
 		
 		List<Board> list = boardService.searchBuyList(bean);
@@ -121,7 +128,14 @@ public class BoardController {
 		
 		boardService.deleteBoard(sellbuy, bno);
 		
-		return "redirect:searchBoard.do";
+		if(sellbuy == 1)
+			return "redirect:searchBuyList.do";
+		
+		else if(sellbuy == 2)
+			return "redirect:searchSellList.do";
+		
+		else
+			return "redirect:HelloBoard.do";
 	}
 	@RequestMapping(value = "helloBoard.do", method = RequestMethod.GET)
 	public String helloBoard(Model model ,HttpSession session){
@@ -173,16 +187,32 @@ public class BoardController {
 		String mnoString = (String)session.getAttribute("mno");
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
 		int mno = Integer.parseInt(mnoString);
-		int bno = boardService.getBoardNo(sellbuy);
-		String dir = (String)session.getAttribute("dir");
+		int bno = board.getBno();
+		String dir = request.getRealPath("upload/");
 		
-		board.setBno(bno);
+		board.setBno(boardService.getBoardNo(sellbuy));
 		board.setMno(mno);
+
+		boardService.insertBoard(sellbuy, board, dir, bno);
 		
-		boardService.insertBoard(sellbuy, board, dir);
-		
-		model.addAttribute("bno", bno);
+		model.addAttribute("bno", board.getBno());
 		
 		return "redirect:searchBoard.do";
 	}
+	
+	/*@RequestMapping(value = "updateBoard.do", method = RequestMethod.POST)
+	public String updateBoard(Board board, HttpSession session, Model model, HttpServletRequest request){
+		String mnoString = (String)session.getAttribute("mno");
+		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		int mno = Integer.parseInt(mnoString);
+		String dir = request.getRealPath("upload/");
+		
+		board.setMno(mno);
+		
+		boardService.updateBoard(sellbuy, board, dir);
+		
+		model.addAttribute("bno", board.getBno());
+		
+		return "redirect:searchBoard.do";
+	}*/
 }

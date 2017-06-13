@@ -44,6 +44,7 @@
 <script src="js/jquery.js"></script>
  <script type="text/javascript">
 
+<<<<<<< HEAD
 /* function passwordCheck() {
 	alert("ddd");
 	var password = document.getElementById("password").value;
@@ -61,6 +62,8 @@
 } */
 
 </script>
+=======
+>>>>>>> branch 'master' of https://github.com/xorud231/joonggonara
 
 </head>
 
@@ -106,14 +109,14 @@
  	  Cookie[] cookies = request.getCookies();
  		String idSave ="";
  		if(cookies==null){
- 			}
- 		else{
-	 	    for(Cookie cookie: cookies){
-	 	    	if(cookie.getName().equals("idsave")){
-	 	    		idSave = cookie.getValue();
-	 	    	}
- 	   	 }
- 		}
+		}
+		else{
+			for(Cookie cookie: cookies){
+				if(cookie.getName().equals("idsave")){
+					idSave = cookie.getValue();
+				}
+			}
+		}
  	    String msg = (String)request.getAttribute("msg");
  	    if(msg!=null && !msg.equals("")){ 
  	    	out.println("<script type='text/javascript'>"
@@ -221,7 +224,6 @@
 								<td><input type='password' name='password' id='password'
 									placeholder="비밀번호" style="font-style: italic"></td>
 							</tr>
-							
 							<tr>
 								<td>&nbsp;</td>
 							</tr>

@@ -29,6 +29,9 @@ public interface BoardDao {
 	public int getBoardNo(int sellbuy);
 	public void insertBoard(int sellbuy, Board board);
 	public void insertFiles(ArrayList<BoardFile> fileInfos, int sellbuy, int bno);
+	public String getCategory(int cno);
+	public String getDealway(int dno);
+	public int getImageCount(int sellbuy, int bno);
 }
 
 

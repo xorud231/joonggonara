@@ -19,9 +19,10 @@ public interface BoardService {
 	public void updateCart(String mno, int sellbuy, int bno, boolean isInCart);
 	public void deleteBoard(int sellbuy, int bno);
 	public void updateReply(int sellbuy, Reply reply, String editReply);
-	public void add(Board board, String dir);
-
 	public void deleteReply(int sellbuy, int rno);
 	public int getBoardNo(int sellbuy);
-	public void insertBoard(int sellbuy, Board board, String dir);
+	public void insertBoard(int sellbuy, Board board, String dir, int bno);
+	public String getCategory(int cno);
+	public String getDealway(int dno);
+	public int getImageCount(int sellbuy, int past_bno);
 }
