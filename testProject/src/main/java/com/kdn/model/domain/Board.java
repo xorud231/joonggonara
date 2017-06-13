@@ -61,10 +61,6 @@ public class Board implements Serializable{
 		this.phoneNum = phoneNum;
 	}
 
-	public void setInCart(boolean isInCart) {
-		this.isInCart = isInCart;
-	}
-
 	public MultipartFile[] getFileup() {
 		return fileup;
 	}

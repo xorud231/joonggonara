@@ -16,13 +16,8 @@
 	
     <title>joonggonara</title>
 
-    <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link href="css/shop-item.css" rel="stylesheet">
-    <link href="css/test.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
     
     <style type="text/css">
     	.reply {
@@ -61,7 +56,7 @@
 			background-color : #dedede;
 		}
 		
-		button[type="button"]{
+		td>button[type="button"]{
 			background : #f5f5f5;
 			border : 0px;
 			float : right;
@@ -73,9 +68,11 @@
     <script type="text/javascript" src="js/jquery-1.10.1.js"></script>
     <script type="text/javascript">
     	var isInCart;
+    	var count=0;
     
     	$(function(){
     		<% int index = 0; %>
+    		$("#addFile").click(addFileForm);
     		
     		isInCart = ${board.isInCart};
     		var cartbutton = document.getElementById("cartbutton");
@@ -94,6 +91,19 @@
     			deleteBoard.style.display = "";
     		}
     	})
+    	
+    	function addFileForm(){
+    		var html="<div id='item_"+count+"'>"
+    		html+="<input type='file' id = 'fileup" + count + "' name='fileup' style='display : inline' />";
+    		html+="<input type='button' value='삭제' onclick='removeForm("+count+")'/></div>";
+    		count++;
+    		$("#fileUpForm").append(html);
+    	}
+    	
+    	function removeForm(count){
+    		var item = document.getElementById('item_'+count);
+    		if(item !=null) item.parentNode.removeChild(item);
+    	}
     	
     	var reviewClick = false;
     	
@@ -125,10 +135,13 @@
     	
     	function update(){
     		if(isInCart){
-    			var cartCheck = confirm("장바구니에서 제거하시겠습니까?");
+    			var cartCheck = confirm("장바구니에서 삭제하시겠습니까?");
     			
     			if(cartCheck)
-    				alert("장바구니에서 제거하였습니다.");
+    				alert("장바구니에서 삭제하였습니다.");
+    			
+    			else
+    				alert("취소하였습니다.");
     		}
     		
     		else{
@@ -136,6 +149,9 @@
     			
     			if(cartCheck)
     				alert("장바구니에 추가하였습니다.");
+    			
+    			else
+    				alert("취소하였습니다.");
     		}
     		
     		location.href = "updateCart.do?bno=" + ${board.bno};
@@ -168,6 +184,111 @@
     			alert("댓글을 삭제하였습니다.")
     			location.href = "deleteReply.do?rnoString=" + rno + "&bno=" + ${board.bno};
     		}
+    		
+    		else{
+    			alert("취소하였습니다.");
+    		}
+    	}
+    	
+    	function clickDno(value){
+    		$("#dname").html(value);
+    		
+    		if(value == '직거래'){
+    			$("#dno").val("1");
+    		}
+    		
+    		else if(value == '택배'){
+    			$("#dno").val("2");
+    		}
+    		
+    		else if(value == '퀵택배'){
+    			$("#dno").val("3");
+    		}
+    	}
+    	
+    	function clickCno(value){
+    		$("#cname").html(value);
+    		
+    		if(value == '가전제품'){
+    			$("#cno").val("2");
+    		}
+    		
+    		else if(value == '가구'){
+    			$("#cno").val("3");
+    		}
+    		
+    		else if(value == '의류잡화'){
+    			$("#cno").val("4");
+    		}
+    		
+    		else if(value == '생활용품'){
+    			$("#cno").val("5");
+    		}
+    		
+    		else if(value == '취미용품'){
+    			$("#cno").val("6");
+    		}
+    		
+    		else if(value == '기타'){
+    			$("#cno").val("7");
+    		}
+    	}
+    	
+    	function deleteBoard(){
+    		var boardCheck = confirm("게시글을 삭제하시겠습니까?");
+			
+			if(boardCheck){
+				alert("게시글을 삭제하였습니다.");
+    			location.href = "deleteBoard.do?bno=" + ${board.bno};
+			}
+			
+			else{
+				alert("취소하였습니다.");
+			}
+    	}
+    	
+    	function updateBoard(){
+    		var frm2 = document.getElementById("frm2");
+			var boardCheck = confirm("게시글을 수정하시겠습니까?");
+			var fileCount = 0;
+			
+			for(var temp = 0; temp < count; temp++){
+				if($("#fileup" + temp).val() != 'undefiend' && $("#fileup0").val() != null){
+					fileCount++;
+				}
+			}
+			
+			if(boardCheck){
+				if(fileCount != 0){
+					var uploadCheck = confirm("사진을 새로 등록하시겠습니까? 기존의 사진은 삭제됩니다.");
+					
+					if(uploadCheck){
+						alert("게시글을 수정하였습니다.");
+						frm2.submit();
+					}
+					
+					else{
+						alert("취소하였습니다.");
+					}
+				}
+				
+				else{
+					var uploadCheck = confirm("사진을 등록하지 않으시겠습니까? 기존의 사진은 삭제됩니다.");
+					
+					if(uploadCheck){
+						alert("게시글을 수정하였습니다.");
+						frm2.submit();
+					}
+					
+					else{
+						alert("취소하였습니다.");
+					}
+				}
+			}
+			
+			else{
+				alert("취소하였습니다.");
+			}
     	}
     	
     </script>
@@ -235,12 +356,13 @@
 						<a class = "btn" onclick = "back()" 
 							style = "background-color : #63A69F; color : #fff">목록</a>
 						<a style = "background-color : #F2E1AC; display : none; color : #fff;" class = "btn" 
-							href = "updateBoardForm.do?bno=${board.bno}" id = "modifyBoard">수정</a>
+							data-toggle = "modal" data-target="#myModal" id = "modifyBoard">수정</a>
 						<a style = "background-color : #F2836B; display : none; color : #fff;" class = "btn"
-						 	href = "deleteBoard.do?bno=${board.bno}" id = "deleteBoard">삭제</a>
+						 	onclick = "deleteBoard()" id = "deleteBoard">삭제</a>
                     	<h4 style = "font-weight : bold;">작성자: ${member.nick}</h4>
-                    	<a style = "color:black; display:block;">작성일 : ${board.regdate}</a>
-                    	<a style = "color:black;">연락처 : ${board.phoneNum}</a>
+                    	<p><p style = "float : left; font-weight : bold">작성일 :&nbsp;</p> ${board.regdate}</p>
+                    	<p><p style = "float : left; font-weight : bold">연락처 :&nbsp;</p>${board.phoneNum}</p>
+                    	<p><p style = "float : left; font-weight : bold">거래방법 :&nbsp;</p>${dealway}</p>
                     </div>
                     
                     <div class="caption-full">
@@ -318,6 +440,119 @@
             </div>
         </div>
     </div>
+    
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel"
+						style = "font-weight : bold; text-align: center; font-size : 20px;">								
+						<c:if test = '${sellbuy == 1}'>
+							구매게시글 수정
+						</c:if>
+						<c:if test = '${sellbuy == 2}'>
+							판매게시글 수정
+						</c:if>
+					</h4>
+				</div>
+				<form method = 'post' action = "insertBoard.do" enctype="multipart/form-data" id = "frm2">
+					<div class="modal-body">
+						<table align="center" width="300">
+							<tr height="50">
+								<td><label for="mno">아이디</label></td>
+								<td><input type="text" name="mno" id="mno"
+									disabled="disabled" value="${mno }" /></td>
+							</tr>
+							<tr height="50">
+								<td><label for="title">제목</label></td>
+								<td>
+									<input type="text" name="title" id="title" 
+											placeholder="title" value = "${board.title}"/>
+								</td>
+							</tr>
+							<tr height="50">
+								<td><label for="phonenum">연락처</label></td>
+								<td>
+									<input type="text" name="phoneNum" id="phoneNum"
+											placeholder="phone number" value = "${board.phoneNum}"/>
+								</td>
+							</tr>
+							<tr height="50">
+								<td><label for="price">가격</label></td>
+								<td>
+									<input type="text" name="price" id="price"
+											placeholder="price" value = "${board.price}"/>
+								</td>
+							</tr>
+							<input type="hidden" name="dealstate" id="dealstate" 
+									value = "${board.dealstate}"/>
+							<tr height="50">
+								<td><label for="dno">거래방법</label></td>
+								<td>
+									<div class="btn-group">
+									  <a id = "dname" name = "dname" href="#" class="btn btn-default">${dealway}</a>
+									  <input type = "hidden" id = "dno" name = "dno" value = "${board.dno}"/>
+									  <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+									  <ul class="dropdown-menu">
+									    <li onclick = "clickDno('직거래')"><a href="#">직거래</a></li>
+									    <li onclick = "clickDno('택배')"><a href="#">택배</a></li>
+									    <li onclick = "clickDno('퀵택배')"><a href="#">퀵택배</a></li>
+									  </ul>
+									</div>
+								</td>
+							</tr>
+							<tr height="50">
+								<td><label for="cno">카테고리</label></td>
+								<td>
+									<div class="btn-group">
+									  <a id = "cname" href="#" class="btn btn-default">${category}</a>
+									  <input type = "hidden" id = "cno" name = "cno" value = "${board.cno}"/>
+									  <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+									  <ul class="dropdown-menu">
+									    <li onclick = "clickCno('가전제품')"><a href="#">가전제품</a></li>
+									    <li onclick = "clickCno('가구')"><a href="#">가구</a></li>
+									    <li onclick = "clickCno('의류잡화')"><a href="#">의류잡화</a></li>
+									    <li onclick = "clickCno('생활용품')"><a href="#">생활용품</a></li>
+									    <li onclick = "clickCno('취미용품')"><a href="#">취미용품</a></li>
+									    <li onclick = "clickCno('기타')"><a href="#">기타</a></li>
+									  </ul>
+									</div>
+								</td>
+							</tr>
+							<tr height="50">
+								<td><label for="fileup">업로드할 파일</label></td>
+								<td><input type="button" name="addFile" id="addFile"
+									value="파일 추가" /></td>
+							</tr>
+							<tr height="50">
+								<td colspan="2" id="fileUpForm"></td>
+							</tr>
+							<tr>
+								<td colspan="2"><label for="content">내용</label></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center"><textarea name="contents"
+										id="contents" cols="70" rows="15" placeholder="content">${board.contents}</textarea></td>
+							</tr>
+							<tr>
+								<input type = "hidden" id = "bno" name = "bno" value = "${board.bno}"/>
+								<td colspan="2" align="center">
+								<button type="button" onclick = "updateBoard()" class="btn btn-primary">
+									게시글수정
+								</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button></td>
+							</tr>
+						</table>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+    
     <!-- /.container -->
 
     <!-- jQuery -->

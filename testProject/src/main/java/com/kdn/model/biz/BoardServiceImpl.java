@@ -72,14 +72,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 	public List<Reply> searchReply(int sellbuy, int bno){
 		try {
-			/*int total = dao.getBuyCount( bean);
-			PageUtility bar = 
-					new PageUtility(bean.getInterval()
-							, total
-							, bean.getPageNo()
-							, "images/");
-			bean.setPagelink(bar.getPageBar());*/
-			
 			return dao.searchReply(sellbuy, bno);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -141,49 +133,6 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	
-	@Override
-	public void add(Board board, String dir) {
-		File[ ] files = null;
-		int size = 0;
-		try {
-			
-			int bno = dao.getBoardNo();
-			board.setBno(bno);
-			
-			MultipartFile[] fileup = board.getFileup();
-			if(fileup!=null){
-				size = fileup.length;
-				files = new File[size];     
-				ArrayList<BoardFile> fileInfos = new ArrayList<BoardFile>(size);
-				String rfilename = null;
-				String sfilename = null;
-				int index =0;  
-				for (MultipartFile file : fileup) {
-					rfilename = file.getOriginalFilename();
-					sfilename = String.format("%d%s"
-											, System.currentTimeMillis()
-											, rfilename);
-					fileInfos.add(new BoardFile(rfilename, sfilename));
-					String fileName = String.format("%s/%s", dir, sfilename);
-					files[index] = new File(fileName);
-					file.transferTo(files[index++]);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			if(files!=null){  
-				//오류가 발생해서 롤백하기 때문에 저장한 파일이 있다면 삭제
-				for (File file : files) {
-					//해당 파일이 지정한 경로에 존재하면 
-					if(file!=null && file.exists()){
-						file.delete();   //파일 삭제 
-					}
-				}
-			}
-			throw new UpdateException("게시글 작성 중 오류 발생");}
-			throw new UpdateException("게시글 작성 중 오류 발생");
-		}
-	
 	public void deleteReply(int sellbuy, int rno){
 		try {
 			dao.deleteReply(sellbuy, rno);
@@ -202,13 +151,13 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	
-	public void insertBoard(int sellbuy, Board board, String dir){
+	public void insertBoard(int sellbuy, Board board, String dir, int past_bno){
 		File[ ] files = null;
 		int size = 0;
 		
 		try {
+			dao.deleteBoard(sellbuy, past_bno);
 			dao.insertBoard(sellbuy, board);
-			
 			MultipartFile[] fileup = board.getFileup();
 			
 			if(fileup!=null){
@@ -223,10 +172,11 @@ public class BoardServiceImpl implements BoardService {
 				
 				for (MultipartFile file : fileup) {
 					rfilename = file.getOriginalFilename();
-					sfilename = String.format("%d_%d_%d_%s"
+					sfilename = String.format("%d_%d_%d_%d_%s"
 											, sellbuy
 											, bno
 											, mno
+											, System.currentTimeMillis()
 											, rfilename);
 					fileInfos.add(new BoardFile(rfilename, sfilename));
 					String fileName = String.format("%s/%s", dir, sfilename);
@@ -239,6 +189,33 @@ public class BoardServiceImpl implements BoardService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new UpdateException("게시판 등록 중 오류 발생");
+		}
+	}
+	
+	public String getCategory(int cno){
+		try {
+			return dao.getCategory(cno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UpdateException("카테고리 추출 중 오류 발생");
+		}
+	}
+	
+	public String getDealway(int dno){
+		try {
+			return dao.getDealway(dno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UpdateException("거래방법 추출 중 오류 발생");
+		}
+	}
+	
+	public int getImageCount(int sellbuy, int bno){
+		try {
+			return dao.getImageCount(sellbuy, bno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UpdateException("이미지 개수 추출 중 오류 발생");
 		}
 	}
 }

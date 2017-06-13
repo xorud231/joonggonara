@@ -176,4 +176,22 @@ public class BoardDaoImpl implements BoardDao {
 			}
 		}
 	}
+	
+	public String getCategory(int cno){
+		return session.selectOne("board.getCategory", cno);
+	}
+	
+	public String getDealway(int dno){
+		return session.selectOne("board.getDealway", dno);
+	}
+	
+	public int getImageCount(int sellbuy, int bno){
+		if(sellbuy == 1){
+			return session.selectOne("board.getBuyImageCount", bno);
+		}
+		
+		else{
+			return session.selectOne("board.getSellImageCount", bno);
+		}
+	}
 }

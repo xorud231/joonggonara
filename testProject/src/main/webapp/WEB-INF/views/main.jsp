@@ -42,25 +42,6 @@
     <![endif]-->
 
 
-<!-- <script type="text/javascript">
-
-function passwordCheck() {
-	var password = document.getElementById("password").value;
-	var passwordCheck = document.getElementById("passwordCheck").value;
-	alert("dd");
-	if(passwordCheck==""){
-		document.getElementById("passwordCheckText").innerHTML = "";
-	}else if(password != passwordCheck){
-		document.getElementById("passwordCheckText").innerHTML = "<font color = black>Not Ok PW</font>";
-		
-	}else{
-		
-		document.getElementById("passwordCheckText").innerHTML = "<font color = black>Ok PW</font>";
-	}
-
-}
-
-</script> -->
 
 </head>
 
@@ -105,14 +86,14 @@ function passwordCheck() {
  	  Cookie[] cookies = request.getCookies();
  		String idSave ="";
  		if(cookies==null){
- 			}
- 		else{
-	 	    for(Cookie cookie: cookies){
-	 	    	if(cookie.getName().equals("idsave")){
-	 	    		idSave = cookie.getValue();
-	 	    	}
- 	   	 }
- 		}
+		}
+		else{
+			for(Cookie cookie: cookies){
+				if(cookie.getName().equals("idsave")){
+					idSave = cookie.getValue();
+				}
+			}
+		}
  	    String msg = (String)request.getAttribute("msg");
  	    if(msg!=null && !msg.equals("")){ 
  	    	out.println("<script type='text/javascript'>"
@@ -220,7 +201,6 @@ function passwordCheck() {
 								<td><input type='password' name='password' id='password'
 									placeholder="비밀번호" style="font-style: italic"></td>
 							</tr>
-							
 							<tr>
 								<td>&nbsp;</td>
 							</tr>

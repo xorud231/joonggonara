@@ -88,7 +88,7 @@
 		           FROM ( SELECT ROWNUM ro, a.*    
 		                    FROM   ( select bno, price, cno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
 		                              from BUYBOARD
-		                              order by bno DESC
+		                              order by regdate DESC
 		                            ) a
 		                 ) b   
 		              
@@ -115,7 +115,7 @@
 		           FROM ( SELECT ROWNUM ro, a.*    
 		                    FROM   ( select bno, price, cno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
 		                              from SELLBOARD
-		                              order by bno DESC
+		                              order by regdate DESC
 		                            ) a
 		                 ) b   
 		                   
@@ -138,18 +138,18 @@
 	
 	<select id = "searchBuyBoard" parameterType = "int" resultMap="boardmap">
 		SELECT a.*, rfilename, sfilename, fno
-		FROM    (select bno, price, dealstate, mno, dno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate, phoneNum
+		FROM    (select bno, price, cno, dealstate, mno, dno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate, phoneNum
 		         from buyboard
 		         where bno = #{bno}) a, BUYBOARDFILE bf
-		WHERE a.bno = bf.bno
+		WHERE a.bno = bf.bno(+)
 	</select>
 	
 	<select id = "searchSellBoard" parameterType = "int" resultMap="boardmap">
 		SELECT a.*, rfilename, sfilename, fno
-		FROM    (select bno, price, dealstate, mno, dno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate, phoneNum
+		FROM    (select bno, price, cno, dealstate, mno, dno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate, phoneNum
 		         from sellboard
 		         where bno = #{bno}) a, SELLBOARDFILE bf
-		WHERE a.bno = bf.bno
+		WHERE a.bno = bf.bno(+)
 	</select>
 	
 	<select id = "searchBuyReply" parameterType = "int" resultType = "reply">
@@ -249,4 +249,20 @@
 		insert into sellboardfile 
 		values(sellboardfile_no.nextval, #{rfilename}, #{sfilename}, #{bno})
 	</insert>
+	
+	<select id = "getCategory" parameterType = "int" resultType = "String">
+		select cname from category where cno = #{cno}
+	</select>
+	
+	<select id = "getDealway" parameterType = "int" resultType = "String">
+		select dname from dealstyle where dno = #{dno}
+	</select>
+	
+	<select id = "getBuyImageCount" parameterType = "int" resultType = "int">
+		select count(*) from buyboardfile where bno = #{bno}
+	</select>
+	
+	<select id = "getSellImageCount" parameterType = "int" resultType = "int">
+		select count(*) from sellboardfile where bno = #{bno}
+	</select>
 </mapper>
