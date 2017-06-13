@@ -45,9 +45,17 @@ public class BoardController {
 		
 		String mno = (String)session.getAttribute("mno");
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
+		int sellbuyCheck = (Integer)session.getAttribute("sellbuyCheck");
+		
+		if(sellbuy == 3){
+			if(sellbuyCheck == 1)
+				sellbuy = 1;
+			
+			else if (sellbuyCheck == 2)
+				sellbuy = 2;
+		}
 
 		Board board = boardService.searchBoard(sellbuy, bno);
-		System.out.println(board);
 		List<Reply> replys = boardService.searchReply(sellbuy, bno);
 		int replycount = boardService.getCountReply(sellbuy, bno);
 		boolean isInCart = boardService.searchInCart(mno, sellbuy, bno);
@@ -71,29 +79,52 @@ public class BoardController {
 		return "index";
 	}
 	@RequestMapping(value = "searchBuyCart.do", method = RequestMethod.GET)
-	public String searchCartList( Model model, PageBean bean,HttpSession session){
-		session.setAttribute("sellbuy", 3);
+	public String searchBuyCartList( Model model, PageBean bean,HttpSession session){
+		session.setAttribute("sellbuyCheck", 1);
+		
 		String mnoString = (String)session.getAttribute("mno");
 		int mno = Integer.parseInt(mnoString);
 		List<Board> list = boardService.searchBuyCart(mno);
-		System.out.println(list);
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchList.jsp");
 		
 		return "index";
 	}
-	@RequestMapping(value = "searchMyBoard.do", method = RequestMethod.GET)
-	public String searchBuyCart( Model model, PageBean bean,HttpSession session){
-		session.setAttribute("sellbuy", 3);
+	
+	@RequestMapping(value = "searchSellCart.do", method = RequestMethod.GET)
+	public String searchSellCartList( Model model, PageBean bean,HttpSession session){
+		session.setAttribute("sellbuyCheck", 2);
+		
 		String mnoString = (String)session.getAttribute("mno");
 		int mno = Integer.parseInt(mnoString);
-		List<Board> list = boardService.searchBuyCart(mno);
-		System.out.println(list);
+		List<Board> list = boardService.searchSellCart(mno);
 		model.addAttribute("list", list);
 		model.addAttribute("content", "board/searchList.jsp");
 		
 		return "index";
 	}
+//	@RequestMapping(value = "searchMyBuyBoard.do", method = RequestMethod.GET)
+//	public String searchMyBuyBoardList( Model model, PageBean bean,HttpSession session){
+//		session.setAttribute("sellbuy", 1);
+//		String mnoString = (String)session.getAttribute("mno");
+//		int mno = Integer.parseInt(mnoString);
+//		List<Board> list = boardService.searchMyBuyBoard(mno);
+//		model.addAttribute("list", list);
+//		model.addAttribute("content", "board/searchList.jsp");
+//		
+//		return "index";
+//	}
+//	@RequestMapping(value = "searchMySellBoard.do", method = RequestMethod.GET)
+//	public String searchMySellBoardList( Model model, PageBean bean,HttpSession session){
+//		session.setAttribute("sellbuy", 1);
+//		String mnoString = (String)session.getAttribute("mno");
+//		int mno = Integer.parseInt(mnoString);
+//		List<Board> list = boardService.searchMySellBoard(mno);
+//		model.addAttribute("list", list);
+//		model.addAttribute("content", "board/searchList.jsp");
+//		
+//		return "index";
+//	}
 	@RequestMapping(value = "searchBuyList.do", method = RequestMethod.GET)
 	public String searchBuyList(Model model, PageBean bean, HttpSession session){
 		session.setAttribute("sellbuy", 1);

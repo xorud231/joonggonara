@@ -48,6 +48,15 @@
 	<select id = "getBuyCartCount" resultType = "int">
 		select COUNT(*) from CART WHERE bkind=1 AND mno = #{mno}
 	</select>
+	<select id = "getSellCartCount" resultType = "int">
+		select COUNT(*) from CART WHERE bkind=2 AND mno = #{mno}
+	</select>
+	<select id = "getBuyCartCount" resultType = "int">
+		select COUNT(*) from CART WHERE bkind=1 AND mno = #{mno}
+	</select>
+	<select id = "getSellCartCount" resultType = "int">
+		select COUNT(*) from CART WHERE bkind=2 AND mno = #{mno}
+	</select>
 	<select id = "getBuyCount" parameterType = "pagebean" resultType = "int">
 		select count(*)
 		from BUYBOARD
@@ -100,6 +109,18 @@
                 		) a
    	    		)b
   			  ) c, BUYBOARDFILE  bf
+	WHERE   c.bno = bf.bno(+)
+	</select>
+	<select id = "searchSellCart" parameterType = "int" resultMap="boardmap">
+	SELECT  c.* , fno, rfilename, sfilename
+	FROM  (    SELECT b.* 
+     				FROM	(SELECT ROWNUM ro, a.* 
+       					from	(SELECT bno, price, cno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate 
+                		FROM SELLBOARD 
+                		WHERE bno in (select bno from CART WHERE bkind=2 AND mno=#{mno})
+                		) a
+   	    		)b
+  			  ) c, SELLBOARDFILE  bf
 	WHERE   c.bno = bf.bno(+)
 	</select>
 	<select id = "searchBuyList" parameterType = "pagebean" resultMap="boardmap">
@@ -155,9 +176,7 @@
 					<when test="key == 'contents'">		
 						and contents like '%'||#{word}||'%'
 					</when>
-					<when test="key == 'cno'">		
-						and cno =#{word}
-					</when>							
+					
 				</choose>
 			</if>
 	</select>

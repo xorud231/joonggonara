@@ -14,6 +14,7 @@ public interface BoardDao {
 	public Board 		searchBuyFile(int bno);
 	public Board 		searchSellFile(int bno);
 	public List<Board> searchBuyCart(int mno) ;
+	public List<Board> searchSellCart(int mno) ;
 	public List<Board> searchBuyList(PageBean bean) ;
 	public List<Board> searchSellList(PageBean bean) ;
 	public int 		getBuyCartCount(int mno) ;
