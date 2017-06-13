@@ -19,8 +19,9 @@
 									data-ride="carousel">
 									<div class="carousel-inner">
 										<div class="item active">
-											<h1>${nick} 님환영합니다</h1>
-											<img class="slide-image" src="img/trade.png" alt="" >
+											<h1 align="center" style="color: #9D9D9D">'' ${nick} ''님 환영합니다</h1>
+											<img class="slide-image"  style="width: 60%;
+											 margin-left: 170px; " src="img/tradeKdn.png" alt=""  >
 										</div>
 									</div>
 								</div>

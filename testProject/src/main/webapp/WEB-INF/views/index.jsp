@@ -6,6 +6,12 @@
 
 <head>
 
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,36 +37,33 @@
     <![endif]-->
 
 <style type="text/css">
-	#category_bg{
-		/* opacity: 0!important; */
-		
-	}
+#category_bg {
+	/* opacity: 0!important; */
+	
+}
 </style>
 
 <!-- <script type="text/javascript" src="js/jquery-1.10.1.js"></script> -->
 
 <!-- jQuery -->
-	<script src="js/jquery.js"></script>
+<script src="js/jquery.js"></script>
 
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
- 
- 
 	var click;
-	
-	$(function (){
-		var sellbuy = <%=session.getAttribute("sellbuy")%>;
-		
-		
+
+	$(function() {
+		var sellbuy =
+<%=session.getAttribute("sellbuy")%>
+	;
+
 		/* location.href = "helloBoard.do";
 		click = document.getElementById("searchAll");
 		click.style.display = ""; */
-		
-		
-				
-		if(sellbuy == 1){
-			
+
+		if (sellbuy == 1) {
+
 			var buy = document.getElementById("3_buy");
 			buy.style.display = "none";
 			var sell = document.getElementById("3_sell");
@@ -70,8 +73,8 @@
 			click = document.getElementById("searchAll");
 			click.style.display = "";
 		}
-		
-		else if(sellbuy == 2){
+
+		else if (sellbuy == 2) {
 			var buy = document.getElementById("3_buy");
 			buy.style.display = "";
 			var sell = document.getElementById("3_sell");
@@ -81,8 +84,8 @@
 			click = document.getElementById("searchAll");
 			click.style.display = "";
 		}
-		
-		else if(sellbuy == 3){
+
+		else if (sellbuy == 3) {
 			var buy = document.getElementById("3_buy");
 			buy.style.display = "none";
 			var sell = document.getElementById("3_sell");
@@ -92,11 +95,9 @@
 			var s = document.getElementById("searchAll");
 			s.style.display = "";
 		}
-		
+
 	});
-	
-	
-	
+
 	/* 	보드 파일업로드 자바스크립트
 		$(function(){
 		$("#addFile").click(addFileForm);
@@ -115,21 +116,15 @@
 		var item = document.getElementById('item_'+count);
 		if(item !=null) item.parentNode.removeChild(item);
 	} */
-	
-	
-	
- 
-	
-	
-	
 </script>
 
 </head>
 
 <body>
-
+	
 	<!-- Navigation -->
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: #131313">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"
+		style="background-color: #131313">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -140,13 +135,14 @@
 						class="icon-bar"></span>
 				</button>
 				<div class="navbar-brand">
-				<a href = "helloBoard.do"><img src="img/translogo.png " 
-					width="150px"></a></div> 
-					
-					
-				
-					
-					
+					<a href="helloBoard.do"><img src="img/translogo.png "
+						width="150px"></a>
+				</div>
+
+
+
+
+
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
@@ -172,41 +168,73 @@
 				<div id="3_buy" style="display: none">
 					<p class="lead">팝니다</p>
 					<div class="list-group">
-						<a class="list-group-item" href="searchSellList.do">전체</a>
-						<a class="list-group-item" href="searchSellList.do">가전제품</a>
-						<a class="list-group-item" href="searchSellList.do">가구</a>
-						<a class="list-group-item" href="searchSellList.do">의류/잡화</a>
-						<a class="list-group-item" href="searchSellList.do">생활용품</a>
-						<a class="list-group-item" href="searchSellList.do">취미용품</a>
-						<a class="list-group-item" href="searchSellList.do">기타</a>
+						<a class="list-group-item" href="searchSellList.do">전체</a> <a
+							class="list-group-item" href="searchSellList.do">가전제품</a> <a
+							class="list-group-item" href="searchSellList.do">가구</a> <a
+							class="list-group-item" href="searchSellList.do">의류/잡화</a> <a
+							class="list-group-item" href="searchSellList.do">생활용품</a> <a
+							class="list-group-item" href="searchSellList.do">취미용품</a> <a
+							class="list-group-item" href="searchSellList.do">기타</a>
 					</div>
 				</div>
 				<div id="3_sell" style="display: none">
 					<p class="lead">삽니다</p>
-					<div class="list-group" id = "category_bg">
-						<a class="list-group-item" href="searchBuyList.do">전체</a>
-						<a class="list-group-item" href="searchBuyList.do">가전제품</a>
-						<a class="list-group-item" href="searchBuyList.do">가구</a>
-						<a class="list-group-item" href="searchBuyList.do">의류/잡화</a>
-						<a class="list-group-item" href="searchBuyList.do">생활용품</a>
-						<a class="list-group-item" href="searchBuyList.do">취미용품</a>
-						<a class="list-group-item" href="searchBuyList.do">기타</a>
+					<div class="list-group" id="category_bg">
+						<a class="list-group-item" href="searchBuyList.do">전체</a> <a
+							class="list-group-item" href="searchBuyList.do">가전제품</a> <a
+							class="list-group-item" href="searchBuyList.do">가구</a> <a
+							class="list-group-item" href="searchBuyList.do">의류/잡화</a> <a
+							class="list-group-item" href="searchBuyList.do">생활용품</a> <a
+							class="list-group-item" href="searchBuyList.do">취미용품</a> <a
+							class="list-group-item" href="searchBuyList.do">기타</a>
 					</div>
 				</div>
 				<div id="myPage" style="display:">
 					<p class="lead">My Page</p>
-					<div class="list-group" id = "category_bg">
+					<div class="list-group" id="category_bg">
 
 						<a href="myInfo.do" id="clickInfo" class="list-group-item">회원정보확인</a>
-						<a href="#col-md-9" class="list-group-item">장바구니</a> 
-						<a href="#col-md-9" class="list-group-item">내 게시물 관리</a>
+						<!-- 장바구니 드롭다운시작 -->
+						<div class="container">
+							<div class="list-group-item">
+								<a id="dLabel" data-target="#" 
+									data-toggle="dropdown" aria-haspopup="true" role="button"
+									aria-expanded="false" style="color: #9D9D9D"> 장바구니 <span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">삽니다 장바구니</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">팝니다 장바구니</a></li>
+								</ul>
+							</div>
+						</div>
+						<!-- 장바구니 드롭다운 끝 --> 
+						<br/>
+						<!-- 내게시물관리 드롭다운시작 -->
+						<div class="container"> 
+							<div class="list-group-item">
+								<a id="dLabel" data-target="#" href="http://naver.com"
+									data-toggle="dropdown" aria-haspopup="true" role="button"
+									aria-expanded="false" style="color: #9D9D9D"> 내 게시물 관리 <span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">삽니다 게시물</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">팝니다 게시물</a></li>
+								</ul>
+							</div>
+						</div>
+						<!-- 내게시물관리 드롭다운 끝 --> 
+						
 					</div>
 				</div>
 			</div>
 
 			<!-- div9 -->
 			<div class="col-md-9">
-					
+
 
 				<!-- selectAll -->
 				<div id="searchAll" style="display: none">
@@ -214,7 +242,7 @@
 						<jsp:include page="${content}" />
 					</c:if>
 				</div>
-				
+
 				<!-- selectAll -->
 
 			</div>
@@ -224,30 +252,26 @@
 
 
 
-		
 
 
-	</div>
-	<!-- /.container -->
 
-	<div class="container">
+		</div>
+		<!-- /.container -->
 
-		<hr>
+		<div class="container">
 
-		<!-- Footer -->
-		<footer>
-			<div class="row">
-				<div class="col-lg-12">
-					<p>KDN 중고나라 2017</p>
+
+			<!-- Footer -->
+			<footer>
+				<div class="">
+					<div class="col-lg-12">
+						<p>KDN 중고나라 2017</p>
+					</div>
 				</div>
-			</div>
-		</footer>
+			</footer>
 
-	</div>
-	<!-- /.container -->
-
-	
-
+		</div>
+		<!-- /.container -->
 </body>
 
 </html>

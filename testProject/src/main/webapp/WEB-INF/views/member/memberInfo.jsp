@@ -18,13 +18,12 @@
  <script src="js/jquery.js"></script>
  <style type="text/css">
  #contact{
-  margin-left: -250px;
+ margin-left: -10%;
   margin-top: -50px;
  
  
  }
  .form-group col-xs-12 floating-label-form-group controls{
- color: white;
  
  }
  
@@ -52,8 +51,8 @@
 <!-- Contact Section -->
     <section id="contact" >
         <div class="container" style="color: #9D9D9D">
-            <div class="row">
-                <div class="col-lg-12 text-center">
+            <div class="row" >
+                <div class="col-lg-12 text-center"  >
                     <h2>고객 정보</h2>
                     <hr class="star-primary">
                 </div>
@@ -112,7 +111,7 @@
  
 	
 	<div class="header-content">
-		<div class="header-content-inner" align="center" style="margin-left: -200px; margin-top: -100px">
+		<div class="header-content-inner" align="center" style="margin-top: -100px; margin-left: 16%">
 			<a type="button" class="btn btn-primary btn-lg"  
 				data-toggle="modal" data-target="#myupdateModal">수   정</a>
 			&nbsp;&nbsp;&nbsp;&nbsp; 

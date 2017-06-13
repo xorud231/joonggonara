@@ -41,13 +41,13 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<script src="js/jquery.js"></script>
+ <script type="text/javascript">
 
-<!-- <script type="text/javascript">
-
-function passwordCheck() {
+/* function passwordCheck() {
+	alert("ddd");
 	var password = document.getElementById("password").value;
 	var passwordCheck = document.getElementById("passwordCheck").value;
-	alert("dd");
 	if(passwordCheck==""){
 		document.getElementById("passwordCheckText").innerHTML = "";
 	}else if(password != passwordCheck){
@@ -58,9 +58,9 @@ function passwordCheck() {
 		document.getElementById("passwordCheckText").innerHTML = "<font color = black>Ok PW</font>";
 	}
 
-}
+} */
 
-</script> -->
+</script>
 
 </head>
 
@@ -90,6 +90,7 @@ function passwordCheck() {
 	<div class="header-content">
 		<div class="header-content-inner">
 			<h1 id="homeHeading">Welcome to KDN 중고나라!</h1>
+			
 			<hr>
 			<p></p>
 			<button type="button" class="btn btn-primary btn-lg"
@@ -224,6 +225,7 @@ function passwordCheck() {
 							<tr>
 								<td>&nbsp;</td>
 							</tr>
+							
 							<tr>
 								<th>닉&nbsp;네&nbsp;임</th>
 								<td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
