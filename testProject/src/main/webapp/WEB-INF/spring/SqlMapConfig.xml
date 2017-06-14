@@ -10,16 +10,10 @@
 		    => org.apache.ibatis.type.TypeAliasRegistry  참조
 		 -->
 		<typeAlias type="com.kdn.model.domain.Board" alias="board"/>
-		<typeAlias type="com.kdn.model.domain.BuyBoard" alias="buyboard"/>
-		<typeAlias type="com.kdn.model.domain.SellBoard" alias="sellboard"/>
 		<typeAlias type="com.kdn.model.domain.BoardFile" alias="boardfile"/>
 		<typeAlias type="com.kdn.model.domain.PageBean" alias="pagebean"/>
-		
 		<typeAlias type="com.kdn.model.domain.Member" alias="member"/>
-		
 		<typeAlias type="com.kdn.model.domain.Reply" alias="reply"/>
-		<typeAlias type="com.kdn.model.domain.SellReply" alias="sellreply"/>
-		<typeAlias type="com.kdn.model.domain.BuyReply" alias="buyreply"/>
 		
 	</typeAliases>
 	<mappers>

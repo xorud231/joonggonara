@@ -16,49 +16,19 @@
 <meta name="description" content="">
 <meta name="author" content="">
  
-<title>Shop Homepage - Start Bootstrap Template</title>
+<title>joonggonara</title>
  
-<!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
- 
-<!-- Custom CSS -->
 <link href="css/shop-homepage.css" rel="stylesheet">
-<!-- 모달 링크 -->
  
- 
- 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
- 
-<style type="text/css">
-#category_bg {
-	/* opacity: 0!important; */
-	
-}
-</style>
- 
-<!-- <script type="text/javascript" src="js/jquery-1.10.1.js"></script> -->
- 
-<!-- jQuery -->
 <script src="js/jquery.js"></script>
  
-<!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	var click;
  
 	$(function() {
-		var sellbuy =
-<%=session.getAttribute("sellbuy")%>
-	;
- 
-		/* location.href = "helloBoard.do";
-		click = document.getElementById("searchAll");
-		click.style.display = ""; */
+		var sellbuy = <%=session.getAttribute("sellbuy")%>;
  
 		if (sellbuy == 1) {
  
@@ -96,24 +66,6 @@
  
 	});
  
-	/* 	보드 파일업로드 자바스크립트
-		$(function(){
-		$("#addFile").click(addFileForm);
-	});
-	var count=0;   //file form index
-	function addFileForm(){
-		var html="<div id='item_"+count+"'>"
-		html+="<input type='file' name='fileup'  />";
-		html+="<input type='button' value='삭제' onclick='removeForm("+count+")'/></div>";
-		count++;
-		//html=$("#content").html()+html;
-		//$("#content").html(html);
-		$("#fileUpForm").append(html);
-	}
-	function removeForm(count){
-		var item = document.getElementById('item_'+count);
-		if(item !=null) item.parentNode.removeChild(item);
-	} */
 </script>
  
 </head>
@@ -136,9 +88,6 @@
 					<a href="helloBoard.do"><img src="img/translogo.png "
 						width="150px"></a>
 				</div>
- 
- 
- 
  
  
 			</div>
@@ -244,7 +193,6 @@
 						<jsp:include page="${content}" />
 					</c:if>
 				</div>
- 
 				<!-- selectAll -->
  
 			</div>
@@ -254,8 +202,6 @@
 		<!-- /.container -->
  
 		<div class="container">
- 
- 
 			<!-- Footer -->
 			<footer>
 				<div class="">
@@ -264,11 +210,8 @@
 					</div>
 				</div>
 			</footer>
- 
 		</div>
 		
 		<!-- /.container -->
 </body>
-
- 
 </html>

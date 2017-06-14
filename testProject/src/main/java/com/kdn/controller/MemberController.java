@@ -33,13 +33,6 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-/*	@RequestMapping(value = "loginform.do", method = RequestMethod.GET)
-	public String loginform(Model model){
-		model.addAttribute("content", "main.jsp");
-		
-		return "index";
-	}*/
-	
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String login(String mno, String password, HttpSession session){
 		memberService.login(mno, password);
@@ -49,16 +42,8 @@ public class MemberController {
 		session.setAttribute("sellbuyCheck", 0);
 		
 		return "redirect:helloBoard.do";
-		//return "redirect:index.do";
 	}
-	
-/*	@RequestMapping(value = "insertMemberForm.do", method = RequestMethod.GET)
-	public String insertMemberForm(Model model){
-		model.addAttribute("content", "insertMember.jsp");
-		
-		return "index";
-	}
-	*/
+
 	@RequestMapping(value = "insertMember.do", method = RequestMethod.POST)
 	public String insertMember(Model model, Member member){
 		
@@ -90,15 +75,6 @@ public class MemberController {
 		return "index";
 	}
 	
-
-/*	@RequestMapping(value = "memberUpdateForm.do", method = RequestMethod.GET)
-	public String memberUpdateForm(Model model, HttpSession session){
-		model.addAttribute("member", memberService.search((String)session.getAttribute("mno")));
-		model.addAttribute("content", "member/updateMember.jsp");
-		
-		return "index";
-	}*/
-	
 	@RequestMapping(value = "memberUpdate.do", method = RequestMethod.POST)
 	public String memberUpdate(Member member){
 		memberService.update(member);
@@ -116,8 +92,6 @@ public class MemberController {
 		session.removeAttribute("sellbuyCheck");
 		return "main";
 	}
-	
-	
 	
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String index(){

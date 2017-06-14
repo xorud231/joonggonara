@@ -204,8 +204,16 @@
     	
     	function updateReplyButton(reply, index){
     		var editReply = document.getElementById("editReply" + index);
-
-    		location.href = "updateReply.do?replyTemp=" + reply + "&editReply=" + editReply.value;
+    		
+			var updateReplyCheck = confirm("댓글을 수정하시겠습니까?");
+    		
+    		if(updateReplyCheck){
+    			alert("댓글을 수정하였습니다.")
+    			location.href = "updateReply.do?replyTemp=" + reply + "&editReply=" + editReply.value;
+    		}
+    		
+    		else
+    			alert("취소하였습니다.");
     	}
     	
     	function deleteReply(rno){

@@ -59,9 +59,9 @@ select::-ms-expand {
 		$("#addFile").click(addFileForm);
 		
 		var insertBoardButton = document.getElementById("insertBoardButton");
-		var sellbuy = ${sellbuy};
+		var sellbuy = <%= session.getAttribute("sellbuy") %>;
 		
-		if(sellbuy = 3){
+		if(sellbuy == 3){
 			insertBoardButton.style.display = "none";
 		}
 		
