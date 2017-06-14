@@ -3816,7 +3816,7 @@ tbody.collapse.in {
 
 .dropdown-menu {
 	position: absolute;
-	top: 0;
+	top: -3px;
 	left: 10%;
 	z-index: 1000;
 	display: none;
@@ -5813,7 +5813,7 @@ a.list-group-item .list-group-item-heading, button.list-group-item .list-group-i
 }
 
 a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus,
-	button.list-group-item:hover {
+	button.list-group-item:hover, div.list-group-item:hover {
 	color: #9E9996;
 	text-decoration: none;
 	background-color: #f5f5f5

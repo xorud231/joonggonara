@@ -45,6 +45,42 @@
 	<select id = "getSellBoardNo" resultType = "int">
 		select sellboard_no.nextval from dual
 	</select>
+	<select id = "getMyBuyBoardCount" parameterType = "pagebean" resultType = "int">
+		select COUNT(*) 
+		from buyboard 
+		WHERE mno = #{mno}
+		<if test = "word != null">
+			<choose>
+				<when test = "key == 'title'">
+					and title like '%'||#{word}||'%'
+				</when>
+				<when test = "key == 'mno'">
+					and mno = #{word}
+				</when>
+				<when test = "key == 'contents'">
+					and contents like '%'||#{word}||'%'
+				</when>
+			</choose>
+		</if>
+	</select>
+	<select id = "getMySellBoardCount" parameterType = "pagebean"  resultType = "int">
+		select COUNT(*) 
+		from sellboard 
+		WHERE mno = #{mno}
+		<if test = "word != null">
+			<choose>
+				<when test = "key == 'title'">
+					and title like '%'||#{word}||'%'
+				</when>
+				<when test = "key == 'mno'">
+					and mno = #{word}
+				</when>
+				<when test = "key == 'contents'">
+					and contents like '%'||#{word}||'%'
+				</when>
+			</choose>
+		</if>
+	</select>
 	<select id = "getBuyCartCount" parameterType = "pagebean" resultType = "int">
 		select COUNT(*) 
 		from CART 
@@ -70,9 +106,6 @@
 					<when test = "key == 'contents'">
 						and contents like '%'||#{word}||'%'
 					</when>
-					<when test="key == 'cno'">		
-						and cno =#{word}
-					</when>		
 				</choose>
 			</if>
 	</select>
@@ -90,10 +123,57 @@
 					</when>
 					<when test = "key == 'contents'">
 						and contents like '%'||#{word}||'%'
+					</when>	
+				</choose>
+			</if>
+	</select>
+	<select id = "searchMyBuyBoard" parameterType = "pagebean" resultMap="boardmap">
+		SELECT  c.* , fno, rfilename, sfilename
+		FROM  (    SELECT b.*
+		      FROM	(SELECT ROWNUM ro, a.*
+		        	from	(SELECT bno, price, cno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
+			                FROM BUYBOARD
+			                WHERE mno = #{mno}
+			                ) a
+		    	    )b
+		  	 ) c, BUYBOARDFILE  bf
+		WHERE   c.bno = bf.bno(+)
+		<if test = "word != null">
+				<choose>
+					<when test = "key == 'title'">
+						and title like '%'||#{word}||'%'
 					</when>
-					<when test="key == 'cno'">		
-						and cno =#{word}
+					<when test = "key == 'mno'">
+						and mno = #{word}
+					</when>
+					<when test = "key == 'contents'">
+						and contents like '%'||#{word}||'%'
 					</when>		
+				</choose>
+			</if>
+	</select>
+	<select id = "searchMySellBoard" parameterType = "pagebean" resultMap="boardmap">
+			SELECT  c.* , fno, rfilename, sfilename
+		FROM  (    SELECT b.*
+		      FROM	(SELECT ROWNUM ro, a.*
+		        	from	(SELECT bno, price, cno, mno, title, contents, to_char(regdate, 'yyyy-mm-dd') regdate
+			                FROM SELLBOARD
+			                WHERE mno = #{mno}
+			                ) a
+		    	    )b
+		  	 ) c, SELLBOARDFILE  bf
+		WHERE   c.bno = bf.bno(+)
+		<if test = "word != null">
+				<choose>
+					<when test = "key == 'title'">
+						and title like '%'||#{word}||'%'
+					</when>
+					<when test = "key == 'mno'">
+						and mno = #{word}
+					</when>
+					<when test = "key == 'contents'">
+						and contents like '%'||#{word}||'%'
+					</when>	
 				</choose>
 			</if>
 	</select>
@@ -118,10 +198,7 @@
 					</when>
 					<when test = "key == 'contents'">
 						and contents like '%'||#{word}||'%'
-					</when>
-					<when test="key == 'cno'">		
-						and cno =#{word}
-					</when>		
+					</when>	
 				</choose>
 			</if>
 		
@@ -147,10 +224,7 @@
 					</when>
 					<when test = "key == 'contents'">
 						and contents like '%'||#{word}||'%'
-					</when>
-					<when test="key == 'cno'">		
-						and cno =#{word}
-					</when>		
+					</when>	
 				</choose>
 			</if>
 	</select>
@@ -209,10 +283,7 @@
 					</when>
 					<when test="key == 'contents'">		
 						and contents like '%'||#{word}||'%'
-					</when>
-					<when test="key == 'cno'">		
-						and cno =#{word}
-					</when>		
+					</when>	
 				</choose>
 			</if>
 	</select>

@@ -34,6 +34,12 @@ public class BoardDaoImpl implements BoardDao {
 			return session.selectOne("board.searchSellBoard", bno);
 		}
 	}
+	public int getMyBuyBoardCount(PageBean bean) {
+		return session.selectOne("board.getMyBuyBoardCount", bean);
+	}
+	public int getMySellBoardCount(PageBean bean) {
+		return session.selectOne("board.getMySellBoardCount", bean);
+	}
 	public int getBuyCartCount(PageBean bean) {
 		return session.selectOne("board.getBuyCartCount", bean);
 	}
@@ -45,6 +51,16 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	public int getSellCount(PageBean bean) {
 		return session.selectOne("board.getSellCount", bean);
+	}
+	public List<Board> searchMyBuyBoard(PageBean bean) {
+		RowBounds rows = new RowBounds(bean.getStart() - 1, bean.getInterval());
+		
+		return session.selectList("board.searchMyBuyBoard", bean, rows);
+	}
+	public List<Board> searchMySellBoard(PageBean bean) {
+		RowBounds rows = new RowBounds(bean.getStart() - 1, bean.getInterval());
+		
+		return session.selectList("board.searchMySellBoard", bean, rows);
 	}
 	public List<Board> searchBuyCart(PageBean bean) {
 		RowBounds rows = new RowBounds(bean.getStart() - 1, bean.getInterval());

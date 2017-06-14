@@ -18,6 +18,8 @@
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/shop-item.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+ 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     
     <style type="text/css">
     	.reply {
@@ -82,6 +84,7 @@
     			
     			modifyBoard.style.display = "";
     			deleteBoard.style.display = "";
+    			cartbutton.style.display = "none";
     		}
     	})
     	
@@ -116,13 +119,30 @@
     	
     	function back(){
     		var sellbuy = <%= session.getAttribute("sellbuy") %>;
-			
+    		var cno = <%= session.getAttribute("cnoSession") %>;
+    		var sellbuyCheck = <%= session.getAttribute("sellbuyCheck") %>;
+    		
     		if(sellbuy == 1){
-    			location.href = "searchBuyList.do?sellbuy=1"
+    			location.href = "searchBuyList.do?cno=" + cno;
     		}
     		
-    		else{
-    			location.href = "searchSellList.do?sellbuy=2"
+    		else if (sellbuy == 2){
+    			location.href = "searchSellList.do?cno=" + cno;
+    		}
+    		
+    		else if (sellbuy == 3){
+    			if(sellbuyCheck == 1){
+    				location.href = "searchBuyCart.do?cno=1";
+    			}
+    			else if(sellbuyCheck == 2){
+					location.href = "searchSellCart.do?cno=1";
+    			}
+    			else if(sellbuyCheck == 3){
+					location.href = "searchMyBuyBoard.do?cno=1";
+    			}
+    			else if(sellbuyCheck == 4){
+					location.href = "searchMySellBoard.do?cno=1";
+    			}
     		}
     	}
     	
@@ -221,27 +241,27 @@
     		$("#cname").html(value);
     		
     		if(value == '가전제품'){
-    			$("#cno").val("2");
+    			$("#cnoInsert").val("2");
     		}
     		
     		else if(value == '가구'){
-    			$("#cno").val("3");
+    			$("#cnoInsert").val("3");
     		}
     		
     		else if(value == '의류잡화'){
-    			$("#cno").val("4");
+    			$("#cnoInsert").val("4");
     		}
     		
     		else if(value == '생활용품'){
-    			$("#cno").val("5");
+    			$("#cnoInsert").val("5");
     		}
     		
     		else if(value == '취미용품'){
-    			$("#cno").val("6");
+    			$("#cnoInsert").val("6");
     		}
     		
     		else if(value == '기타'){
-    			$("#cno").val("7");
+    			$("#cnoInsert").val("7");
     		}
     	}
     	
@@ -250,6 +270,7 @@
 			
 			if(boardCheck){
 				alert("게시글을 삭제하였습니다.");
+
     			location.href = "deleteBoard.do?bno=" + ${board.bno};
 			}
 			
@@ -425,16 +446,16 @@
 					                            	<button type="button" class="btn btn-default btn-sm" 
 											        	id = "deleteReply<%=index %>" 
 											        	onclick = "deleteReply('${reply.rno}')"
-											        	style = "background-image : url('img/delete2.PNG'); 
-											        	border : 0px; float : right;">
-											        	<span class="glyphicon glyphicon-remove"></span> 
+											        	style = "border : 0px; float : right; 
+											        			background-color : #f5f5f5">
+											        	<i class = "fa fa-trash" style = "background : #f5f5f5"></i>
 											        </button>
 						                            <button type="button" class="btn btn-default btn-sm" 
 						                            	id = "updateReply<%=index %>"
 						                            	onclick = "updateReply('${reply}', <%=index%>)"
-						                            	style = "background-image : url('img/edit.PNG'); 
-						                            	border : 0px; float : right;">
-											        	<span class="glyphicon glyphicon-edit"></span>
+						                            	style = "border : 0px; float : right; 
+						                            			background-color : #f5f5f5">
+											        	<i class = "fa fa-edit"></i>
 											        </button>
 											        <a class = "btn btn-success" 
 											        	id = "editReplyButton<%=index%>"
@@ -471,10 +492,10 @@
 					</button>
 					<h4 class="modal-title" id="myModalLabel"
 						style = "font-weight : bold; text-align: center; font-size : 20px;">								
-						<c:if test = '${sellbuy == 1}'>
+						<c:if test = '${sellbuy == 1 || (sellbuy == 3 && sellbuyCheck == 3)}'>
 							구매게시글 수정
 						</c:if>
-						<c:if test = '${sellbuy == 2}'>
+						<c:if test = '${sellbuy == 2 || (sellbuy == 3 && sellbuyCheck == 4)}'>
 							판매게시글 수정
 						</c:if>
 					</h4>
@@ -530,7 +551,7 @@
 								<td>
 									<div class="btn-group">
 									  <a id = "cname" href="#" class="btn btn-default">${category}</a>
-									  <input type = "hidden" id = "cno" name = "cno" value = "${board.cno}"/>
+									  <input type = "hidden" id = "cnoInsert" name = "cnoInsert" value = "${board.cno}"/>
 									  <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
 									  <ul class="dropdown-menu">
 									    <li onclick = "clickCno('가전제품')"><a href="#">가전제품</a></li>

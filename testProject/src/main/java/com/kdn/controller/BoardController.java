@@ -47,10 +47,10 @@ public class BoardController {
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
 		int sellbuyCheck = (Integer)session.getAttribute("sellbuyCheck");
 		if(sellbuy == 3){
-			if(sellbuyCheck == 1)
+			if(sellbuyCheck == 1 || sellbuyCheck == 3)
 				sellbuy = 1;
 			
-			else if (sellbuyCheck == 2)
+			else if (sellbuyCheck == 2 || sellbuyCheck == 4)
 				sellbuy = 2;
 		}
 		Board board = boardService.searchBoard(sellbuy, bno);
@@ -75,6 +75,33 @@ public class BoardController {
 		model.addAttribute("dealway", dealway);
 		model.addAttribute("imageCount", imageCount);
 		model.addAttribute("content", "board/searchBoard.jsp");
+		
+		return "index";
+	}
+	@RequestMapping(value = "searchMyBuyBoard.do", method = RequestMethod.GET)
+	public String searchMyBuyBoardList( Model model, PageBean bean, HttpSession session){
+		session.setAttribute("sellbuyCheck", 3);
+		
+		String mnoString = (String)session.getAttribute("mno");
+		int mno = Integer.parseInt(mnoString);
+		bean.setMno(mno);
+		List<Board> list = boardService.searchMyBuyBoard(bean);
+		model.addAttribute("list", list);
+		model.addAttribute("content", "board/searchList.jsp");
+		
+		return "index";
+	}
+	
+	@RequestMapping(value = "searchMySellBoard.do", method = RequestMethod.GET)
+	public String searchMySellBoardList( Model model, PageBean bean, HttpSession session){
+		session.setAttribute("sellbuyCheck", 4);
+		
+		String mnoString = (String)session.getAttribute("mno");
+		int mno = Integer.parseInt(mnoString);
+		bean.setMno(mno);
+		List<Board> list = boardService.searchMySellBoard(bean);
+		model.addAttribute("list", list);
+		model.addAttribute("content", "board/searchList.jsp");
 		
 		return "index";
 	}
@@ -138,10 +165,10 @@ public class BoardController {
 		int sellbuyCheck = (Integer)session.getAttribute("sellbuyCheck"); 
 
 		if(sellbuy == 3){
-			if(sellbuyCheck == 1)
+			if(sellbuyCheck == 1 || sellbuyCheck == 3)
 				sellbuy = 1;
 			
-			else if (sellbuyCheck == 2)
+			else if (sellbuyCheck == 2 || sellbuyCheck == 4)
 				sellbuy = 2;
 		}
 		
@@ -182,22 +209,34 @@ public class BoardController {
 	public String deleteBoard(int bno, HttpSession session, Model model){
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
 		int sellbuyCheck = (Integer)session.getAttribute("sellbuyCheck"); 
+		int cno = (Integer)session.getAttribute("cnoSession");
+		int post_sellbuy = sellbuy;
 
 		if(sellbuy == 3){
-			if(sellbuyCheck == 1)
+			if(sellbuyCheck == 3){
 				sellbuy = 1;
+				cno = 1;
+			}
 			
-			else if (sellbuyCheck == 2)
+			else if (sellbuyCheck == 4){
 				sellbuy = 2;
+				cno = 1;
+			}
 		}
 		
 		boardService.deleteBoard(sellbuy, bno);
 		
-		if(sellbuy == 1)
-			return "redirect:searchBuyList.do";
+		if(post_sellbuy == 1)
+			return "redirect:searchBuyList.do?cno=" + cno;
 		
-		else if(sellbuy == 2)
-			return "redirect:searchSellList.do";
+		else if(post_sellbuy == 2)
+			return "redirect:searchSellList.do?cno=" + cno;
+		
+		else if(post_sellbuy == 3 && sellbuyCheck == 3)
+			return "redirect:searchMyBuyBoard.do?cno=1";
+		
+		else if(post_sellbuy == 3  && sellbuyCheck == 4)
+			return "redirect:searchMySellBoard.do?cno=1";
 		
 		else
 			return "redirect:HelloBoard.do";
@@ -220,10 +259,10 @@ public class BoardController {
 		int sellbuyCheck = (Integer)session.getAttribute("sellbuyCheck");
 		
 		if(sellbuy == 3){
-			if(sellbuyCheck == 1)
+			if(sellbuyCheck == 1 || sellbuyCheck == 3)
 				sellbuy = 1;
 			
-			else if (sellbuyCheck == 2)
+			else if (sellbuyCheck == 2 || sellbuyCheck == 4)
 				sellbuy = 2;
 		}
 		
@@ -252,10 +291,10 @@ public class BoardController {
 		int sellbuyCheck = (Integer)session.getAttribute("sellbuyCheck"); 
 
 		if(sellbuy == 3){
-			if(sellbuyCheck == 1)
+			if(sellbuyCheck == 1 || sellbuyCheck == 3)
 				sellbuy = 1;
 			
-			else if (sellbuyCheck == 2)
+			else if (sellbuyCheck == 2 || sellbuyCheck == 4)
 				sellbuy = 2;
 		}
 		
@@ -266,18 +305,20 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "insertBoard.do", method = RequestMethod.POST)
-	public String insertBoard(Board board, HttpSession session, Model model, HttpServletRequest request){
+	public String insertBoard(Board board, String cnoInsert, HttpSession session, Model model, HttpServletRequest request){
+		System.out.println(board);
 		String mnoString = (String)session.getAttribute("mno");
 		int sellbuy = (Integer)session.getAttribute("sellbuy");
 		int mno = Integer.parseInt(mnoString);
 		int bno = board.getBno();
 		String dir = request.getRealPath("upload/");
+		int cno = Integer.parseInt(cnoInsert);
+		board.setCno(cno);
 		
 		board.setBno(boardService.getBoardNo(sellbuy));
 		board.setMno(mno);
 
 		boardService.insertBoard(sellbuy, board, dir, bno);
-		
 		model.addAttribute("bno", board.getBno());
 		
 		return "redirect:searchBoard.do";

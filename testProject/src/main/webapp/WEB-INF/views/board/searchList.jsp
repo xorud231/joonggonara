@@ -57,6 +57,14 @@ select::-ms-expand {
 <script type="text/javascript">
 	$(function(){
 		$("#addFile").click(addFileForm);
+		
+		var insertBoardButton = document.getElementById("insertBoardButton");
+		var sellbuy = ${sellbuy};
+		
+		if(sellbuy = 3){
+			insertBoardButton.style.display = "none";
+		}
+		
 	});
 	var count=0;   //file form index
 	function addFileForm(){
@@ -80,16 +88,21 @@ select::-ms-expand {
 		var frm = document.getElementById("frm");
 		var sellbuy = <%= session.getAttribute("sellbuy") %>;
 		var sellbuyCheck = <%= session.getAttribute("sellbuyCheck") %>;
+		var cno = ${pageBean.cno};
 		
 		if(sellbuy == 1)
-			frm.action="searchBuyList.do";
+			frm.action="searchBuyList.do?cno=" + cno;
 		else if(sellbuy == 2)
-			frm.action="searchSellList.do";
+			frm.action="searchSellList.do?cno=" + cno;
 		else if(sellbuy == 3){
 			if(sellbuyCheck == 1)
-				frm.action="searchBuyCart.do";
-			else
-				frm.action="searchSellCart.do";
+				frm.action="searchBuyCart.do?cno=1";
+			else if(sellbuyCheck == 2)
+				frm.action="searchSellCart.do?cno=1";
+			else if(sellbuyCheck == 3)
+				frm.action="searchMyBuyBoard.do?cno=1";
+			else if(sellbuyCheck == 4)
+				frm.action="searchMySellBoard.do?cno=1";
 		}
 		frm.submit();
 	}
@@ -122,27 +135,27 @@ select::-ms-expand {
 		$("#cname").html(value);
 		
 		if(value == '가전제품'){
-			$("#cno").val("2");
+			$("#cnoInsert").val("2");
 		}
 		
 		else if(value == '가구'){
-			$("#cno").val("3");
+			$("#cnoInsert").val("3");
 		}
 		
 		else if(value == '의류잡화'){
-			$("#cno").val("4");
+			$("#cnoInsert").val("4");
 		}
 		
 		else if(value == '생활용품'){
-			$("#cno").val("5");
+			$("#cnoInsert").val("5");
 		}
 		
 		else if(value == '취미용품'){
-			$("#cno").val("6");
+			$("#cnoInsert").val("6");
 		}
 		
 		else if(value == '기타'){
-			$("#cno").val("7");
+			$("#cnoInsert").val("7");
 		}
 	}
  
@@ -200,7 +213,7 @@ select::-ms-expand {
 	  	  <input type="text" id="word" name="word" value="${pageBean.word}"/>
 	  	  <input type = "hidden" id = "cno" name = "cno" value="${pageBean.cno}"/>
 	  	  <a href="#" onclick="pagelist(1)" class="myButton">검색</a>
-	  	  <a data-toggle = "modal" class="myButton" data-target="#myModal">글쓰기</a>
+	  	  <a id = "insertBoardButton" data-toggle = "modal" class="myButton" data-target="#myModal">글쓰기</a>
 
 	  	 </td>
 	  	</tr>
@@ -270,7 +283,7 @@ select::-ms-expand {
 									<td>
 										<div class="btn-group">
 										  <a id = "cname" href="#" class="btn btn-default">거래방법</a>
-										  <input type = "hidden" id = "cno" name = "cno" value = ""/>
+										  <input type = "hidden" id = "cnoInsert" name = "cnoInsert" value = ""/>
 										  <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
 										  <ul class="dropdown-menu">
 										    <li onclick = "clickCno('가전제품')"><a href="#">가전제품</a></li>

@@ -10,8 +10,6 @@
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
  
  
- 
- 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -163,9 +161,9 @@
 	<!-- Page Content -->
 	<div class="container">
  
-		<div class="row" id="row">
+		<div class="row" id="row"  >
 			<div class="col-md-3" id="col-md-3" onclick="md3()">
-				<div id="3_buy" style="display: none">
+				<div id="3_buy" style="display: none" >
 					<p class="lead">팝니다</p>
 					<div class="list-group">
 						<a class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&cno=1">전체</a> <a
@@ -177,7 +175,7 @@
 							class="list-group-item" href="searchSellList.do?pageNo=1&bno=&sellbuy=2&cno=7">기타</a>
 					</div>
 				</div>
-				<div id="3_sell" style="display: none">
+				<div id="3_sell" style="display: none" >
 					<p class="lead">삽니다</p>
 					<div class="list-group" id="category_bg">
 						<a class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&cno=1">전체</a> <a
@@ -189,14 +187,14 @@
 							class="list-group-item" href="searchBuyList.do?pageNo=1&bno=&sellbuy=1&cno=7">기타</a>
 					</div>
 				</div>
-				<div id="myPage" style="display:">
+				<div id="myPage" style="display:" >
 					<p class="lead">My Page</p>
 					<div class="list-group" id="category_bg">
 					
 							
 					<a href="myInfo.do" id="clickInfo" class="list-group-item">회원정보확인</a>
 						<!-- 장바구니 드롭다운시작 -->
-						<div class="container">
+						
 							
 							<div class="list-group-item">
 								<a id="dLabel" 
@@ -211,26 +209,25 @@
 										href="searchSellCart.do">팝니다 장바구니</a></li>
 								</ul>
 							</div>
-						</div>
+						
 						
 						<!-- 장바구니 드롭다운 끝 -->
-						<br />
 						<!-- 내게시물관리 드롭다운시작 -->
-						<div class="container">
+						
 							<div class="list-group-item">
 								<a id="dLabel"  
 									data-toggle="dropdown" aria-haspopup="true" role="button"
-									aria-expanded="false" style="color: #9D9D9D;margin-left: -30px;margin-top: -100px" > 내 게시물 관리 <span
+									aria-expanded="false" style="color: #9D9D9D;" > 내 게시물 관리 <span
 									class="caret"></span>
 								</a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"  data-options="align:right">
 									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">삽니다 게시물</a></li>
+										href="searchMyBuyBoard.do">삽니다 게시물</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">팝니다 게시물</a></li>
+										href="searchMySellBoard.do">팝니다 게시물</a></li>
 								</ul>
 							</div>
-						</div>
+						
 						<!-- 내게시물관리 드롭다운 끝 -->
  
 					</div>
@@ -238,7 +235,7 @@
 			</div>
  
 			<!-- div9 -->
-			<div class="col-md-9">
+			<div class="col-md-9" style="height: 750px">
  
  
 				<!-- selectAll -->
@@ -269,7 +266,9 @@
 			</footer>
  
 		</div>
+		
 		<!-- /.container -->
 </body>
+
  
 </html>
